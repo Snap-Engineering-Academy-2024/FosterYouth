@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { GiftedChat } from "react-native-gifted-chat";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, SafeAreaView, Platform } from "react-native";
-import defaultProfileImage from "../../assets/snapchat/Snap Icon.png";
+import defaultProfileImage from "../../assets/snapchat/personalBitmoji.png";
 
 //Temporary Solution to avoid warning on user screen
 const error = console.error; 
@@ -11,19 +11,19 @@ console.error = (...args) => {
 };
 
 const CHATBOT_USER_OBJ = {
-  _id: 3,
-  name: "Team Snapchat",
+  _id: 2,
+  name: "Evan Spiegel",
   avatar: defaultProfileImage,
 };
 
-export default function ChatNotification() {
+export default function EvanChat() {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     setMessages([
       {
         _id: 1,
-        text: "Team Snapchat says hi",
+        text: "Hey this is Evan!",
         createdAt: new Date(),
         user: CHATBOT_USER_OBJ,
       },
@@ -54,7 +54,7 @@ export default function ChatNotification() {
 
     // Simple chatbot logic (aka Checkpoint 2 onwards) here!
 
-    addBotMessage("Try out Give Fund");
+    addBotMessage("Welcome to a recreated version of SnapChat");
   };
 
   const onSend = useCallback((messages = []) => {

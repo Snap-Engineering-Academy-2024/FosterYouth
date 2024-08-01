@@ -3,19 +3,26 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Platform, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import UserChat from "../components/UserChat";
-import BasicChatbot from "../chatbots/BasicChatbot";
 import ChatNotification from "../chatbots/ChatNotification";
+import EvanChat from "../chatbots/EvanChat";
+import LindseyChat from "../chatbots/LindseyChat";
+
 // prettier-ignore
 export const CHATBOTS = {
   "Team Snapchat": {
     name: "Team Snapchat",
-    imageUrl: "https://loremflickr.com/140/140",
+    imageUrl: require("../../assets/snapchat/Snap Icon.png"),
     component: ChatNotification,
   },
-  "BasicChatbot": {
-    name: "React Native Chatbot",
-    imageUrl: "https://loremflickr.com/140/140",
-    component: BasicChatbot,
+  "Evan Spiegel": {
+    name: "Evan Spiegel",
+    imageUrl: require("../../assets/snapchat/personalBitmoji.png"),
+    component: EvanChat,
+  },
+  "Lindsey Heisser": {
+    name: "Lindsey Heisser",
+    imageUrl: require("../../assets/snapchat/lindseyBitmoji.png"),
+    component: LindseyChat,
   }
 }
 export default function ConversationScreen({ route, navigation }) {

@@ -31,15 +31,6 @@ export default function ConversationScreen({ route, navigation }) {
   };
   return (
     <View style={[styles.container, { paddingBottom: insets.bottom }]}>
-      <Pressable
-        onPress={() =>{
-          navigation.navigate('CampaignScreen')
-        }
-        }
-        style={styles.buttonStyle}
-      >
-        <Text>Join Friends to Give Fund</Text>
-      </Pressable>
       {isChatbot ? makeChatbotComponent(chatId) : <UserChat chatId={chatId} />}
     </View>
   );

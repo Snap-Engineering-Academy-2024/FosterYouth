@@ -1,8 +1,10 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { GiftedChat } from "react-native-gifted-chat";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, SafeAreaView, Platform } from "react-native";
+import { StyleSheet, SafeAreaView, Platform, Pressable, Text } from "react-native";
 import defaultProfileImage from "../../assets/snapchat/defaultprofile12.png";
+import { useNavigation } from "@react-navigation/native";
+
 
 //Temporary Solution to avoid warning on user screen
 const error = console.error; 
@@ -18,6 +20,7 @@ const CHATBOT_USER_OBJ = {
 
 export default function ChatNotification() {
   const [messages, setMessages] = useState([]);
+  const navigation = useNavigation();
 
   useEffect(() => {
     setMessages([
@@ -62,7 +65,17 @@ export default function ChatNotification() {
   }, []);
 
   return (
-    <GiftedChat
+    <>
+    <Pressable
+        onPress={() =>{
+          navigation.navigate('CampaignScreen')
+        }
+        }
+        style={styles.buttonStyle}
+      >
+        <Text>Join Friends to Give Fund</Text>
+      </Pressable>
+      <GiftedChat
       messages={messages}
       onSend={(messages) => {
         onSend(messages);
@@ -74,5 +87,24 @@ export default function ChatNotification() {
       }}
       renderUsernameOnMessage={true}
     />
+    </>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+    // paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+  },
+  buttonStyle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 5,
+    paddingVertical: 20,
+    paddingHorizontal: 32,
+    borderRadius: 20,
+    elevation: 3,
+    backgroundColor: '#FFFC00',
+  },
+});

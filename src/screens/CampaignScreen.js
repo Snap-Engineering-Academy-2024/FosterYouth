@@ -84,7 +84,7 @@ export default function CampaignScreen({ route, navigation }) {
         </View>
 
         <View style={styles.discoverContent}>
-          <Text style={styles.sectionHeader}>Discover</Text>
+          <Text style={styles.sectionHeader}>See How You Can Make An Impact</Text>
           <FlatList
             data={DATA}
             horizontal={false}
@@ -103,6 +103,7 @@ export default function CampaignScreen({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // backgroundColor: "black"
   },
   contentContainer: {
     display: "flex",

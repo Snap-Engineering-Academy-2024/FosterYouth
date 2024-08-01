@@ -66,7 +66,23 @@ export default function StoriesScreen({ route, navigation }) {
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.stories}
           >
-            <StoriesBitmoji onPress={console.log("bit moooooo")}/>
+            <StoriesBitmoji />
+            <StoriesBitmoji />
+            <StoriesBitmoji />
+            <StoriesBitmoji />
+            <StoriesBitmoji />
+            <StoriesBitmoji />
+            <StoriesBitmoji />
+          </ScrollView>
+        </View>
+        <View style={styles.storyBar}>
+          <Text style={styles.sectionHeader}>Give Fund</Text>
+          <ScrollView
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.stories}
+          >
+            <StoriesBitmoji />
             <StoriesBitmoji />
             <StoriesBitmoji />
             <StoriesBitmoji />

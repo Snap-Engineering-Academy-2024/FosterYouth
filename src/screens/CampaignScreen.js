@@ -7,15 +7,14 @@ import {
   Image,
   ScrollView,
   FlatList,
+  SafeAreaView
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { fontHeader } from "../../assets/themes/font";
 import { colors } from "../../assets/themes/colors";
-import StoriesBitmoji from "../components/StoriesBitmoji";
+import BitmojiCrowd from "../components/BitmojiCrowd";
 import DiscoverFeed from "../components/DiscoverFeed";
 import { useNavigation } from "@react-navigation/native";
-
-import Header from "../components/Header";
 
 /* Discover FlatList will render a component in the list
  * for each object in the array DATA. This is just an example I took
@@ -41,37 +40,35 @@ export default function CampaignScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
 
   return (
-    <View
+    <SafeAreaView
       style={[
         styles.container,
         {
           // Paddings to handle safe area
-          paddingTop: insets.top,
           paddingBottom: insets.bottom,
           paddingLeft: insets.left,
           paddingRight: insets.right,
         },
       ]}
     >
-
-      <Header title="Stories" />
       <View style={styles.contentContainer}>
-        <View style={styles.storyBar}>
-          <Text style={styles.sectionHeader}>Friends</Text>
+        <View style={styles.bitmojiContainer}>
+          <Text style={styles.sectionHeader}>Join Friends to Give Fund</Text>
           <ScrollView
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.stories}
           >
-            <StoriesBitmoji onPress={console.log("bit moooooo")}/>
-            <StoriesBitmoji />
-            <StoriesBitmoji />
-            <StoriesBitmoji />
-            <StoriesBitmoji />
-            <StoriesBitmoji />
-            <StoriesBitmoji />
+            <BitmojiCrowd />
+            <BitmojiCrowd />
+            <BitmojiCrowd />
+            <BitmojiCrowd />
+            <BitmojiCrowd />
+            <BitmojiCrowd />
+            <BitmojiCrowd />
           </ScrollView>
         </View>
+        
         <View style={styles.discoverContent}>
           <Text style={styles.sectionHeader}>Discover</Text>
           <FlatList
@@ -85,7 +82,7 @@ export default function CampaignScreen({ route, navigation }) {
           />
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -94,18 +91,20 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contentContainer: {
-    padding: 12,
     display: "flex",
     flexDirection: "column",
     gap: 12,
   },
-  storyBar: {
+  bitmojiContainer:{
+    padding: 12,
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
     gap: 4,
+    backgroundColor: "#FFFC00",
   },
   discoverContent: {
+    padding: 12,
     display: "flex",
     flexDirection: "column",
   },

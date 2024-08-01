@@ -38,7 +38,7 @@ export default function ConversationScreen({ route, navigation }) {
         }
         style={styles.buttonStyle}
       >
-        <Text>CLICK ME</Text>
+        <Text>Join Friends to Give Fund</Text>
       </Pressable>
       {isChatbot ? makeChatbotComponent(chatId) : <UserChat chatId={chatId} />}
     </View>
@@ -58,6 +58,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     borderRadius: 20,
     elevation: 3,
-    backgroundColor: '#2196F3',
+    backgroundColor: '#FFFC00',
   },
 });

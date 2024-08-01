@@ -52,14 +52,12 @@ export default function CameraScreen({ navigation, focused }) {
   if (!permission.granted) {
     // Camera permissions are not granted yet.
     return (
-      <View style={styles.container}>
-        <Text style={styles.message}>
-          We need your permission to show the camera.
-        </Text>
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.message}>We need your permission to show the camera.</Text>
         <TouchableOpacity onPress={requestPermission} style={styles.button}>
           <Text style={styles.text}>Grant Permission</Text>
         </TouchableOpacity>
-      </View>
+      </SafeAreaView>
     );
   }
 
@@ -145,7 +143,7 @@ export default function CameraScreen({ navigation, focused }) {
     };
 
     return (
-      <View
+      <SafeAreaView
         style={[
           styles.container,
           {
@@ -167,70 +165,69 @@ export default function CameraScreen({ navigation, focused }) {
             savePhoto={savePhoto}
           />
         )}
-      </View>
+      </SafeAreaView>
     );
   }
 
   if (showGalleryMenu) {
     return (
-      <View
-        style={[
-          styles.container,
-          {
-            marginBottom: tabBarHeight,
-            paddingTop: insets.top,
-            paddingBottom: insets.bottom,
-          },
-        ]}
-      >
-        <CameraView style={styles.camera} facing={facing} ref={cameraRef} />
-        <CameraOptions flipCamera={flipCamera} />
-        <CameraActions
-          galleryMenu={galleryMenu}
-          checkGallery={checkGallery}
-          takePhoto={takePhoto}
-        />
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={showGalleryMenu}
-          onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
-            setModalVisible(!modalVisible);
-          }}
-        >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Pressable
-                onPress={checkGallery}
-                style={({ pressed }) => [
-                  { backgroundColor: pressed ? "blue" : "transparent" },
-                  styles.buttonStyle,
-                ]}
-                // style={styles.buttonStyle}
-              >
-                <Text style={styles.buttonText}>Phone Gallery</Text>
-              </Pressable>
-              <Pressable
-                onPress={() => {
-                  navigation.navigate("MemoryScreen");
-                }}
-                style={styles.buttonStyle}
-              >
-                <Text style={styles.buttonText}>ChatSnap Memories</Text>
-              </Pressable>
-              <Pressable onPress={galleryMenu} style={styles.closeButtonStyle}>
-                <Text style={styles.buttonText}>Close</Text>
-              </Pressable>
-            </View>
+      <SafeAreaView
+      style={[
+        styles.container,
+        {
+          marginBottom: tabBarHeight,
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+        },
+      ]}
+    >
+      <CameraView style={styles.camera} facing={facing} ref={cameraRef} /> 
+      <CameraOptions flipCamera={flipCamera} />
+      <CameraActions galleryMenu={galleryMenu} checkGallery={checkGallery} takePhoto={takePhoto} />
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={showGalleryMenu}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setModalVisible(!modalVisible);
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Pressable
+              onPress={checkGallery}
+              style={({ pressed }) => [
+                  { backgroundColor: pressed ? 'blue' : 'transparent' },
+                  styles.buttonStyle
+              ]}
+              // style={styles.buttonStyle}
+            >
+              <Text style={styles.buttonText}>Phone Gallery</Text>
+            </Pressable>
+            <Pressable
+              onPress={() =>{
+                navigation.navigate('MemoryScreen')
+              }
+              }
+              style={styles.buttonStyle}
+            >
+              <Text style={styles.buttonText}>ChatSnap Memories</Text>
+            </Pressable>
+            <Pressable
+              onPress={galleryMenu}
+              style={styles.closeButtonStyle}
+            >
+              <Text style={styles.buttonText}>Close</Text>
+            </Pressable>
           </View>
-        </Modal>
-      </View>
-    );
+        </View>
+      </Modal>
+    </SafeAreaView>
+    )
   }
 
   return (
-    <View
+    <SafeAreaView
       style={[
         styles.container,
         {
@@ -242,12 +239,8 @@ export default function CameraScreen({ navigation, focused }) {
     >
       <CameraView style={styles.camera} facing={facing} ref={cameraRef} />
       <CameraOptions flipCamera={flipCamera} />
-      <CameraActions
-        galleryMenu={galleryMenu}
-        checkGallery={checkGallery}
-        takePhoto={takePhoto}
-      />
-    </View>
+      <CameraActions galleryMenu={galleryMenu} checkGallery={checkGallery} takePhoto={takePhoto} />
+    </SafeAreaView>
   );
 }
 

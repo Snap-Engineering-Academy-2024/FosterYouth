@@ -10,6 +10,7 @@ import SettingsScreen from "../screens/SettingsScreen";
 import FriendStory from "../screens/FriendStory";
 import AstrologyScreen from "../screens/AstrologyScreen";
 import MemoryScreen from "../screens/MemoryScreen";
+import CampaignScreen from '../screens/CampaignScreen';
 import EventScreen from "../screens/EventScreen"; //New component by Sona and Christian
 
 const Stack = createStackNavigator();
@@ -47,11 +48,31 @@ export default function App() {
         <Stack.Screen
           name="Search"
           component={SearchScreen}
-          options={{ headerShown: false }}
+          options={{ headerShown: false}}
         />
         <Stack.Screen
           name="MemoryScreen"
           component={MemoryScreen}
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="CampaignScreen"
+          component={CampaignScreen}
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="Astrology"
+          component={AstrologyScreen}
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="Event"
+          component={EventScreen}
           options={{ headerShown: true }}
         />
         <Stack.Screen

@@ -2,29 +2,28 @@ import React, { useState, useCallback, useEffect } from "react";
 import { GiftedChat } from "react-native-gifted-chat";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, SafeAreaView, Platform } from "react-native";
-import defaultProfileImage from "../../assets/snapchat/defaultprofile12.png";
+import defaultProfileImage from "../../assets/snapchat/lindseyBitmoji.png";
 
 //Temporary Solution to avoid warning on user screen
-const error = console.error;
-console.error = (...args) => {
-  if (/defaultProps/.test(args[0])) return;
-  error(...args);
+const error = console.error; 
+console.error = (...args) => { 
+  if (/defaultProps/.test(args[0])) return; error(...args); 
 };
 
 const CHATBOT_USER_OBJ = {
-  _id: 3,
-  name: "React Native Chatbot",
+  _id: 4,
+  name: "Lindsey Heisser",
   avatar: defaultProfileImage,
 };
 
-export default function BasicChatbot() {
+export default function LindseyChat() {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     setMessages([
       {
-        _id: 5,
-        text: "Hello, welcome to simple trivia! Say 'Yes' when you're ready to play!",
+        _id: 1,
+        text: "It's Lindsey!",
         createdAt: new Date(),
         user: CHATBOT_USER_OBJ,
       },
@@ -70,7 +69,7 @@ export default function BasicChatbot() {
         setTimeout(() => respondToUser(messages), 1000);
       }}
       user={{
-        _id: 4,
+        _id: 1,
         name: "Alexis",
       }}
       renderUsernameOnMessage={true}

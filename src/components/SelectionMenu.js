@@ -19,7 +19,7 @@ const SelectionMenu = ({ showMenu, setShowMenu }) => {
       onPress: () => setShowMenu(false),
     },
   ];
-  console.log("showmenu", showMenu)
+  // console.log("showmenu", showMenu)
 
   // if (showMenu) {
     return (

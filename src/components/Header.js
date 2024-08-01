@@ -15,7 +15,7 @@ export default function Header({ title }) {
   const navigation = useNavigation();
 
   const [showMenu, setShowMenu] = useState(false);
-  console.log(showMenu)
+  // console.log(showMenu)
 
   // const handleClick = () => {
   //   setShowMenu(true)

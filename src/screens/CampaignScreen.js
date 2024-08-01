@@ -68,7 +68,21 @@ export default function CampaignScreen({ route, navigation }) {
             <BitmojiCrowd />
           </ScrollView>
         </View>
-        
+
+        <View style={styles.mainInfoContainer}>
+          <Text style={styles.mainTitle}>Kids In The Spotlight</Text>
+          <Pressable 
+            style={styles.buttonStyle}
+          >
+            <Text>Donate</Text>
+          </Pressable>
+          <Pressable 
+            style={styles.buttonStyle}
+          >
+            <Text>Follow</Text>
+          </Pressable>
+        </View>
+
         <View style={styles.discoverContent}>
           <Text style={styles.sectionHeader}>Discover</Text>
           <FlatList
@@ -103,6 +117,26 @@ const styles = StyleSheet.create({
     gap: 4,
     backgroundColor: "#FFFC00",
   },
+  mainInfoContainer:{
+    textAlign: "center",
+    // alignItems: "center", // Center items horizontally
+    justifyContent: "center", // Center items vertically if needed
+    padding: 12,
+    display: "flex",
+    flexDirection: "column",
+    // alignItems: "flex-start",
+    gap: 4,
+  },
+  mainTitle:{
+    // alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: "center",
+    paddingVertical: 4,
+    color: "black",
+    fontSize: 25,
+    fontFamily: fontHeader.fontFamily,
+    fontWeight: fontHeader.fontWeight,
+  },
   discoverContent: {
     padding: 12,
     display: "flex",
@@ -124,5 +158,15 @@ const styles = StyleSheet.create({
     fontSize: fontHeader.fontSize,
     fontFamily: fontHeader.fontFamily,
     fontWeight: fontHeader.fontWeight,
+  },
+  buttonStyle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    borderRadius: 20,
+    elevation: 3,
+    backgroundColor: '#FFFC00',
   },
 });

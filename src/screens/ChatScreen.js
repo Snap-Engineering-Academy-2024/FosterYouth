@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
+import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -16,7 +16,7 @@ export default function ChatScreen({ navigation }) {
   function getChatbots() {
     let chatbotsTemp = [];
     for (const botId in CHATBOTS) {
-      chatbotsTemp.push({ isChatbot: true, chatId: botId });
+      chatbotsTemp.push({ isChatbot: true, chatId: botId, chatImage: CHATBOTS[botId].imageUrl});
     }
 
     setChats((otherChats) => [...otherChats, ...chatbotsTemp]);
@@ -34,7 +34,7 @@ export default function ChatScreen({ navigation }) {
     }
 
     // Add user chats to array
-    let userChatsTemp = [];
+    let userChatsTemp = []; 
     if (userChats) {
       userChats.forEach((userChat) => {
         userChatsTemp.push({ isChatbot: false, chatId: userChat.id });
@@ -78,11 +78,15 @@ export default function ChatScreen({ navigation }) {
               }}
               key={chat.chatId}
             >
-              <Ionicons
+              {/* <Ionicons
                 style={styles.userIcon}
                 name="person-outline"
                 size={36}
                 color="lightgrey"
+              /> */}
+              <Image
+                style={styles.userIcon} 
+                source={chat.chatImage}
               />
               <Text style={styles.userName}> {chat.chatId} </Text>
               <Ionicons
@@ -114,6 +118,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 5,
     top: 5,
+    width: 40,
+    height: 40
   },
   userName: {
     position: "absolute",

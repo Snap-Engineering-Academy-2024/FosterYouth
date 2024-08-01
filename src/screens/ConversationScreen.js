@@ -1,6 +1,6 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Platform, Text, View } from "react-native";
+import { StyleSheet, Platform, Text, View, Pressable } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import UserChat from "../components/UserChat";
 import BasicChatbot from "../chatbots/BasicChatbot";
@@ -31,6 +31,15 @@ export default function ConversationScreen({ route, navigation }) {
   };
   return (
     <View style={[styles.container, { paddingBottom: insets.bottom }]}>
+      <Pressable
+        onPress={() =>{
+          navigation.navigate('CampaignScreen')
+        }
+        }
+        style={styles.buttonStyle}
+      >
+        <Text>CLICK ME</Text>
+      </Pressable>
       {isChatbot ? makeChatbotComponent(chatId) : <UserChat chatId={chatId} />}
     </View>
   );
@@ -40,5 +49,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#FFFFFF",
     // paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+  },
+  buttonStyle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 5,
+    paddingVertical: 20,
+    paddingHorizontal: 32,
+    borderRadius: 20,
+    elevation: 3,
+    backgroundColor: '#2196F3',
   },
 });

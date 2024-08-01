@@ -6,6 +6,7 @@ import ProfileScreen from "../screens/ProfileScreen";
 import DiscoverCard from "../components/DiscoverCard";
 import SearchScreen from "../screens/SearchScreen";
 import MemoryScreen from "../screens/MemoryScreen";
+import CampaignScreen from '../screens/CampaignScreen';
 
 const Stack = createStackNavigator();
 
@@ -37,6 +38,11 @@ export default function () {
         <Stack.Screen
           name="MemoryScreen"
           component={MemoryScreen}
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="CampaignScreen"
+          component={CampaignScreen}
           options={{ headerShown: true }}
         />
       </Stack.Navigator>

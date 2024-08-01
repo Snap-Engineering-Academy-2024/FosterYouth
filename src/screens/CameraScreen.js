@@ -41,12 +41,12 @@ export default function CameraScreen({ navigation, focused }) {
   if (!permission.granted) {
     // Camera permissions are not granted yet.
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Text style={styles.message}>We need your permission to show the camera.</Text>
         <TouchableOpacity onPress={requestPermission} style={styles.button}>
           <Text style={styles.text}>Grant Permission</Text>
         </TouchableOpacity>
-      </View>
+      </SafeAreaView>
     );
   }
 
@@ -132,7 +132,7 @@ export default function CameraScreen({ navigation, focused }) {
     };
 
     return (
-      <View
+      <SafeAreaView
         style={[
           styles.container,
           {
@@ -151,13 +151,13 @@ export default function CameraScreen({ navigation, focused }) {
         {hasMediaLibraryPermission && (
           <PostcaptureOptions deletePhoto={() => setPhoto(null)} savePhoto={savePhoto} />
         )}
-      </View>
+      </SafeAreaView>
     );
   }
 
   if(showGalleryMenu){
     return (
-      <View
+      <SafeAreaView
       style={[
         styles.container,
         {
@@ -208,12 +208,12 @@ export default function CameraScreen({ navigation, focused }) {
           </View>
         </View>
       </Modal>
-    </View>
+    </SafeAreaView>
     )
   }
 
   return (
-    <View
+    <SafeAreaView
       style={[
         styles.container,
         {
@@ -226,7 +226,7 @@ export default function CameraScreen({ navigation, focused }) {
       <CameraView style={styles.camera} facing={facing} ref={cameraRef} /> 
       <CameraOptions flipCamera={flipCamera} />
       <CameraActions galleryMenu={galleryMenu} checkGallery={checkGallery} takePhoto={takePhoto} />
-    </View>
+    </SafeAreaView>
   );
 }
 

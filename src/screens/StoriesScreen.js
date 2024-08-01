@@ -15,6 +15,7 @@ import { colors } from "../../assets/themes/colors";
 import StoriesBitmoji from "../components/StoriesBitmoji";
 import DiscoverFeed from "../components/DiscoverFeed";
 import { useNavigation } from "@react-navigation/native";
+import GiveFundSection from '../components/GiveFundSection'
 
 import Header from "../components/Header";
 
@@ -75,22 +76,7 @@ export default function StoriesScreen({ route, navigation }) {
             <StoriesBitmoji />
           </ScrollView>
         </View>
-        <View style={styles.storyBar}>
-          <Text style={styles.sectionHeader}>Give Fund</Text>
-          <ScrollView
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.stories}
-          >
-            <StoriesBitmoji />
-            <StoriesBitmoji />
-            <StoriesBitmoji />
-            <StoriesBitmoji />
-            <StoriesBitmoji />
-            <StoriesBitmoji />
-            <StoriesBitmoji />
-          </ScrollView>
-        </View>
+        <GiveFundSection />
         <Text style={styles.sectionHeader}>Discover</Text>
         <FlatList
           contentContainerStyle={{ paddingBottom: 250 }}

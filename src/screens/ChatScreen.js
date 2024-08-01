@@ -2,57 +2,45 @@ import React, { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
-// import Ionicons from "react-native-vector-icons/Ionicons";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { supabase } from "../utils/hooks/supabase"; // Import Supabase client
-
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { supabase } from "../utils/hooks/supabase";  // Import Supabase client
 import Header from "../components/Header";
 import { CHATBOTS } from "./ConversationScreen";
-
 export default function ChatScreen({ navigation }) {
   const [chats, setChats] = useState([]);
   const insets = useSafeAreaInsets();
   const tabBarHeight = useBottomTabBarHeight();
-
   function getChatbots() {
     let chatbotsTemp = [];
     for (const botId in CHATBOTS) {
       chatbotsTemp.push({ isChatbot: true, chatId: botId, chatImage: CHATBOTS[botId].imageUrl});
     }
-
     setChats((otherChats) => [...otherChats, ...chatbotsTemp]);
   }
-
-  // async function getUserChats() {
-  //   // Fetch user chats from Supabase
-  //   const { data: userChats, error } = await supabase
-  //     .from('conversations')
-  //     .select('id')
-  //     .select('messages');
-
-  //   if (error) {
-  //     console.error("Error fetching user chats:", error);
-  //     return;
-  //   }
-
+  async function getUserChats() {
+    // Fetch user chats from Supabase
+    const { data: userChats, error } = await supabase
+      .from('Chats')
+      .select('id');
+    if (error) {
+      console.error("Error fetching user chats:", error);
+      return;
+    }
     // Add user chats to array
-    let userChatsTemp = []; 
+    let userChatsTemp = [];
     if (userChats) {
       userChats.forEach((userChat) => {
         userChatsTemp.push({ isChatbot: false, chatId: userChat.id });
       });
     }
-
-  //   setChats((otherChats) => [...otherChats, ...userChatsTemp]);
-  // }
-
+    setChats((otherChats) => [...otherChats, ...userChatsTemp]);
+  }
   useEffect(() => {
     if (chats.length < 1) {
       getChatbots();
       // getUserChats();
     }
   }, [chats.length]);
-
   return (
     <View
       style={[
@@ -87,7 +75,7 @@ export default function ChatScreen({ navigation }) {
                 color="lightgrey"
               /> */}
               <Image
-                style={styles.userIcon} 
+                style={styles.userIcon}
                 source={chat.chatImage}
               />
               <Text style={styles.userName}> {chat.chatId} </Text>
@@ -104,7 +92,6 @@ export default function ChatScreen({ navigation }) {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

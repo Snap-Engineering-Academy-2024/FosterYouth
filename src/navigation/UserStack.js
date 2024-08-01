@@ -75,21 +75,6 @@ export default function App() {
           component={EventScreen}
           options={{ headerShown: true }}
         />
-        <Stack.Screen
-          name="Astrology"
-          component={AstrologyScreen}
-          options={{ headerShown: true }}
-        />
-        <Stack.Screen
-          name="Settings"
-          component={SettingsScreen}
-          options={{ headerShown: true }}
-        />
-        <Stack.Screen
-          name="Event"
-          component={EventScreen}
-          options={{ headerShown: true }}
-        />
       </Stack.Navigator>
     </NavigationContainer>
   );

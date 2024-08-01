@@ -35,7 +35,7 @@ export function findAstrologySign() {
         .single();
 
       if (error) {
-        console.log("Birthday fetch failure");
+        // console.log("Birthday fetch failure");
       } else if (data.birthday) {
         setBirthday(data.birthday.split("/").slice(0, 2));
       }

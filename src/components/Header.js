@@ -38,7 +38,7 @@ export default function Header({ title }) {
         .single();
 
       if (error) {
-        console.log("Profile pic fetch failure");
+        // console.log("Profile pic fetch failure");
       } else if (data.avatar_url) {
         setProfilePicUrl(data.avatar_url);
       }

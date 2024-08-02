@@ -12,7 +12,7 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { fontHeader } from "../../assets/themes/font";
 import { colors } from "../../assets/themes/colors";
-import DiscoverFeed from "../components/DiscoverFeed";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import HeaderFund from "../components/HeaderFund";
 import { useNavigation } from "@react-navigation/native";
 import CampaignTestimonials from "../components/CampaignTestimonials";
@@ -95,6 +95,7 @@ export default function CampaignScreen({ route, navigation }) {
           <ScrollView
             horizontal={true}
             showsHorizontalScrollIndicator={false}
+            style={styles.sectionContent}
             >
                 {DATA.length > 1 ? (
                     <FlatList
@@ -114,17 +115,24 @@ export default function CampaignScreen({ route, navigation }) {
 
         <View style={styles.storiesSection}>
           <Text style={styles.sectionHeader}>About</Text>
-          <Text>Link here</Text>
+          <View style={styles.sectionContent}>
+            <Text style={{padding:10}}>{title} Information</Text>
+            <Ionicons name="chevron-forward-outline" size={20} color="black" style={{padding:10}}/>
+          </View>
         </View>
 
         <View style={styles.storiesSection}>
           <Text style={styles.sectionHeader}>Friends</Text>
-          <Text>Invite Friends</Text>
+          <View style={styles.sectionContent}>
+            <Text>Invite Friends</Text>
+          </View>
         </View>
 
         <View style={styles.storiesSection}>
           <Text style={styles.sectionHeader}>My Stories</Text>
-          <Text>Add to my story</Text>
+          <View style={styles.sectionContent}>
+            <Text>Add to my story</Text>
+          </View>
         </View>
       </View>
       
@@ -196,6 +204,8 @@ const styles = StyleSheet.create({
     height: 70,
     marginRight: 10,
     borderRadius:100,
+    borderColor: "#A05DCD", 
+    borderWidth: 3
   },
   storiesSection: {
     padding: 12,
@@ -215,6 +225,16 @@ const styles = StyleSheet.create({
     fontSize: fontHeader.fontSize,
     fontFamily: fontHeader.fontFamily,
     fontWeight: fontHeader.fontWeight,
+  },
+  sectionContent: {
+    display:"flex",
+    flexDirection: "row",
+    backgroundColor:"white", 
+    padding: 10,
+    borderRadius: 12, 
+    shadowColor: "#E8E8E8", 
+    shadowOffset: {width: -5, height: 4},
+    shadowRadius: 25,
   },
   buttonStyle: {
     alignItems: 'center',

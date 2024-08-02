@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   FeedImage: {
     width: 480,
     height: 420,
-    borderRadius: 20,
+    borderRadius: 12,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

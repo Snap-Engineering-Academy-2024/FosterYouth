@@ -52,6 +52,7 @@ export default function CampaignScreen({ route, navigation }) {
         },
       ]}
     >
+    <ScrollView>
 
       <View style={styles.contentContainer}>
         <View style={styles.bitmojiContainer}>
@@ -89,7 +90,7 @@ export default function CampaignScreen({ route, navigation }) {
         </View>
 
         <View style={styles.storiesSection}>
-          <Text style={styles.sectionHeader}>See How You Can Make An Impact</Text>
+          <Text style={styles.sectionHeader}>Testimonials</Text>
           <FlatList
             data={DATA}
             horizontal={false}
@@ -100,13 +101,30 @@ export default function CampaignScreen({ route, navigation }) {
             keyExtractor={(item) => item.id}
           />
         </View>
+
+        <View style={styles.storiesSection}>
+          <Text style={styles.sectionHeader}>About</Text>
+          <Text>Link here</Text>
+        </View>
+
+        <View style={styles.storiesSection}>
+          <Text style={styles.sectionHeader}>Friends</Text>
+          <Text>Invite Friends</Text>
+        </View>
+
+        <View style={styles.storiesSection}>
+          <Text style={styles.sectionHeader}>My Stories</Text>
+          <Text>Add to my story</Text>
+        </View>
       </View>
       
-      <View style={{backgroundColor:"transparent",
+    </ScrollView>
+      <View style={{backgroundColor:"white",
         position: "absolute",
         left: 0, 
         top: 0,}}>
         <HeaderFund />
+        {/* <Image source={{uri: "../../assets/buttons/campaignHeader.png"}} style={{width:50, height: 50}}/> */}
       </View>
     </SafeAreaView>
   );
@@ -163,10 +181,11 @@ const styles = StyleSheet.create({
   },
   logo: {
     alignSelf:"center",
-    resizeMode: 'contain',
+    resizeMode: "cover",
     width: 66,
     height: 70,
     marginRight: 10,
+    borderRadius:100,
   },
   storiesSection: {
     padding: 12,

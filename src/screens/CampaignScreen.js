@@ -52,22 +52,28 @@ export default function CampaignScreen({ route, navigation }) {
         },
       ]}
     >
-      <HeaderFund/>
+
       <View style={styles.contentContainer}>
         <View style={styles.bitmojiContainer}>
-          <Text style={styles.sectionHeader}>Join Friends to Give Fund</Text>
           <Image 
             source={{uri:"https://i.ibb.co/xjCH2yR/Screenshot-2024-08-01-at-11-21-07-PM.png"}}
             style={styles.headerImage}
           />
+          <Text style={styles.sectionHeader}>Join Friends to Give Fund</Text>
         </View>
 
         <View style={styles.mainInfoContainer}>
-          <Image 
-            style={styles.logo}
-            source={{uri: photoUrl,}}
-          />
-          <Text style={styles.mainTitle}>{title}</Text>
+          <View style={styles.titleContainer}>
+            <Image 
+              style={styles.logo}
+              source={{uri: photoUrl,}}
+            />
+            <View>
+              <Text style={styles.mainTitle}>{title}</Text>
+              <Text style={styles.followers}>{followers} followers</Text>
+            </View>
+          </View>
+          
           <Pressable 
             style={styles.buttonStyle}
           >
@@ -95,6 +101,13 @@ export default function CampaignScreen({ route, navigation }) {
           />
         </View>
       </View>
+      
+      <View style={{backgroundColor:"transparent",
+        position: "absolute",
+        left: 0, 
+        top: 0,}}>
+        <HeaderFund />
+      </View>
     </SafeAreaView>
   );
 }
@@ -109,30 +122,33 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     gap: 12,
   },
+  titleContainer: {
+    display: "flex",
+    flexDirection: "row",
+
+  },
   bitmojiContainer:{
-    padding: 12,
+    // padding: 12,
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
     gap: 4,
-    backgroundColor: "#FFFC00",
+    backgroundColor: "transparent",
   },
   headerImage:{
-    position:"absolute",
+    // position:"absolute",
     resizeMode: "cover",
     width:700,
     height:100, 
     marginTop:50,
   },
   mainInfoContainer:{
-    marginTop:80,
     textAlign: "center",
     // alignItems: "center", // Center items horizontally
     justifyContent: "center", // Center items vertically if needed
-    padding: 12,
+    paddingHorizontal: 12,
     display: "flex",
     flexDirection: "column",
-    // alignItems: "flex-start",
     gap: 4,
   },
   mainTitle:{
@@ -144,6 +160,13 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontFamily: fontHeader.fontFamily,
     fontWeight: fontHeader.fontWeight,
+  },
+  logo: {
+    alignSelf:"center",
+    resizeMode: 'contain',
+    width: 66,
+    height: 70,
+    marginRight: 10,
   },
   storiesSection: {
     padding: 12,
@@ -157,6 +180,7 @@ const styles = StyleSheet.create({
   },
   sectionHeader: {
     textAlign: "left",
+    paddingHorizontal: 12,
     paddingVertical: 4,
     color: colors.primary,
     fontSize: fontHeader.fontSize,
@@ -175,11 +199,5 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "white",
-  },
-  logo: {
-    alignSelf:"center",
-    resizeMode: 'contain',
-    width: 66,
-    height: 70,
   },
 });

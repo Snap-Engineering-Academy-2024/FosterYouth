@@ -65,7 +65,7 @@ export default function HeaderFund({ }) {
       {/* <UpIcon width={50} height={50}/> */}
 
       <View style={styles.headerRight}>
-        <TouchableOpacity onPress={console.log("Button pressed")} style={styles.photosIcon}>
+        <TouchableOpacity style={styles.photosIcon}>
           <Ionicons name="arrow-up-circle-outline" size={25} color="white" backgroundColor="#18191A33" borderRadius="30" />
         </TouchableOpacity>
 

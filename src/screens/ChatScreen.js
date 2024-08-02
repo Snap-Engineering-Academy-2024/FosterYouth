@@ -3,22 +3,25 @@ import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { supabase } from "../utils/hooks/supabase";  // Import Supabase client
+import { supabase } from "../utils/hooks/supabase";
 import Header from "../components/Header";
 import { CHATBOTS } from "./ConversationScreen";
+import { ChatScreenChatOutline, ChatScreenChatFill } from "../../assets/snapchat/NavigationIcons";
+
 export default function ChatScreen({ navigation }) {
   const [chats, setChats] = useState([]);
   const insets = useSafeAreaInsets();
   const tabBarHeight = useBottomTabBarHeight();
+
   function getChatbots() {
     let chatbotsTemp = [];
     for (const botId in CHATBOTS) {
-      chatbotsTemp.push({ isChatbot: true, chatId: botId, chatImage: CHATBOTS[botId].imageUrl});
+      chatbotsTemp.push({ isChatbot: true, chatId: botId, chatImage: CHATBOTS[botId].imageUrl, notif: CHATBOTS[botId].notificationMessage, newNotif: CHATBOTS[botId].hasNotification});
     }
     setChats((otherChats) => [...otherChats, ...chatbotsTemp]);
   }
+
   async function getUserChats() {
-    // Fetch user chats from Supabase
     const { data: userChats, error } = await supabase
       .from('Chats')
       .select('id');
@@ -26,7 +29,6 @@ export default function ChatScreen({ navigation }) {
       console.error("Error fetching user chats:", error);
       return;
     }
-    // Add user chats to array
     let userChatsTemp = [];
     if (userChats) {
       userChats.forEach((userChat) => {
@@ -35,12 +37,13 @@ export default function ChatScreen({ navigation }) {
     }
     setChats((otherChats) => [...otherChats, ...userChatsTemp]);
   }
+
   useEffect(() => {
     if (chats.length < 1) {
       getChatbots();
-      // getUserChats();
     }
   }, [chats.length]);
+
   return (
     <View
       style={[
@@ -61,6 +64,14 @@ export default function ChatScreen({ navigation }) {
             <TouchableOpacity
               style={styles.userButton}
               onPress={() => {
+                setChats((prevChats) =>
+                  prevChats.map((chat) =>
+                    chat.newNotif === true
+                      ? { ...chat, newNotif: false, notif: "Received • 1m" }
+                      : chat
+                  )
+                );
+
                 navigation.navigate("Conversation", {
                   isChatbot: chat.isChatbot,
                   chatId: chat.chatId,
@@ -68,17 +79,30 @@ export default function ChatScreen({ navigation }) {
               }}
               key={chat.chatId}
             >
-              {/* <Ionicons
-                style={styles.userIcon}
-                name="person-outline"
-                size={36}
-                color="lightgrey"
-              /> */}
               <Image
                 style={styles.userIcon}
                 source={chat.chatImage}
               />
-              <Text style={styles.userName}> {chat.chatId} </Text>
+
+              <Text style={[styles.userName, chat.newNotif ? styles.userNameNotification : styles.userNameOpened]}> {chat.chatId} </Text>
+
+              <Ionicons
+                style={styles.userCamera}
+                name="camera-outline"
+                size={24}
+                color="lightgrey"
+              />
+
+              <Text style={[styles.userNotif, chat.newNotif ? styles.userNotifNotification : styles.userNotifOpened]}> {chat.notif} </Text>
+
+              <View style={styles.userNotifIcon}>
+                {chat.newNotif ? (
+                  <ChatScreenChatFill width={16} height={16} />
+                ) : (
+                  <ChatScreenChatOutline width={16} height={16} />
+                )}
+              </View>
+              
               <Ionicons
                 style={styles.userCamera}
                 name="camera-outline"
@@ -92,33 +116,69 @@ export default function ChatScreen({ navigation }) {
     </View>
   );
 }
+
+const handlePress = () => {
+  
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFF",
   },
   userButton: {
-    padding: 25,
     display: "flex",
     borderBottomColor: "lightgrey",
     borderBottomWidth: 1,
+    paddingVertical: 35
   },
   userIcon: {
     position: "absolute",
     left: 5,
-    top: 5,
+    top: 15,
     width: 40,
-    height: 40
+    height: 40,
   },
   userName: {
     position: "absolute",
     left: 50,
-    top: 14,
+    top: 15,
     fontSize: 18,
+  },
+
+  userNameNotification: {
+    fontWeight: 'bold',
+  },
+
+  userNameOpened: {
+    fontWeight: 'normal',
+  },
+
+  userNotif: {
+    position: "absolute",
+    left: 70,
+    top: 40,
+    fontSize: 12,
+  },
+
+  userNotifNotification: {
+    color: "#0eadff",
+    fontWeight: 'bold',
+  },
+
+  userNotifOpened: {
+    fontWeight: 'normal',
+  },
+
+
+  userNotifIcon: {
+    position: "absolute",
+    left: 52,
+    top: 40,
   },
   userCamera: {
     position: "absolute",
     right: 15,
-    top: 10,
+    top: 23,
   },
 });

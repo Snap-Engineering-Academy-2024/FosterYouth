@@ -4,7 +4,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, SafeAreaView, Platform, Pressable, Text } from "react-native";
 import defaultProfileImage from "../../assets/snapchat/Snap Icon.png";
 import { useNavigation } from "@react-navigation/native";
-
+import { supabase } from "../utils/hooks/supabase";
 
 //Temporary Solution to avoid warning on user screen
 const error = console.error; 
@@ -22,6 +22,8 @@ export default function ChatNotification() {
   const [messages, setMessages] = useState([]);
   const navigation = useNavigation();
 
+  const [nonprofits, setNonprofits] = useState([]);
+
   useEffect(() => {
     setMessages([
       {
@@ -31,6 +33,24 @@ export default function ChatNotification() {
         user: CHATBOT_USER_OBJ,
       },
     ]);
+
+    async function fetchNonprofits() {
+      try {
+          const { data, error } = await supabase.from("nonprofits").select("*");
+          if (error) {
+              console.error("Error fetching nonprofits:", error.message);
+              return;
+          }
+          if (data) {
+              setNonprofits(data);
+              // console.log(data[0]);
+          }
+      } catch (error) {
+          console.error("Error fetching Nonprofits:", error.message);
+      }
+      }
+  
+      fetchNonprofits();
   }, []);
 
   const addNewMessage = (newMessages) => {
@@ -68,7 +88,17 @@ export default function ChatNotification() {
     <>
     <Pressable
         onPress={() =>{
-          navigation.navigate('CampaignScreen')
+          navigation.navigate('CampaignScreen', {
+            title: nonprofits[0].name,
+            photoUrl: nonprofits[0].imageUrl,
+            id: nonprofits[0].registrationNumber,
+            bio: nonprofits[0].bio,
+            website: nonprofits[0].websiteUrl,
+            contributors: nonprofits[0].contributors,
+            followers: nonprofits[0].followers,
+            current: nonprofits[0].currentAmount,
+            goals: nonprofits[0].goals
+          })
         }
         }
         style={styles.buttonStyle}

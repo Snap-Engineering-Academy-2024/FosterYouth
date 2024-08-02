@@ -12,16 +12,22 @@ export const CHATBOTS = {
   "Team Snapchat": {
     name: "Team Snapchat",
     imageUrl: require("../../assets/snapchat/Snap Icon.png"),
+    hasNotification: true,
+    notificationMessage: "New Chat • 1m",
     component: ChatNotification,
   },
   "Evan Spiegel": {
     name: "Evan Spiegel",
     imageUrl: require("../../assets/snapchat/personalBitmoji.png"),
+    hasNotification: false,
+    notificationMessage: "Recieved • 2h • 52🔥",
     component: EvanChat,
   },
   "Lindsey Heisser": {
     name: "Lindsey Heisser",
     imageUrl: require("../../assets/snapchat/lindseyBitmoji.png"),
+    hasNotification: false,
+    notificationMessage: "Recieved • 3h • 78🔥",
     component: LindseyChat,
   }
 }

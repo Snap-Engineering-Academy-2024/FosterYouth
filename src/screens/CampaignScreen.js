@@ -13,6 +13,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { fontHeader } from "../../assets/themes/font";
 import { colors } from "../../assets/themes/colors";
 import DiscoverFeed from "../components/DiscoverFeed";
+import HeaderFund from "../components/HeaderFund";
 import { useNavigation } from "@react-navigation/native";
 
 /* Discover FlatList will render a component in the list
@@ -51,6 +52,7 @@ export default function CampaignScreen({ route, navigation }) {
         },
       ]}
     >
+      <HeaderFund/>
       <View style={styles.contentContainer}>
         <View style={styles.bitmojiContainer}>
           <Text style={styles.sectionHeader}>Join Friends to Give Fund</Text>

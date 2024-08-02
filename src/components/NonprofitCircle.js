@@ -46,18 +46,22 @@ const styles = StyleSheet.create({
   npImage: {
     width: 60,
     height: 60,
+    borderRadius: 30
   },
   titleContainer: {
     backgroundColor: "white",
     borderRadius: 20,
     padding: 4,
+    // justifyContent: "center",
+    // alignContent: "center",
   },
   title: {
     textAlign: "center",
     alignSelf: "center",
     fontSize: 12,
     fontWeight: "700",
-    width:70
+    width:90,
+    height: 30,
   },
   subtitle: {
     fontSize: 8,

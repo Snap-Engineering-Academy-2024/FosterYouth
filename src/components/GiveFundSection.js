@@ -19,7 +19,7 @@ export default function GiveFundSection() {
             }
             if (data) {
                 setNonprofits(data);
-                console.log(data[0]);
+                // console.log(data[0]);
             }
         } catch (error) {
             console.error("Error fetching Nonprofits:", error.message);

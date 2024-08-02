@@ -38,6 +38,7 @@ const DATA = [
 
 export default function CampaignScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
+  const { title, photoUrl } = route.params; //Destructure any props that were passed in
 
   return (
     <SafeAreaView
@@ -70,7 +71,12 @@ export default function CampaignScreen({ route, navigation }) {
         </View>
 
         <View style={styles.mainInfoContainer}>
-          <Text style={styles.mainTitle}>Kids In The Spotlight</Text>
+          <Image 
+            style={styles.logo}
+            source={{uri: photoUrl,
+            }}
+          />
+          <Text style={styles.mainTitle}>{title}</Text>
           <Pressable 
             style={styles.buttonStyle}
           >
@@ -83,7 +89,7 @@ export default function CampaignScreen({ route, navigation }) {
           </Pressable>
         </View>
 
-        <View style={styles.discoverContent}>
+        <View style={styles.storiesSection}>
           <Text style={styles.sectionHeader}>See How You Can Make An Impact</Text>
           <FlatList
             data={DATA}
@@ -138,7 +144,7 @@ const styles = StyleSheet.create({
     fontFamily: fontHeader.fontFamily,
     fontWeight: fontHeader.fontWeight,
   },
-  discoverContent: {
+  storiesSection: {
     padding: 12,
     display: "flex",
     flexDirection: "column",
@@ -147,10 +153,6 @@ const styles = StyleSheet.create({
     display: "flex",
     gap: 12,
     width: "100%",
-  },
-  DiscoveryContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
   },
   sectionHeader: {
     textAlign: "left",
@@ -169,5 +171,10 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     elevation: 3,
     backgroundColor: '#FFFC00',
+  },
+  logo: {
+    alignSelf:"center",
+    width: 66,
+    height: 58,
   },
 });

@@ -17,20 +17,20 @@ import Header from "./Header";
 export default function NonprofitCircle({name, photoUrl}) {
   const navigation = useNavigation();
   return (
-    <View style={styles.myBitmoji}>
+    <View style={styles.nonprofitContainer}>
       <Pressable //added a presable to give the story interaction
         style={[styles.profile, styles.buttons]}
         onPress={() => {
-          navigation.navigate("FriendStory");
+          navigation.navigate("CampaignScreen", {title:name, photoUrl:photoUrl});
         }}
       >
         <Image
-          style={styles.bitmojiImage}
+          style={styles.npImage}
           source={{uri: photoUrl}}
         />
       </Pressable>
-      <View style={styles.bitmojiTextContainer}>
-        <Text style={styles.bitmojiText}>{name}</Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>{name}</Text>
         {/* <Text style={styles.usernameText}>Username</Text> */}
       </View>
     </View>
@@ -38,21 +38,21 @@ export default function NonprofitCircle({name, photoUrl}) {
 }
 
 const styles = StyleSheet.create({
-  myBitmoji: {
+  nonprofitContainer: {
     alignItems: "center",
     justifyContent: "center",
     paddingRight: 10,
   },
-  bitmojiImage: {
+  npImage: {
     width: 60,
     height: 60,
   },
-  bitmojiTextContainer: {
+  titleContainer: {
     backgroundColor: "white",
     borderRadius: 20,
     padding: 4,
   },
-  bitmojiText: {
+  title: {
     textAlign: "center",
     alignSelf: "center",
     fontSize: 12,
@@ -63,14 +63,5 @@ const styles = StyleSheet.create({
     fontSize: 8,
     fontWeight: "700",
     opacity: 0.5,
-  },
-  Friends: {
-    textAlign: "left",
-    paddingLeft: 20,
-    paddingBottom: 20,
-    color: colors.primary,
-    fontSize: fontHeader.fontSize,
-    fontFamily: fontHeader.fontFamily,
-    fontWeight: fontHeader.fontWeight,
   },
 });

@@ -20,7 +20,7 @@ export default function Header({ title }) {
   const navigation = useNavigation();
 
   const [profilePicUrl, setProfilePicUrl] = useState(
-    "https://i.imgur.com/FxsJ3xy.jpg",
+    "https://sdk.bitmoji.com/render/panel/a41da708-81e9-4ec3-9364-9d8748f7063d-f5895c2e-da2d-4413-b1f6-d806dd48e7f5-v1.png?transparent=1&palette=1",
   );
 
   const { user } = useAuthentication();

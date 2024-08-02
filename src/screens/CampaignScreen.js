@@ -12,7 +12,6 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { fontHeader } from "../../assets/themes/font";
 import { colors } from "../../assets/themes/colors";
-import BitmojiCrowd from "../components/BitmojiCrowd";
 import DiscoverFeed from "../components/DiscoverFeed";
 import { useNavigation } from "@react-navigation/native";
 
@@ -55,19 +54,10 @@ export default function CampaignScreen({ route, navigation }) {
       <View style={styles.contentContainer}>
         <View style={styles.bitmojiContainer}>
           <Text style={styles.sectionHeader}>Join Friends to Give Fund</Text>
-          <ScrollView
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.stories}
-          >
-            <BitmojiCrowd />
-            <BitmojiCrowd />
-            <BitmojiCrowd />
-            <BitmojiCrowd />
-            <BitmojiCrowd />
-            <BitmojiCrowd />
-            <BitmojiCrowd />
-          </ScrollView>
+          <Image 
+            source={{uri:"https://i.ibb.co/xjCH2yR/Screenshot-2024-08-01-at-11-21-07-PM.png"}}
+            style={styles.headerImage}
+          />
         </View>
 
         <View style={styles.mainInfoContainer}>
@@ -125,7 +115,15 @@ const styles = StyleSheet.create({
     gap: 4,
     backgroundColor: "#FFFC00",
   },
+  headerImage:{
+    position:"absolute",
+    resizeMode: "cover",
+    width:700,
+    height:100, 
+    marginTop:50,
+  },
   mainInfoContainer:{
+    marginTop:80,
     textAlign: "center",
     // alignItems: "center", // Center items horizontally
     justifyContent: "center", // Center items vertically if needed

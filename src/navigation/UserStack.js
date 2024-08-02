@@ -12,6 +12,7 @@ import AstrologyScreen from "../screens/AstrologyScreen";
 import MemoryScreen from "../screens/MemoryScreen";
 import CampaignScreen from '../screens/CampaignScreen';
 import EventScreen from "../screens/EventScreen"; //New component by Sona and Christian
+import CampaignStoryIndiv from "../components/CampaignStoryIndiv";
 
 const Stack = createStackNavigator();
 
@@ -58,6 +59,11 @@ export default function App() {
         <Stack.Screen
           name="CampaignScreen"
           component={CampaignScreen}
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="CampaignStoryIndiv"
+          component={CampaignStoryIndiv}
           options={{ headerShown: true }}
         />
         <Stack.Screen

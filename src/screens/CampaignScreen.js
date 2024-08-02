@@ -15,6 +15,7 @@ import { colors } from "../../assets/themes/colors";
 import DiscoverFeed from "../components/DiscoverFeed";
 import HeaderFund from "../components/HeaderFund";
 import { useNavigation } from "@react-navigation/native";
+import CampaignTestimonials from "../components/CampaignTestimonials";
 
 /* Discover FlatList will render a component in the list
  * for each object in the array DATA. This is just an example I took
@@ -91,15 +92,24 @@ export default function CampaignScreen({ route, navigation }) {
 
         <View style={styles.storiesSection}>
           <Text style={styles.sectionHeader}>Testimonials</Text>
-          <FlatList
-            data={DATA}
-            horizontal={false}
-            numColumns={2}
-            ItemSeparatorComponent={() => <View style={{ height: "1%" }} />}
-            columnWrapperStyle={{ justifyContent: "space-between" }}
-            renderItem={({ item }) => <DiscoverFeed title={item.title} />}
-            keyExtractor={(item) => item.id}
-          />
+          <ScrollView
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            >
+                {DATA.length > 1 ? (
+                    <FlatList
+                      data={DATA}
+                      horizontal={false}
+                      numColumns={DATA.length}
+                      ItemSeparatorComponent={() => <View style={{ height: "1%" }} />}
+                      columnWrapperStyle={{ justifyContent: "space-between" }}
+                      renderItem={({ item }) => <CampaignTestimonials title={item.title} />}
+                      keyExtractor={(item) => item.id}
+                  />
+                ) : (
+                <Text>No "usersToAdd" table</Text>
+            )}
+        </ScrollView>
         </View>
 
         <View style={styles.storiesSection}>

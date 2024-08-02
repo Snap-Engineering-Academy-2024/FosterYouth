@@ -19,6 +19,7 @@ export default function GiveFundSection() {
             }
             if (data) {
                 setNonprofits(data);
+                console.log(data[0]);
             }
         } catch (error) {
             console.error("Error fetching Nonprofits:", error.message);
@@ -32,6 +33,13 @@ export default function GiveFundSection() {
         <NonprofitCircle 
             name={item.name}
             photoUrl={item.imageUrl}
+            id={item.registrationNumber}
+            bio={item.bio}
+            website={item.websiteUrl}
+            contributors={item.contributors} //array
+            followers={item.followers}
+            current={item.currentAmount}
+            goals={item.goals}//arrray
         />
       );
 

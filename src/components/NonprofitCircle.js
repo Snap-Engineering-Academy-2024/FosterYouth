@@ -14,14 +14,14 @@ import { useNavigation } from "@react-navigation/native";
 
 import Header from "./Header";
 
-export default function NonprofitCircle({name, photoUrl}) {
+export default function NonprofitCircle({name, photoUrl, id, bio, website, contributors, followers, current, goals}) {
   const navigation = useNavigation();
   return (
     <View style={styles.nonprofitContainer}>
       <Pressable //added a presable to give the story interaction
         style={[styles.profile, styles.buttons]}
         onPress={() => {
-          navigation.navigate("CampaignScreen", {title:name, photoUrl:photoUrl});
+          navigation.navigate("CampaignScreen", {title:name, photoUrl:photoUrl, id:id, bio:bio, website:website, contributors:contributors, followers:followers, current:current, goals:goals});
         }}
       >
         <Image
@@ -31,7 +31,7 @@ export default function NonprofitCircle({name, photoUrl}) {
       </Pressable>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>{name}</Text>
-        {/* <Text style={styles.usernameText}>Username</Text> */}
+        <Text style={styles.subtitle}>{followers} followers</Text>
       </View>
     </View>
   );
@@ -59,9 +59,11 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     width:70
   },
-  usernameText: {
+  subtitle: {
     fontSize: 8,
     fontWeight: "700",
     opacity: 0.5,
+    textAlign: "center",
+    marginTop: 5,
   },
 });

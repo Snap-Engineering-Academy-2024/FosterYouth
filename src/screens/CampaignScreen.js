@@ -38,7 +38,7 @@ const DATA = [
 
 export default function CampaignScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
-  const { title, photoUrl } = route.params; //Destructure any props that were passed in
+  const { title, photoUrl, id, bio, website, contributors, followers, current, goals } = route.params; //Destructure any props that were passed in
 
   return (
     <SafeAreaView
@@ -73,8 +73,7 @@ export default function CampaignScreen({ route, navigation }) {
         <View style={styles.mainInfoContainer}>
           <Image 
             style={styles.logo}
-            source={{uri: photoUrl,
-            }}
+            source={{uri: photoUrl,}}
           />
           <Text style={styles.mainTitle}>{title}</Text>
           <Pressable 
@@ -87,6 +86,8 @@ export default function CampaignScreen({ route, navigation }) {
           >
             <Text>Follow</Text>
           </Pressable>
+          <Text>Current Amount Raised: ${current}</Text>
+          <Text>{website}</Text>
         </View>
 
         <View style={styles.storiesSection}>
@@ -174,7 +175,8 @@ const styles = StyleSheet.create({
   },
   logo: {
     alignSelf:"center",
+    resizeMode: 'contain',
     width: 66,
-    height: 58,
+    height: 70,
   },
 });

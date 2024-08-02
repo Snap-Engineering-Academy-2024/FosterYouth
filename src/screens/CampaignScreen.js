@@ -71,12 +71,12 @@ export default function CampaignScreen({ route, navigation }) {
           <Pressable 
             style={styles.buttonStyle}
           >
-            <Text>Donate</Text>
+            <Text style={styles.buttonText}>＋ Follow</Text>
           </Pressable>
           <Pressable 
             style={styles.buttonStyle}
           >
-            <Text>Follow</Text>
+            <Text style={styles.buttonText}>＋ Donate</Text>
           </Pressable>
           <Text>Current Amount Raised: ${current}</Text>
           <Text>{website}</Text>
@@ -171,7 +171,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 20,
     elevation: 3,
-    backgroundColor: '#FFFC00',
+    backgroundColor: '#007AFF',
+  },
+  buttonText: {
+    color: "white",
   },
   logo: {
     alignSelf:"center",

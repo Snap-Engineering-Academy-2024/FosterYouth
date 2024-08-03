@@ -68,6 +68,9 @@ export default function CampaignScreen({ route, navigation }) {
 
           <Pressable 
             style={styles.buttonStyle}
+            onPress={() => {
+              navigation.navigate("DonateScreen", {title:title, photoUrl:photoUrl, contributors:contributors, current:current, goals:goals, stories:stories});
+            }}
           >
             <View style={{display:"flex", flexDirection:"row"}}>
               <Ionicons name="gift-outline" color="yellow" size={20}/>

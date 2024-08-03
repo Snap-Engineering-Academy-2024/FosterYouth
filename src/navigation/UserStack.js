@@ -13,6 +13,7 @@ import MemoryScreen from "../screens/MemoryScreen";
 import CampaignScreen from '../screens/CampaignScreen';
 import EventScreen from "../screens/EventScreen"; //New component by Sona and Christian
 import CampaignStoryIndiv from "../components/CampaignStoryIndiv";
+import DonateScreen from '../screens/GiveFundScreens/DonateScreen'
 
 const Stack = createStackNavigator();
 
@@ -64,6 +65,11 @@ export default function App() {
         <Stack.Screen
           name="CampaignStoryIndiv"
           component={CampaignStoryIndiv}
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="DonateScreen"
+          component={DonateScreen}
           options={{ headerShown: true }}
         />
         <Stack.Screen

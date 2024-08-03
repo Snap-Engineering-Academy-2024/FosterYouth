@@ -13,7 +13,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { fontHeader } from "../../assets/themes/font";
 import { colors } from "../../assets/themes/colors";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import HeaderFund from "../components/HeaderFund";
+import HeaderFund from "../components/GiveFundComponents/HeaderFund";
 import { useNavigation } from "@react-navigation/native";
 import CampaignTestimonials from "../components/CampaignTestimonials";
 import FollowButton from "../components/GiveFundComponents/FollowButton";

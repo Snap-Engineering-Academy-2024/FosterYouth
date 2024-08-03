@@ -1,19 +1,19 @@
 import { Text, View, StyleSheet, Button, Image, TouchableOpacity } from "react-native";
-import { colors } from "../../assets/themes/colors";
-import { fontHeader } from "../../assets/themes/font";
-import { Followers, More, Search } from "../../assets/snapchat/HeaderIcons";
+import { colors } from "../../../assets/themes/colors";
+import { fontHeader } from "../../../assets/themes/font";
+import { Followers, More, Search } from "../../../assets/snapchat/HeaderIcons";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useState, useEffect } from "react";
-import { useAuthentication } from "../utils/hooks/useAuthentication";
-import { supabase } from "../utils/hooks/supabase";
+import { useAuthentication } from "../../utils/hooks/useAuthentication";
+import { supabase } from "../../utils/hooks/supabase";
 import Ionicons from "react-native-vector-icons/Ionicons";
 // import Svg from "react-native-svg"
 // import UpIcon from '../../assets/buttons/up.svg'
 //npx expo install react-native-svg
 
-import SelectionMenu from "./SelectionMenu";
+import SelectionMenu from "../SelectionMenu";
 const Stack = createStackNavigator();
 
 export default function HeaderFund({ }) {

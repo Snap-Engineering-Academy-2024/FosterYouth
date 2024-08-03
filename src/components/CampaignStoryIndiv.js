@@ -10,15 +10,18 @@ import {
   useState,
 } from "react-native";
 import { colors } from "../../assets/themes/colors";
+import { useRoute } from '@react-navigation/native';
 
 export default function CampaignStoryIndiv() {
+  const route = useRoute();
+  const { link } = route.params;
   return (
     <View style={styles.Square}>
       <ImageBackground
         style={styles.FeedImage}
         imageStyle={{ borderRadius: 20 }}
         source={{
-          uri: "https://eccles.utah.edu/wp-content/uploads/2017/02/snapchat.jpg",
+          uri: link,
         }}
       >
         <Text style={styles.FeedText}>Thank you for watching our story</Text>
@@ -38,7 +41,7 @@ const styles = StyleSheet.create({
   },
   FeedImage: {
     width: 480,
-    height: 420,
+    height: 500,
     borderRadius: 12,
     shadowColor: "#000",
     shadowOffset: {

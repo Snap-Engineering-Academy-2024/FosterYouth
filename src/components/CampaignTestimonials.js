@@ -18,7 +18,7 @@ export default function CampaignTestimonials({url}) {
       <View style={styles.Square}>
         <Pressable
           onPress={() => {
-            navigation.navigate("CampaignStoryIndiv");
+            navigation.navigate("CampaignStoryIndiv", {link:url});
           }}
         >
           <ImageBackground

@@ -7,7 +7,8 @@ import {
   Image,
   ScrollView,
   FlatList,
-  SafeAreaView
+  SafeAreaView, 
+  TextInput
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { fontHeader } from "../../../assets/themes/font";
@@ -20,7 +21,12 @@ import CampaignTestimonials from "../../components/CampaignTestimonials";
 export default function DonateScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
   const { title, photoUrl, contributors, current, goals, stories } = route.params; 
+
+  const [donation, setDonation] = useState("0");
   
+  const handleNumberChange = (text) => {
+    setDonation(text);
+  };
 
   return (
     <SafeAreaView
@@ -67,6 +73,17 @@ export default function DonateScreen({ route, navigation }) {
                     <View style={{display:"flex", flexDirection:"row"}}>
                         <Text style={styles.buttonText}> $5</Text>
                     </View>
+                </Pressable>
+                <Pressable 
+                    style={[styles.buttonStyle, styles.moneyButton, {display:"flex", flexDirection:"row"}]}
+                >
+                    <Text style={styles.inputLabel}>Other: </Text>
+                    <TextInput
+                        keyboardType="numeric"
+                        value={donation}
+                        onChangeText={handleNumberChange}
+                        style={styles.input}
+                    />
                 </Pressable>
             </View>
 
@@ -157,30 +174,6 @@ const styles = StyleSheet.create({
     borderColor: "#A05DCD", 
     borderWidth: 3
   },
-  storiesSection: {
-    padding: 12,
-    display: "flex",
-    flexDirection: "column",
-  },
-  sectionHeader: {
-    textAlign: "left",
-    paddingHorizontal: 12,
-    paddingVertical: 4,
-    color: colors.primary,
-    fontSize: fontHeader.fontSize,
-    fontFamily: fontHeader.fontFamily,
-    fontWeight: fontHeader.fontWeight,
-  },
-  sectionContent: {
-    display:"flex",
-    flexDirection: "row",
-    backgroundColor:"white", 
-    padding: 10,
-    borderRadius: 12, 
-    shadowColor: "#E8E8E8", 
-    shadowOffset: {width: -5, height: 4},
-    shadowRadius: 25,
-  },
   buttonStyle: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -190,6 +183,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     elevation: 3,
     backgroundColor: '#007AFF',
+    width: 120,
+    height: 50
   },
   buttonText: {
     fontSize: 16,
@@ -197,14 +192,25 @@ const styles = StyleSheet.create({
   },
   chosenMoneyButton:{
     backgroundColor: "black",
-    width: 80
   },
   moneyButton:{
     backgroundColor: "#707070",
-    width: 80
   },
   moneyContainer:{
     display:"flex", 
-    flexDirection:"row"
+    flexDirection:"row", 
+    justifyContent: "center",
+    alignItems:"center"
+  }, 
+  inputLabel:{
+    fontFamily: fontHeader.fontFamily,
+    fontWeight: fontHeader.fontWeight,
+    color: "white"
+  },
+  input:{
+    backgroundColor:"white",
+    width: 50, 
+    borderRadius: 10,
+    padding: 10
   }
 });

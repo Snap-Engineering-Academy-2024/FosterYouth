@@ -235,6 +235,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#007AFF',
   },
   buttonText: {
+    fontSize: 16,
     color: "white",
   },
 });

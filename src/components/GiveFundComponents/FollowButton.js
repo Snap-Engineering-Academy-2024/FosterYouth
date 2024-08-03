@@ -34,26 +34,36 @@ export default function FollowButton({ followNum,setFollowNum, isFollowing, setI
         },
       ]}
     >
-          <Pressable 
-            style={styles.buttonStyle}
-            onPress={() => {
-              handleFollow()
-            }}
-          >
-            <View style={{display:"flex", flexDirection:"row"}}>
-              {isFollowing ? 
-              <>
-                <Ionicons name="remove-circle-outline" color="red" size={25}/>
-                <Text style={styles.buttonText}> Unfollow</Text> 
-              </>
+      {isFollowing ? 
+      <>
+        <Pressable 
+          style={[styles.buttonStyle, styles.unfollow]}
+          onPress={() => {
+            handleFollow()
+          }}
+        >
+          <View style={{display:"flex", flexDirection:"row"}}>
+              <Ionicons name="remove-circle-outline" color="red" size={25}/>
+              <Text style={[styles.buttonText, styles.unfollow]}> Unfollow</Text> 
+          </View>
+        </Pressable>
+      </>
               : 
-              <>
-                <Ionicons name="add-circle-outline" color="yellow" size={25}/>
-                <Text style={styles.buttonText}> Follow</Text> 
-              </>
-              }
-            </View>
-          </Pressable>
+      <>
+        <Pressable 
+          style={[styles.buttonStyle]}
+          onPress={() => {
+            handleFollow()
+          }}
+        >
+          <View style={{display:"flex", flexDirection:"row"}}>
+            <Ionicons name="add-circle-outline" color="yellow" size={25}/>
+            <Text style={[styles.buttonText]}> Follow</Text> 
+          </View>
+        </Pressable>
+      </>
+      }
+            
     </SafeAreaView>
   );
 }
@@ -71,9 +81,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 20,
     elevation: 3,
-    backgroundColor: '#007AFF',
+    backgroundColor: '#0FADFF',
+  },
+  unfollow:{
+    backgroundColor: "white",
+    color: "black",
   },
   buttonText: {
+    fontSize: 16,
     color: "white",
   },
 });

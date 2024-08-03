@@ -1,7 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { GiftedChat } from "react-native-gifted-chat";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, SafeAreaView, Platform } from "react-native";
 import defaultProfileImage from "../../assets/snapchat/lindseyBitmoji.png";
 
 //Temporary Solution to avoid warning on user screen
@@ -32,8 +30,6 @@ export default function LindseyChat() {
 
   const addNewMessage = (newMessages) => {
     setMessages((previousMessages) => {
-      // console.log("PREVIOUS MESSAGES:", previousMessages);
-      // console.log("NEW MESSAGE:", newMessages);
       return GiftedChat.append(previousMessages, newMessages);
     });
   };
@@ -50,11 +46,7 @@ export default function LindseyChat() {
   };
 
   const respondToUser = (userMessages) => {
-    // console.log("User message text:", userMessages[0].text);
-
-    // Simple chatbot logic (aka Checkpoint 2 onwards) here!
-
-    addBotMessage("Welcome to a recreated version of SnapChat");
+addBotMessage("Did you know Give Fund started as a project from the Snap Academies?");
   };
 
   const onSend = useCallback((messages = []) => {

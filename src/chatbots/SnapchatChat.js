@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { GiftedChat } from "react-native-gifted-chat";
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, SafeAreaView, Platform, Pressable, Text } from "react-native";
 import defaultProfileImage from "../../assets/snapchat/Snap Icon.png";
 import { useNavigation } from "@react-navigation/native";
@@ -18,7 +17,7 @@ const CHATBOT_USER_OBJ = {
   avatar: defaultProfileImage,
 };
 
-export default function ChatNotification() {
+export default function SnapchatChat() {
   const [messages, setMessages] = useState([]);
   const navigation = useNavigation();
 
@@ -55,8 +54,6 @@ export default function ChatNotification() {
 
   const addNewMessage = (newMessages) => {
     setMessages((previousMessages) => {
-      // console.log("PREVIOUS MESSAGES:", previousMessages);
-      // console.log("NEW MESSAGE:", newMessages);
       return GiftedChat.append(previousMessages, newMessages);
     });
   };
@@ -73,11 +70,7 @@ export default function ChatNotification() {
   };
 
   const respondToUser = (userMessages) => {
-    // console.log("User message text:", userMessages[0].text);
-
-    // Simple chatbot logic (aka Checkpoint 2 onwards) here!
-
-    addBotMessage("Try out Give Fund");
+    addBotMessage("Try out Give Fund!");
   };
 
   const onSend = useCallback((messages = []) => {
@@ -125,7 +118,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFFFFF",
-    // paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   buttonStyle: {
     alignItems: 'center',

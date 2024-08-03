@@ -16,23 +16,13 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import HeaderFund from "../components/HeaderFund";
 import { useNavigation } from "@react-navigation/native";
 import CampaignTestimonials from "../components/CampaignTestimonials";
+import FollowButton from "../components/GiveFundComponents/FollowButton";
 
 export default function CampaignScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
   const { title, photoUrl, id, bio, website, contributors, followers, current, goals, stories } = route.params; //Destructure any props that were passed in
   const[followNum, setFollowNum] = useState(followers);
   const[isFollowing, setIsFollowing] = useState(false);
-
-  function follow() {
-    // console.log("Followed!");
-    if(!isFollowing){
-      setFollowNum(followNum + 1);
-      setIsFollowing(true)
-    } else {
-      setFollowNum(followNum - 1);
-      setIsFollowing(false)
-    }
-  }
 
   return (
     <SafeAreaView
@@ -69,26 +59,13 @@ export default function CampaignScreen({ route, navigation }) {
             </View>
           </View>
           
-          <Pressable 
-            style={styles.buttonStyle}
-            onPress={() => {
-              follow()
-            }}
-          >
-            <View style={{display:"flex", flexDirection:"row"}}>
-              {isFollowing ? 
-              <>
-                <Ionicons name="remove-circle-outline" color="red" size={25}/>
-                <Text style={styles.buttonText}> Unfollow</Text> 
-              </>
-              : 
-              <>
-                <Ionicons name="add-circle-outline" color="yellow" size={25}/>
-                <Text style={styles.buttonText}> Follow</Text> 
-              </>
-              }
-            </View>
-          </Pressable>
+          <FollowButton 
+              followNum={followNum}
+              setFollowNum={setFollowNum}
+              isFollowing={isFollowing}
+              setIsFollowing={setIsFollowing}
+            />
+
           <Pressable 
             style={styles.buttonStyle}
           >

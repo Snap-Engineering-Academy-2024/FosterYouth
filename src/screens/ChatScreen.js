@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
 
   newMessageButton : {
     position: "absolute",
-    bottom: 55,
+    bottom: 30,
     right: 20,
     backgroundColor: "#0eadff",
     padding: 14,

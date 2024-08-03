@@ -105,6 +105,12 @@ export default function ChatScreen({ navigation }) {
           );
         })}
       </View>
+
+      <View style={styles.newMessageButton}>
+        <Ionicons name="add" size={35} color="white"/>
+      </View>
+      
+
     </View>
   );
 }
@@ -172,4 +178,17 @@ const styles = StyleSheet.create({
     right: 15,
     top: 23,
   },
+
+  newMessageButton : {
+    position: "absolute",
+    bottom: 55,
+    right: 20,
+    backgroundColor: "#0eadff",
+    padding: 14,
+    borderRadius: 40,
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.4,
+    shadowRadius: 4
+  }
 });

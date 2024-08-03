@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -17,34 +17,22 @@ import HeaderFund from "../components/HeaderFund";
 import { useNavigation } from "@react-navigation/native";
 import CampaignTestimonials from "../components/CampaignTestimonials";
 
-/* Discover FlatList will render a component in the list
- * for each object in the array DATA. This is just an example I took
- * from the FlatList documentation, so feel free to change the contents.
- */
-
-const DATA = [
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "Second Item",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Third Item",
-  },
-  {
-    id: "78694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Fourth Item",
-  },
-];
-
 export default function CampaignScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
   const { title, photoUrl, id, bio, website, contributors, followers, current, goals, stories } = route.params; //Destructure any props that were passed in
-  // console.log(stories);
+  const[followNum, setFollowNum] = useState(followers);
+  const[isFollowing, setIsFollowing] = useState(false);
+
+  function follow() {
+    // console.log("Followed!");
+    if(!isFollowing){
+      setFollowNum(followNum + 1);
+      setIsFollowing(true)
+    } else {
+      setFollowNum(followNum - 1);
+      setIsFollowing(false)
+    }
+  }
 
   return (
     <SafeAreaView
@@ -77,19 +65,37 @@ export default function CampaignScreen({ route, navigation }) {
             />
             <View>
               <Text style={styles.mainTitle}>{title}</Text>
-              <Text style={styles.followers}>{followers} followers</Text>
+              <Text style={styles.followers}>{followNum} followers</Text>
             </View>
           </View>
           
           <Pressable 
             style={styles.buttonStyle}
+            onPress={() => {
+              follow()
+            }}
           >
-            <Text style={styles.buttonText}>＋ Follow</Text>
+            <View style={{display:"flex", flexDirection:"row"}}>
+              {isFollowing ? 
+              <>
+                <Ionicons name="remove-circle-outline" color="red" size={25}/>
+                <Text style={styles.buttonText}> Unfollow</Text> 
+              </>
+              : 
+              <>
+                <Ionicons name="add-circle-outline" color="yellow" size={25}/>
+                <Text style={styles.buttonText}> Follow</Text> 
+              </>
+              }
+            </View>
           </Pressable>
           <Pressable 
             style={styles.buttonStyle}
           >
-            <Text style={styles.buttonText}>＋ Donate</Text>
+            <View style={{display:"flex", flexDirection:"row"}}>
+              <Ionicons name="gift-outline" color="yellow" size={20}/>
+              <Text style={styles.buttonText}>  Donate</Text>
+            </View>
           </Pressable>
           <Text>Current Amount Raised: ${current}</Text>
           <Text>{website}</Text>

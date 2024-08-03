@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#0FADFF',
   },
   unfollow:{
-    backgroundColor: "white",
+    backgroundColor: "#D0D0D0",
     color: "black",
   },
   buttonText: {

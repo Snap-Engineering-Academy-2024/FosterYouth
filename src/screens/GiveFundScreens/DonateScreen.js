@@ -51,9 +51,9 @@ export default function DonateScreen({ route, navigation }) {
         </View>
 
         <View style={styles.mainInfoContainer}>
-          <Image 
-              style={styles.logo}
-              source={{uri: photoUrl,}}
+            <Image 
+                style={styles.logo}
+                source={{uri: photoUrl}}
             />
             <Text style={styles.mainTitle}>You're Supporting</Text>
             <Text style={[styles.mainTitle, styles.nonprofitName]}>{title}!</Text>
@@ -63,8 +63,8 @@ export default function DonateScreen({ route, navigation }) {
                     style={[styles.buttonStyle, styles.chosenMoneyButton]}
                 >
                     <View style={{display:"flex", flexDirection:"row"}}>
-                    <Ionicons name="checkmark-outline" color="white" size={20}/>
-                    <Text style={styles.buttonText}> $1</Text>
+                        <Ionicons name="checkmark-outline" color="white" size={20}/>
+                        <Text style={styles.buttonText}> $1</Text>
                     </View>
                 </Pressable>
                 <Pressable 
@@ -87,14 +87,12 @@ export default function DonateScreen({ route, navigation }) {
                 </Pressable>
             </View>
 
-            
-
             <Pressable 
-                style={styles.buttonStyle}
+                style={[styles.buttonStyle, styles.donateButton]}
             >
                 <View style={{display:"flex", flexDirection:"row"}}>
-                <Ionicons name="gift-outline" color="yellow" size={20}/>
-                <Text style={styles.buttonText}>  Donate</Text>
+                    <Ionicons name="gift-outline" color="yellow" size={20}/>
+                    <Text style={styles.buttonText}>  Donate</Text>
                 </View>
             </Pressable>
             <Text>Current Amount Raised: ${current}</Text>
@@ -212,5 +210,8 @@ const styles = StyleSheet.create({
     width: 50, 
     borderRadius: 10,
     padding: 10
+  },
+  donateButton: {
+    width: "100%",
   }
 });

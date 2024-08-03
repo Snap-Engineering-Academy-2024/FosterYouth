@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-export default function CampaignTestimonials() {
+export default function CampaignTestimonials({url}) {
   const navigation = useNavigation();
   return (
     <View style={styles.FeedContainer}>
@@ -25,7 +25,7 @@ export default function CampaignTestimonials() {
             style={styles.FeedImage}
             imageStyle={{ borderRadius: 20 }}
             source={{
-              uri: "https://eccles.utah.edu/wp-content/uploads/2017/02/snapchat.jpg",
+              uri: url,
             }}
           >
             <Text style={styles.FeedText}>Hear Our Story</Text>

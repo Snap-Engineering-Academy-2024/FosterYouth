@@ -14,14 +14,14 @@ import { useNavigation } from "@react-navigation/native";
 
 import Header from "./Header";
 
-export default function NonprofitCircle({name, photoUrl, id, bio, website, contributors, followers, current, goals}) {
+export default function NonprofitCircle({name, photoUrl, id, bio, website, contributors, followers, current, goals, stories}) {
   const navigation = useNavigation();
   return (
     <View style={styles.nonprofitContainer}>
       <Pressable //added a presable to give the story interaction
         style={[styles.profile, styles.buttons]}
         onPress={() => {
-          navigation.navigate("CampaignScreen", {title:name, photoUrl:photoUrl, id:id, bio:bio, website:website, contributors:contributors, followers:followers, current:current, goals:goals});
+          navigation.navigate("CampaignScreen", {title:name, photoUrl:photoUrl, id:id, bio:bio, website:website, contributors:contributors, followers:followers, current:current, goals:goals, stories:stories});
         }}
       >
         <Image

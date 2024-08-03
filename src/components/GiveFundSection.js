@@ -19,7 +19,7 @@ export default function GiveFundSection() {
             }
             if (data) {
                 setNonprofits(data);
-                // console.log(data[0]);
+                // console.log(data[1].stories);
             }
         } catch (error) {
             console.error("Error fetching Nonprofits:", error.message);
@@ -40,6 +40,7 @@ export default function GiveFundSection() {
             followers={item.followers}
             current={item.currentAmount}
             goals={item.goals}//arrray
+            stories={item.stories}
         />
       );
 

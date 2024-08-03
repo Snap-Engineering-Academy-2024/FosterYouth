@@ -35,11 +35,16 @@ const DATA = [
     id: "58694a0f-3da1-471f-bd96-145571e29d72",
     title: "Third Item",
   },
+  {
+    id: "78694a0f-3da1-471f-bd96-145571e29d72",
+    title: "Fourth Item",
+  },
 ];
 
 export default function CampaignScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
-  const { title, photoUrl, id, bio, website, contributors, followers, current, goals } = route.params; //Destructure any props that were passed in
+  const { title, photoUrl, id, bio, website, contributors, followers, current, goals, stories } = route.params; //Destructure any props that were passed in
+  // console.log(stories);
 
   return (
     <SafeAreaView
@@ -97,15 +102,15 @@ export default function CampaignScreen({ route, navigation }) {
             showsHorizontalScrollIndicator={false}
             style={styles.sectionContent}
             >
-                {DATA.length > 1 ? (
+                {stories.length > 1 ? (
                     <FlatList
-                      data={DATA}
+                      data={stories}
                       horizontal={false}
-                      numColumns={DATA.length}
+                      numColumns={stories.length}
                       ItemSeparatorComponent={() => <View style={{ height: "1%" }} />}
                       columnWrapperStyle={{ justifyContent: "space-between" }}
-                      renderItem={({ item }) => <CampaignTestimonials title={item.title} />}
-                      keyExtractor={(item) => item.id}
+                      renderItem={({ item }) => <CampaignTestimonials url={item} />}
+                      keyExtractor={(item) => item}
                   />
                 ) : (
                 <Text>No "usersToAdd" table</Text>

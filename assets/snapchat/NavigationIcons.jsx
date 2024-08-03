@@ -82,6 +82,38 @@ export const ChatOutline = (props) => (
   </Svg>
 );
 
+export const ChatScreenChatFill = ({ width, height }) => (
+  <Svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    viewBox="0 0 24 24"
+    fill="none"
+  >
+    <Path
+      fill="#0eadff"
+      d="M20.4 18.356v1.876c0 .424-.358.768-.8.768a.824.824 0 0 1-.459-.139l-3.729-2.505H8.4c-2.21 0-4-1.719-4-3.84V6.84C4.4 4.719 6.19 3 8.4 3h8c2.21 0 4 1.719 4 3.839v11.517Z"
+    />
+  </Svg>
+);
+
+export const ChatScreenChatOutline = ({ width, height }) => (
+  <Svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    viewBox="0 0 24 24"
+    fill="none"
+  >
+    <Path
+      fill="#0eadff"
+      fillRule="evenodd"
+      d="m16.021 16.356 2.379 1.598V6.839C18.4 5.9 17.583 5 16.4 5h-8c-1.183 0-2 .9-2 1.839v7.678c0 .939.817 1.839 2 1.839h7.621Zm4.235 2.845Zm-4.844-.845 3.73 2.505c.134.09.294.139.458.139.442 0 .8-.344.8-.768V6.84c0-2.12-1.79-3.839-4-3.839h-8c-2.21 0-4 1.719-4 3.839v7.678c0 2.12 1.79 3.839 4 3.839h7.012Z"
+      clipRule="evenodd"
+    />
+  </Svg>
+);
+
 export const GroupFill = (props) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"

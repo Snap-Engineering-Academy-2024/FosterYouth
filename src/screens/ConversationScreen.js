@@ -1,9 +1,8 @@
 import React from "react";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Platform, Text, View, Pressable } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import UserChat from "../components/UserChat";
-import ChatNotification from "../chatbots/ChatNotification";
+import SnapchatChat from "../chatbots/SnapchatChat";
 import EvanChat from "../chatbots/EvanChat";
 import LindseyChat from "../chatbots/LindseyChat";
 
@@ -12,16 +11,22 @@ export const CHATBOTS = {
   "Team Snapchat": {
     name: "Team Snapchat",
     imageUrl: require("../../assets/snapchat/Snap Icon.png"),
-    component: ChatNotification,
+    hasNotification: true,
+    notificationMessage: "New Chat • 1m",
+    component: SnapchatChat,
   },
   "Evan Spiegel": {
     name: "Evan Spiegel",
     imageUrl: require("../../assets/snapchat/personalBitmoji.png"),
+    hasNotification: false,
+    notificationMessage: "Recieved • 2h • 52🔥",
     component: EvanChat,
   },
   "Lindsey Heisser": {
     name: "Lindsey Heisser",
     imageUrl: require("../../assets/snapchat/lindseyBitmoji.png"),
+    hasNotification: false,
+    notificationMessage: "Recieved • 3h • 78🔥",
     component: LindseyChat,
   }
 }
@@ -46,7 +51,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFFFFF",
-    // paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   buttonStyle: {
     alignItems: 'center',

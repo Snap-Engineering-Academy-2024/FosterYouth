@@ -1,10 +1,9 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { GiftedChat } from "react-native-gifted-chat";
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, SafeAreaView, Platform, Pressable, Text } from "react-native";
 import defaultProfileImage from "../../assets/snapchat/Snap Icon.png";
 import { useNavigation } from "@react-navigation/native";
-
+import { supabase } from "../utils/hooks/supabase";
 
 //Temporary Solution to avoid warning on user screen
 const error = console.error; 
@@ -18,9 +17,11 @@ const CHATBOT_USER_OBJ = {
   avatar: defaultProfileImage,
 };
 
-export default function ChatNotification() {
+export default function SnapchatChat() {
   const [messages, setMessages] = useState([]);
   const navigation = useNavigation();
+
+  const [nonprofits, setNonprofits] = useState([]);
 
   useEffect(() => {
     setMessages([
@@ -31,12 +32,28 @@ export default function ChatNotification() {
         user: CHATBOT_USER_OBJ,
       },
     ]);
+
+    async function fetchNonprofits() {
+      try {
+          const { data, error } = await supabase.from("nonprofits").select("*");
+          if (error) {
+              console.error("Error fetching nonprofits:", error.message);
+              return;
+          }
+          if (data) {
+              setNonprofits(data);
+              // console.log(data[0]);
+          }
+      } catch (error) {
+          console.error("Error fetching Nonprofits:", error.message);
+      }
+      }
+  
+      fetchNonprofits();
   }, []);
 
   const addNewMessage = (newMessages) => {
     setMessages((previousMessages) => {
-      // console.log("PREVIOUS MESSAGES:", previousMessages);
-      // console.log("NEW MESSAGE:", newMessages);
       return GiftedChat.append(previousMessages, newMessages);
     });
   };
@@ -53,11 +70,7 @@ export default function ChatNotification() {
   };
 
   const respondToUser = (userMessages) => {
-    // console.log("User message text:", userMessages[0].text);
-
-    // Simple chatbot logic (aka Checkpoint 2 onwards) here!
-
-    addBotMessage("Try out Give Fund");
+    addBotMessage("Try out Give Fund!");
   };
 
   const onSend = useCallback((messages = []) => {
@@ -68,7 +81,17 @@ export default function ChatNotification() {
     <>
     <Pressable
         onPress={() =>{
-          navigation.navigate('CampaignScreen')
+          navigation.navigate('CampaignScreen', {
+            title: nonprofits[0].name,
+            photoUrl: nonprofits[0].imageUrl,
+            id: nonprofits[0].registrationNumber,
+            bio: nonprofits[0].bio,
+            website: nonprofits[0].websiteUrl,
+            contributors: nonprofits[0].contributors,
+            followers: nonprofits[0].followers,
+            current: nonprofits[0].currentAmount,
+            goals: nonprofits[0].goals
+          })
         }
         }
         style={styles.buttonStyle}
@@ -95,7 +118,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFFFFF",
-    // paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   buttonStyle: {
     alignItems: 'center',

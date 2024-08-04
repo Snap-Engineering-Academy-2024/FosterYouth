@@ -1,7 +1,6 @@
-import { Text, View, StyleSheet, Button, Image, TouchableOpacity } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { colors } from "../../../assets/themes/colors";
 import { fontHeader } from "../../../assets/themes/font";
-import { Followers, More, Search } from "../../../assets/snapchat/HeaderIcons";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -9,7 +8,6 @@ import { useState, useEffect } from "react";
 import { useAuthentication } from "../../utils/hooks/useAuthentication";
 import { supabase } from "../../utils/hooks/supabase";
 import Ionicons from "react-native-vector-icons/Ionicons";
-//npx expo install react-native-svg
 
 import SelectionMenu from "../SelectionMenu";
 const Stack = createStackNavigator();
@@ -49,26 +47,30 @@ export default function HeaderFund({ }) {
 
   return (
     <View style={styles.container}>
-      <View style={{borderRadius:50, backgroundColor:"#18191A33" }}>
+      <View style={[styles.more, styles.buttons]}>
         <Ionicons 
           name="chevron-down-outline" 
-          size={25} 
-          color="white"
+          size={20} 
+          color="gray"
         />
       </View>
 
       <View style={styles.headerRight}>
-        <View style={{borderRadius:50, backgroundColor:"#18191A33" }}>
+        <View style={[styles.more, styles.buttons]}>
           <Ionicons 
-            name="arrow-up-circle-outline" 
-            size={25} 
-            color="white" 
+            name="push-outline" 
+            size={20} 
+            color="gray" 
           />
         </View>
 
         <Pressable title="Open Bottom Sheet" onPress={() => setShowMenu(true)}>
           <View style={[styles.more, styles.buttons]}>
-            <More />
+          <Ionicons 
+            name="ellipsis-horizontal-outline" 
+            size={20} 
+            color="gray" 
+          />
           </View>
         </Pressable>
         <SelectionMenu showMenu={showMenu} setShowMenu={setShowMenu} />
@@ -89,13 +91,6 @@ const styles = StyleSheet.create({
   imageContainer: {
     backgroundColor:"gray",
   },
-  title: {
-    textAlign: "center",
-    color: colors.primary,
-    fontSize: fontHeader.fontSize,
-    fontFamily: fontHeader.fontFamily,
-    fontWeight: fontHeader.fontWeight,
-  },
   headerLeft: {
     flexDirection: "row",
     gap: 8,
@@ -106,8 +101,8 @@ const styles = StyleSheet.create({
   },
   buttons: {
     borderRadius: 100,
-    height: 44,
-    width: 44,
+    height: 30,
+    width: 30,
     backgroundColor: colors.interactionGraySubtle,
     justifyContent: "center",
     alignItems: "center",

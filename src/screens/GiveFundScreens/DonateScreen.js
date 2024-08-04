@@ -6,26 +6,36 @@ import {
   Pressable,
   Image,
   ScrollView,
-  FlatList,
   SafeAreaView, 
   TextInput
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { fontHeader } from "../../../assets/themes/font";
-import { colors } from "../../../assets/themes/colors";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import HeaderFund from "../../components/GiveFundComponents/HeaderFund";
-import { useNavigation } from "@react-navigation/native";
-import CampaignTestimonials from "../../components/CampaignTestimonials";
+import ButtonMultiselect, {ButtonLayout} from 'react-native-button-multiselect'; //yarn add react-native-button-multiselect
 
 export default function DonateScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
   const { title, photoUrl, contributors, current, goals, stories } = route.params; 
 
-  const [donation, setDonation] = useState("0");
+  const [donation, setDonation] = useState("$");
   
   const handleNumberChange = (text) => {
     setDonation(text);
+  };
+
+  // Money Donation Buttons
+  const buttons = [
+    { label: '$1', value: 'one' },
+    { label: '$5', value: 'five' },
+    { label: '$10', value: 'ten' },
+    { label: '$20', value: 'twenty' },
+    { label: 'Other', value: 'other' },
+  ];
+  const [selectedButtons, setSelectedButtons] = useState([]);
+  const handleButtonSelected = (selectedValues) => {
+    setSelectedButtons(selectedValues);
   };
 
   return (
@@ -59,33 +69,24 @@ export default function DonateScreen({ route, navigation }) {
             <Text style={[styles.mainTitle, styles.nonprofitName]}>{title}!</Text>
 
             <View style={styles.moneyContainer}>
-                <Pressable 
-                    style={[styles.buttonStyle, styles.chosenMoneyButton]}
-                >
-                    <View style={{display:"flex", flexDirection:"row"}}>
-                        <Ionicons name="checkmark-outline" color="white" size={20}/>
-                        <Text style={styles.buttonText}> $1</Text>
-                    </View>
-                </Pressable>
-                <Pressable 
-                    style={[styles.buttonStyle, styles.moneyButton]}
-                >
-                    <View style={{display:"flex", flexDirection:"row"}}>
-                        <Text style={styles.buttonText}> $5</Text>
-                    </View>
-                </Pressable>
-                <Pressable 
-                    style={[styles.buttonStyle, styles.moneyButton, {display:"flex", flexDirection:"row"}]}
-                >
-                    <Text style={styles.inputLabel}>Other: </Text>
-                    <TextInput
-                        keyboardType="numeric"
-                        value={donation}
-                        onChangeText={handleNumberChange}
-                        style={styles.input}
-                    />
-                </Pressable>
+            <ButtonMultiselect
+              layout={ButtonLayout.CAROUSEL} // Choose from ButtonLayout enum: CAROUSEL, FULL_WIDTH, GRID
+              buttons={buttons}
+              selectedButtons={selectedButtons}
+              onButtonSelected={handleButtonSelected}
+            />
             </View>
+
+            {selectedButtons=="other" ? 
+            <TextInput
+              keyboardType="numeric"
+              value={donation}
+              onChangeText={handleNumberChange}
+              style={styles.input}
+            />
+            :
+            <></>
+            }
 
             <Pressable 
                 style={[styles.buttonStyle, styles.donateButton]}
@@ -207,7 +208,7 @@ const styles = StyleSheet.create({
   },
   input:{
     backgroundColor:"white",
-    width: 50, 
+    width: 90, 
     borderRadius: 10,
     padding: 10
   },

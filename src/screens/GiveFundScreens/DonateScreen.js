@@ -15,7 +15,6 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import HeaderFund from "../../components/GiveFundComponents/HeaderFund";
 import ButtonMultiselect, {ButtonLayout} from 'react-native-button-multiselect'; //yarn add react-native-button-multiselect
 import RadioGroup from 'react-native-radio-buttons-group'; //yarn add react-native-radio-buttons-group
-import { CheckBox } from "@react-native-community/checkbox"; //yarn add @react-native-community/checkbox
 
 export default function DonateScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
@@ -80,8 +79,24 @@ export default function DonateScreen({ route, navigation }) {
     }
   ]), []);
 
-  //Checkbox for public display or not
-  const [toggleCheckBox, setToggleCheckBox] = useState(false)
+    //Display Public or Not
+    const [publicId, setPublicId] = useState();
+    const publicButtons = useMemo(() => ([
+      {
+        id: '1',
+        label: 'Display Me on Give Fund',
+        value: 'sure',
+        containerStyle: styles.radioButtonContainer,
+        labelStyle: styles.radioButtonLabel,
+      },
+      {
+        id: '2',
+        label: 'Don\'t Display Me Publicly on Give Fund             ⍰',
+        value: 'dont',
+        containerStyle: styles.radioButtonContainer,
+        labelStyle: styles.radioButtonLabel,
+      },
+    ]), []);
 
   return (
     <SafeAreaView
@@ -143,7 +158,7 @@ export default function DonateScreen({ route, navigation }) {
               Give Method
             </Text>
 
-            <View style={{borderRadius:10, flex: 1, justifyContent: 'center', backgroundColor:"white"}}>
+            <View style={{borderRadius:10, flex: 1, justifyContent: 'center', backgroundColor:"white", marginBottom:30}}>
               <RadioGroup 
                 radioButtons={radioButtons} 
                 onPress={setSelectedId}
@@ -152,14 +167,14 @@ export default function DonateScreen({ route, navigation }) {
               />
             </View>
 
-            <Text style={{marginTop:20, padding:10, borderRadius:20, flex: 1, justifyContent: 'center', backgroundColor:"white"}}>
-              Don't Display Me Publicly on Give Fund
-            </Text>
-            {/* <CheckBox
-              disabled={false}
-              value={toggleCheckBox}
-              onValueChange={() => setToggleCheckBox(!toggleCheckBox)}
-            /> */}
+            <View style={{borderRadius:10, flex: 1, justifyContent: 'center', backgroundColor:"white", marginBottom:30}}>
+              <RadioGroup 
+                radioButtons={publicButtons} 
+                onPress={setPublicId}
+                selectedId={publicId}
+                containerStyle={styles.radioGroup}
+              />
+            </View>
 
             <Pressable 
                 style={[styles.buttonStyle, styles.donateButton]}

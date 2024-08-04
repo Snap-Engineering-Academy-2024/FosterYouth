@@ -7,7 +7,8 @@ import {
   Image,
   ScrollView,
   FlatList,
-  SafeAreaView
+  SafeAreaView, 
+  Linking
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { fontHeader } from "../../assets/themes/font";
@@ -73,12 +74,11 @@ export default function CampaignScreen({ route, navigation }) {
             }}
           >
             <View style={{display:"flex", flexDirection:"row"}}>
-              <Ionicons name="gift-outline" color="yellow" size={20}/>
+              <Ionicons name="gift-outline" color="black" size={20} />
               <Text style={styles.buttonText}>  Donate</Text>
             </View>
           </Pressable>
           <Text>Current Amount Raised: ${current}</Text>
-          <Text>{website}</Text>
         </View>
 
         <View style={styles.storiesSection}>
@@ -87,42 +87,46 @@ export default function CampaignScreen({ route, navigation }) {
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             style={styles.sectionContent}
-            >
-                {stories.length > 1 ? (
-                    <FlatList
-                      data={stories}
-                      horizontal={false}
-                      numColumns={stories.length}
-                      ItemSeparatorComponent={() => <View style={{ height: "1%" }} />}
-                      columnWrapperStyle={{ justifyContent: "space-between" }}
-                      renderItem={({ item }) => <CampaignTestimonials url={item} />}
-                      keyExtractor={(item) => item}
-                  />
-                ) : (
-                <Text>No "usersToAdd" table</Text>
+          >
+            {stories.length > 1 ? (
+                <FlatList
+                  data={stories}
+                  horizontal={false}
+                  numColumns={stories.length}
+                  ItemSeparatorComponent={() => <View style={{ height: "1%" }} />}
+                  columnWrapperStyle={{ justifyContent: "space-between" }}
+                  renderItem={({ item }) => <CampaignTestimonials url={item} />}
+                  keyExtractor={(item) => item}
+              />
+            ) : (
+              <Text>No "usersToAdd" table</Text>
             )}
         </ScrollView>
         </View>
 
         <View style={styles.storiesSection}>
           <Text style={styles.sectionHeader}>About</Text>
-          <View style={styles.sectionContent}>
-            <Text style={{padding:10}}>{title} Information</Text>
-            <Ionicons name="chevron-forward-outline" size={20} color="black" style={{padding:10}}/>
-          </View>
+          <Pressable onPress={() => Linking.openURL(website)}>
+            <View style={[styles.sectionContent, {justifyContent:"space-between"}]}>
+              <Text style={{padding:10}}>{title} Website</Text>
+              <Ionicons name="chevron-forward-outline" size={20} color="black" style={{padding:10}}/>
+            </View>
+          </Pressable>
         </View>
 
         <View style={styles.storiesSection}>
           <Text style={styles.sectionHeader}>Friends</Text>
-          <View style={styles.sectionContent}>
-            <Text>Invite Friends</Text>
+          <View style={[styles.sectionContent, {justifyContent:"space-between"}]}>
+            <Text style={{padding:10}}>Invite Friends</Text>
+            <Ionicons name="people-outline" size={20} color="black" style={{padding:10}}/>
           </View>
         </View>
 
         <View style={styles.storiesSection}>
           <Text style={styles.sectionHeader}>My Stories</Text>
-          <View style={styles.sectionContent}>
-            <Text>Add to my story</Text>
+          <View style={[styles.sectionContent,{justifyContent:"space-between"}]}>
+            <Text style={{padding:10}}>Add to my story</Text>
+            <Ionicons name="camera-outline" size={20} color="black" style={{padding:10}}/>
           </View>
         </View>
       </View>
@@ -199,7 +203,8 @@ const styles = StyleSheet.create({
     borderWidth: 3
   },
   storiesSection: {
-    padding: 12,
+    paddingHorizontal: 12,
+    paddingVertical:5,
     display: "flex",
     flexDirection: "column",
   },
@@ -229,16 +234,19 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     alignItems: 'center',
+    // alignSelf:"center",
     justifyContent: 'center',
     margin: 5,
     paddingVertical: 10,
     paddingHorizontal: 10,
     borderRadius: 20,
     elevation: 3,
-    backgroundColor: '#007AFF',
+    backgroundColor: '#FFFC01',
+    // width:"80%"
   },
   buttonText: {
     fontSize: 16,
-    color: "white",
+    fontWeight: "600",
+    color: "black",
   },
 });

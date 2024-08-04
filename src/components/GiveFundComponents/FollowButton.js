@@ -57,7 +57,7 @@ export default function FollowButton({ followNum,setFollowNum, isFollowing, setI
           }}
         >
           <View style={{display:"flex", flexDirection:"row"}}>
-            <Ionicons name="add-circle-outline" color="yellow" size={25}/>
+            <Ionicons name="add-circle-outline" color="white" size={25}/>
             <Text style={[styles.buttonText]}> Follow</Text> 
           </View>
         </Pressable>
@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
+    fontWeight: "600",
     color: "white",
   },
 });

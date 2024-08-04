@@ -2,23 +2,25 @@ import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-export default function ChatScreenBanner({setShowBanner}) {
-    return (
-        <View style={styles.container}>
-          <View style={styles.content}>
-            <Image source={require('../../assets/snapchat/chatBannerBitmoji.png')} style={styles.image} />
+export default function ChatScreenBanner({setShowBanner, handleOpenModal}) {
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity onPress={handleOpenModal}>
+        <View style={styles.content}>
+          <Image source={require('../../assets/snapchat/chatBannerBitmoji.png')} style={styles.image} />
 
-            <View>
-              <Text style={styles.mainHeading}>Show your support for Foster Youth</Text>
-              <Text style={styles.subHeading}>Use Give Fund and give back to the community</Text>
-            </View>
-
-            <TouchableOpacity onPress={() => setShowBanner(false)}>
-              <Ionicons name="close" size={25} color="gray" />
-            </TouchableOpacity>
+          <View>
+            <Text style={styles.mainHeading}>Show your support for Foster Youth</Text>
+            <Text style={styles.subHeading}>Use Give Fund and give back to the community</Text>
           </View>
+
+          <TouchableOpacity onPress={() => setShowBanner(false)}>
+            <Ionicons name="close" size={25} color="gray" />
+          </TouchableOpacity>
         </View>
-    );
+      </TouchableOpacity>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -26,10 +28,11 @@ const styles = StyleSheet.create({
         borderBottomColor: "lightgrey",
         borderBottomWidth: 1,
         padding: 8,
+        backgroundColor: "#f1f2f3",
       },
     
       content : {
-        backgroundColor: "lightgrey",
+        backgroundColor: "white",
         borderRadius: 10,
         overflow: "hidden",
         flexDirection: "row",
@@ -42,7 +45,7 @@ const styles = StyleSheet.create({
       image : {
         width: 60,
         height: 60,
-        backgroundColor: "#10adff",
+        backgroundColor: "#fffc00",
         borderRadius: 30
       },
     

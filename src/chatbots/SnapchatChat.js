@@ -90,7 +90,8 @@ export default function SnapchatChat() {
             contributors: nonprofits[0].contributors,
             followers: nonprofits[0].followers,
             current: nonprofits[0].currentAmount,
-            goals: nonprofits[0].goals
+            goals: nonprofits[0].goals,
+            stories: nonprofits[0].stories
           })
         }
         }

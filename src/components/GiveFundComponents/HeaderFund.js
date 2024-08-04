@@ -9,8 +9,6 @@ import { useState, useEffect } from "react";
 import { useAuthentication } from "../../utils/hooks/useAuthentication";
 import { supabase } from "../../utils/hooks/supabase";
 import Ionicons from "react-native-vector-icons/Ionicons";
-// import Svg from "react-native-svg"
-// import UpIcon from '../../assets/buttons/up.svg'
 //npx expo install react-native-svg
 
 import SelectionMenu from "../SelectionMenu";
@@ -51,23 +49,22 @@ export default function HeaderFund({ }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerLeft}>
-        <Pressable
-          style={[styles.search, styles.buttons]}
-          onPress={() => {
-            navigation.navigate("Search");
-          }}
-        >
-          <Search />
-        </Pressable>
+      <View style={{borderRadius:50, backgroundColor:"#18191A33" }}>
+        <Ionicons 
+          name="chevron-down-outline" 
+          size={25} 
+          color="white"
+        />
       </View>
 
-      {/* <UpIcon width={50} height={50}/> */}
-
       <View style={styles.headerRight}>
-        <TouchableOpacity style={styles.photosIcon}>
-          <Ionicons name="arrow-up-circle-outline" size={25} color="white" backgroundColor="#18191A33" borderRadius="30" />
-        </TouchableOpacity>
+        <View style={{borderRadius:50, backgroundColor:"#18191A33" }}>
+          <Ionicons 
+            name="arrow-up-circle-outline" 
+            size={25} 
+            color="white" 
+          />
+        </View>
 
         <Pressable title="Open Bottom Sheet" onPress={() => setShowMenu(true)}>
           <View style={[styles.more, styles.buttons]}>
@@ -80,26 +77,6 @@ export default function HeaderFund({ }) {
   );
 }
 
-let screenOptions = {
-  tabBarShowLabel: false,
-  headerLeft: () => (
-    <Button
-      onPress={() => {
-        signOut(auth)
-          .then(() => {
-            // Sign-out successful.
-            user = null;
-          })
-          .catch((error) => {
-            // An error happened.
-            // should we do something with that error??
-          });
-      }}
-      title="Log Out"
-    />
-  ),
-};
-
 const styles = StyleSheet.create({
   container: {
     width: "100%",
@@ -108,6 +85,9 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     justifyContent: "space-between",
     alignItems: "center",
+  },
+  imageContainer: {
+    backgroundColor:"gray",
   },
   title: {
     textAlign: "center",

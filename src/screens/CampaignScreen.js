@@ -18,6 +18,7 @@ import HeaderFund from "../components/GiveFundComponents/HeaderFund";
 import { useNavigation } from "@react-navigation/native";
 import CampaignTestimonials from "../components/GiveFundComponents/CampaignTestimonials";
 import FollowButton from "../components/GiveFundComponents/FollowButton";
+import * as Progress from 'react-native-progress'; //yarn add react-native-progress --save
 
 export default function CampaignScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
@@ -45,7 +46,7 @@ export default function CampaignScreen({ route, navigation }) {
             source={{uri:"https://i.ibb.co/xjCH2yR/Screenshot-2024-08-01-at-11-21-07-PM.png"}}
             style={styles.headerImage}
           />
-          <Text style={styles.sectionHeader}>Join Friends to Give Fund</Text>
+          <Text style={[styles.sectionHeader, {marginTop:-40, fontSize:16, backgroundColor:"#FFFC01"}]}>Join Friends to Give Fund</Text>
         </View>
 
         <View style={styles.mainInfoContainer}>
@@ -78,11 +79,25 @@ export default function CampaignScreen({ route, navigation }) {
               <Text style={styles.buttonText}>  Donate</Text>
             </View>
           </Pressable>
-          <Text>Current Amount Raised: ${current}</Text>
+
+          {/* can make this section a component to work on Bitmoji head */}
+          <View style={styles.progressSection}>
+            <Progress.Bar 
+              progress={current/goals[0]} 
+              width={200} 
+              height={15}
+              borderRadius={50}
+            />
+            <Text style={[{color: colors.primary,fontSize: fontHeader.fontSize, fontFamily: fontHeader.fontFamily,textAlign:"center", paddingVertical:10, fontSize:15}]}>
+              ${current} raised out of ${goals[0]} goal
+            </Text>
+          </View>
+
         </View>
 
         <View style={styles.storiesSection}>
           <Text style={styles.sectionHeader}>Testimonials</Text>
+          <Text style={[styles.sectionHeader, {fontSize:14, fontWeight:"400"}]}>Watch a story to support {title}!</Text>
           <ScrollView
             horizontal={true}
             showsHorizontalScrollIndicator={false}
@@ -248,5 +263,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
     color: "black",
+  },
+  progressSection:{
+    alignSelf:"center",
+    padding: 15,
   },
 });

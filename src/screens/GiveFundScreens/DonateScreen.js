@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   View,
   Text,
@@ -15,11 +15,13 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import HeaderFund from "../../components/GiveFundComponents/HeaderFund";
 import ButtonMultiselect, {ButtonLayout} from 'react-native-button-multiselect'; //yarn add react-native-button-multiselect
 
+import RadioGroup from 'react-native-radio-buttons-group'; //yarn add react-native-radio-buttons-group
+
 export default function DonateScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
   const { title, photoUrl, contributors, current, goals, stories } = route.params; 
 
-  const [donation, setDonation] = useState("$");
+  const [donation, setDonation] = useState("");
   
   const handleNumberChange = (text) => {
     setDonation(text);
@@ -37,6 +39,46 @@ export default function DonateScreen({ route, navigation }) {
   const handleButtonSelected = (selectedValues) => {
     setSelectedButtons(selectedValues);
   };
+
+  //Card Payment Options
+  const [selectedId, setSelectedId] = useState();
+  const radioButtons = useMemo(() => ([
+    {
+      id: '0', // acts as primary key, should be unique and non-empty string
+      label: 'Credit or Debit Card  💳',
+      value: 'card',
+      containerStyle: styles.radioButtonContainer,
+      labelStyle: styles.radioButtonLabel,
+    },
+    {
+      id: '1',
+      label: 'Apple Pay   🍏',
+      value: 'apple',
+      containerStyle: styles.radioButtonContainer,
+      labelStyle: styles.radioButtonLabel,
+    },
+    {
+      id: '2',
+      label: 'Venmo     V',
+      value: 'venmo',
+      containerStyle: styles.radioButtonContainer,
+      labelStyle: styles.radioButtonLabel,
+    },
+    {
+      id: '3',
+      label: 'Paypal    P',
+      value: 'paypal',
+      containerStyle: styles.radioButtonContainer,
+      labelStyle: styles.radioButtonLabel,
+    },
+    {
+      id: '4',
+      label: 'Snap View Coin    🪙',
+      value: 'snap',
+      containerStyle: styles.radioButtonContainer,
+      labelStyle: styles.radioButtonLabel,
+    }
+  ]), []);
 
   return (
     <SafeAreaView
@@ -78,16 +120,34 @@ export default function DonateScreen({ route, navigation }) {
             </View>
 
             {selectedButtons=="other" ? 
+            <>
+            <Text style={[{alignSelf:"center", width:"100%"}]}>
+              Custom
+            </Text>
             <TextInput
               keyboardType="numeric"
               value={donation}
               onChangeText={handleNumberChange}
-              style={styles.input}
+              placeholder="$0.00"
+              style={[styles.input, {alignSelf:"center", width:"100%"}]}
             />
+            </>
             :
             <></>
             }
 
+            <Text style={[{alignSelf:"center", width:"100%", marginTop:20}]}>
+              Give Method
+            </Text>
+
+            <View style={{flex: 1, justifyContent: 'center', backgroundColor:"white"}}>
+              <RadioGroup 
+                radioButtons={radioButtons} 
+                onPress={setSelectedId}
+                selectedId={selectedId}
+                containerStyle={styles.radioGroup}
+              />
+            </View>
             <Pressable 
                 style={[styles.buttonStyle, styles.donateButton]}
             >
@@ -211,6 +271,21 @@ const styles = StyleSheet.create({
     width: 90, 
     borderRadius: 10,
     padding: 10
+  },
+  radioGroup: {
+    padding:0
+  },
+  radioButtonContainer: {
+    alignItems: 'flex-start',
+    width: '100%',
+    borderColor: "black",
+    borderWidth:1,
+    padding:5, 
+    alignItems: 'center',
+    marginBottom:-6,//Might need to be adjusted based on paddings
+  },
+  radioButtonLabel:{
+    textAlign:"left"
   },
   donateButton: {
     width: "100%",

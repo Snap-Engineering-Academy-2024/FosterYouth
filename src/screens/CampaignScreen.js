@@ -15,7 +15,7 @@ import { colors } from "../../assets/themes/colors";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import HeaderFund from "../components/GiveFundComponents/HeaderFund";
 import { useNavigation } from "@react-navigation/native";
-import CampaignTestimonials from "../components/CampaignTestimonials";
+import CampaignTestimonials from "../components/GiveFundComponents/CampaignTestimonials";
 import FollowButton from "../components/GiveFundComponents/FollowButton";
 
 export default function CampaignScreen({ route, navigation }) {

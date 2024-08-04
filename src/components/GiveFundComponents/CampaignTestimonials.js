@@ -3,11 +3,8 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
-  ScrollView,
   ImageBackground,
   Pressable,
-  useState,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -53,7 +50,6 @@ const styles = StyleSheet.create({
     height:"100%",
     width: "100%",
     alignItems: "center",
-    // backgroundColor: "pink",
     alignItems: "center",
     borderRadius: 20,
     flexWrap: "wrap",

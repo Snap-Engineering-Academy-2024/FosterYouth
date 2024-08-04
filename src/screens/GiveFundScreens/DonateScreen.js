@@ -14,8 +14,8 @@ import { fontHeader } from "../../../assets/themes/font";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import HeaderFund from "../../components/GiveFundComponents/HeaderFund";
 import ButtonMultiselect, {ButtonLayout} from 'react-native-button-multiselect'; //yarn add react-native-button-multiselect
-
 import RadioGroup from 'react-native-radio-buttons-group'; //yarn add react-native-radio-buttons-group
+import { CheckBox } from "@react-native-community/checkbox"; //yarn add @react-native-community/checkbox
 
 export default function DonateScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
@@ -80,6 +80,9 @@ export default function DonateScreen({ route, navigation }) {
     }
   ]), []);
 
+  //Checkbox for public display or not
+  const [toggleCheckBox, setToggleCheckBox] = useState(false)
+
   return (
     <SafeAreaView
       style={[
@@ -140,7 +143,7 @@ export default function DonateScreen({ route, navigation }) {
               Give Method
             </Text>
 
-            <View style={{flex: 1, justifyContent: 'center', backgroundColor:"white"}}>
+            <View style={{borderRadius:10, flex: 1, justifyContent: 'center', backgroundColor:"white"}}>
               <RadioGroup 
                 radioButtons={radioButtons} 
                 onPress={setSelectedId}
@@ -148,6 +151,16 @@ export default function DonateScreen({ route, navigation }) {
                 containerStyle={styles.radioGroup}
               />
             </View>
+
+            <Text style={{marginTop:20, padding:10, borderRadius:20, flex: 1, justifyContent: 'center', backgroundColor:"white"}}>
+              Don't Display Me Publicly on Give Fund
+            </Text>
+            {/* <CheckBox
+              disabled={false}
+              value={toggleCheckBox}
+              onValueChange={() => setToggleCheckBox(!toggleCheckBox)}
+            /> */}
+
             <Pressable 
                 style={[styles.buttonStyle, styles.donateButton]}
             >
@@ -278,11 +291,12 @@ const styles = StyleSheet.create({
   radioButtonContainer: {
     alignItems: 'flex-start',
     width: '100%',
-    borderColor: "black",
+    borderColor: "#D0D0D0",
     borderWidth:1,
     padding:5, 
     alignItems: 'center',
     marginBottom:-6,//Might need to be adjusted based on paddings
+    borderRadius:5
   },
   radioButtonLabel:{
     textAlign:"left"

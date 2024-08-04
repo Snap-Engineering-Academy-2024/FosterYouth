@@ -28,15 +28,16 @@ export default function DonateScreen({ route, navigation }) {
 
   // Money Donation Buttons
   const buttons = [
-    { label: '$1', value: 'one' },
-    { label: '$5', value: 'five' },
-    { label: '$10', value: 'ten' },
-    { label: '$20', value: 'twenty' },
-    { label: 'Other', value: 'other' },
+    { label: '$1', value: '1' },
+    { label: '$5', value: '5' },
+    { label: '$10', value: '10' },
+    { label: '$20', value: '20' },
+    { label: 'Other', value: ' ' },
   ];
   const [selectedButtons, setSelectedButtons] = useState([]);
   const handleButtonSelected = (selectedValues) => {
     setSelectedButtons(selectedValues);
+    setDonation(selectedValues)
   };
 
   //Card Payment Options
@@ -91,7 +92,7 @@ export default function DonateScreen({ route, navigation }) {
       },
       {
         id: '2',
-        label: 'Don\'t Display Me Publicly on Give Fund             ⍰',
+        label: 'Don\'t Display Me Publicly on Give Fund',
         value: 'dont',
         containerStyle: styles.radioButtonContainer,
         labelStyle: styles.radioButtonLabel,
@@ -137,7 +138,7 @@ export default function DonateScreen({ route, navigation }) {
             />
             </View>
 
-            {selectedButtons=="other" ? 
+            {selectedButtons==" " ? 
             <>
             <Text style={[{alignSelf:"center", width:"100%"}]}>
               Custom
@@ -154,11 +155,11 @@ export default function DonateScreen({ route, navigation }) {
             <></>
             }
 
-            <Text style={[{alignSelf:"center", width:"100%", marginTop:20}]}>
+            <Text style={[styles.sectionTitles]}>
               Give Method
             </Text>
 
-            <View style={{borderRadius:10, flex: 1, justifyContent: 'center', backgroundColor:"white", marginBottom:30}}>
+            <View style={{borderRadius:10, flex: 1, justifyContent: 'center', backgroundColor:"white"}}>
               <RadioGroup 
                 radioButtons={radioButtons} 
                 onPress={setSelectedId}
@@ -166,6 +167,10 @@ export default function DonateScreen({ route, navigation }) {
                 containerStyle={styles.radioGroup}
               />
             </View>
+
+            <Text style={[styles.sectionTitles]}>
+              Publicly Display  ⍰
+            </Text>
 
             <View style={{borderRadius:10, flex: 1, justifyContent: 'center', backgroundColor:"white", marginBottom:30}}>
               <RadioGroup 
@@ -176,15 +181,28 @@ export default function DonateScreen({ route, navigation }) {
               />
             </View>
 
+            <View style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
+              <Text style={[{fontSize:20}]}>
+                Your Donation
+              </Text>
+              <Text style={[{fontSize:20}]}>
+                ${donation}
+              </Text>
+            </View>
+            
+            <Text style={[styles.sectionTitles]}>
+              Confirmation
+            </Text>
             <Pressable 
                 style={[styles.buttonStyle, styles.donateButton]}
             >
                 <View style={{display:"flex", flexDirection:"row"}}>
-                    <Ionicons name="gift-outline" color="yellow" size={20}/>
-                    <Text style={styles.buttonText}>  Donate</Text>
+                    <Ionicons name="gift-outline" color="yellow" size={25}/>
+                    <Text style={[styles.buttonText, {fontWeight:"600", fontSize:20}]}>  
+                      Complete Give
+                    </Text>
                 </View>
             </Pressable>
-            <Text>Current Amount Raised: ${current}</Text>
         </View>
     </View>
       
@@ -202,7 +220,6 @@ export default function DonateScreen({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: "black"
   },
   contentContainer: {
     display: "flex",
@@ -215,7 +232,6 @@ const styles = StyleSheet.create({
 
   },
   bitmojiContainer:{
-    // padding: 12,
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
@@ -223,7 +239,6 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   headerImage:{
-    // position:"absolute",
     resizeMode: "cover",
     width:700,
     height:100, 
@@ -231,15 +246,13 @@ const styles = StyleSheet.create({
   },
   mainInfoContainer:{
     textAlign: "center",
-    // alignItems: "center", // Center items horizontally
-    justifyContent: "center", // Center items vertically if needed
+    justifyContent: "center", 
     paddingHorizontal: 12,
     display: "flex",
     flexDirection: "column",
     gap: 4,
   },
   mainTitle:{
-    // alignItems: 'center',
     justifyContent: 'center',
     textAlign: "center",
     paddingVertical: 4,
@@ -247,6 +260,11 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontFamily: fontHeader.fontFamily,
     fontWeight: fontHeader.fontWeight,
+  },
+  sectionTitles:{
+    width:"100%", 
+    marginTop:20,
+    fontWeight:"600"
   },
   nonprofitName:{
     fontSize: 40,
@@ -310,7 +328,7 @@ const styles = StyleSheet.create({
     borderWidth:1,
     padding:5, 
     alignItems: 'center',
-    marginBottom:-6,//Might need to be adjusted based on paddings
+    marginVertical:0,//Might need to be adjusted based on paddings
     borderRadius:5
   },
   radioButtonLabel:{

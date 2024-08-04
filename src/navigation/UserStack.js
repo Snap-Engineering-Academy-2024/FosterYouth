@@ -12,7 +12,7 @@ import AstrologyScreen from "../screens/AstrologyScreen";
 import MemoryScreen from "../screens/MemoryScreen";
 import CampaignScreen from '../screens/CampaignScreen';
 import EventScreen from "../screens/EventScreen"; //New component by Sona and Christian
-import CampaignStoryIndiv from "../components/CampaignStoryIndiv";
+import CampaignStoryIndiv from "../components/GiveFundComponents/CampaignStoryIndiv";
 import DonateScreen from '../screens/GiveFundScreens/DonateScreen'
 
 const Stack = createStackNavigator();

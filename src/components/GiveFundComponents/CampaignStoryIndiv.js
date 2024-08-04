@@ -3,13 +3,8 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
-  ScrollView,
   ImageBackground,
-  Pressable,
-  useState,
 } from "react-native";
-import { colors } from "../../assets/themes/colors";
 import { useRoute } from '@react-navigation/native';
 
 export default function CampaignStoryIndiv() {
@@ -36,7 +31,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: colors.secondary,
+    backgroundColor: "gray",
     borderRadius: 4,
   },
   FeedImage: {
@@ -55,11 +50,11 @@ const styles = StyleSheet.create({
   FeedText: {
     padding: 8,
     fontWeight: "700",
-    fontSize: 14,
+    fontSize: 20,
     color: "white",
     position: "absolute",
-    right: 15,
-    bottom: 15,
+    left: 50,
+    bottom: -40,
     textShadowColor: "#000",
     textShadowOffset: {
       width: -1,

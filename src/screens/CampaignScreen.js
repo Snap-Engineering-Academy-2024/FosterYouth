@@ -103,13 +103,13 @@ export default function CampaignScreen({ route, navigation }) {
             showsHorizontalScrollIndicator={false}
             style={styles.sectionContent}
           >
-            {stories.length > 1 ? (
+            {stories.length > 0 ? (
                 <FlatList
                   data={stories}
                   horizontal={false}
                   numColumns={stories.length}
                   ItemSeparatorComponent={() => <View style={{ height: "1%" }} />}
-                  columnWrapperStyle={{ justifyContent: "space-between" }}
+                  // columnWrapperStyle={{ justifyContent: "space-between" }}
                   renderItem={({ item }) => <CampaignTestimonials url={item} />}
                   keyExtractor={(item) => item}
               />

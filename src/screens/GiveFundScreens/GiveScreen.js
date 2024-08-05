@@ -15,15 +15,17 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import HeaderFund from "../../components/GiveFundComponents/HeaderFund";
 import ButtonMultiselect, {ButtonLayout} from 'react-native-button-multiselect'; //yarn add react-native-button-multiselect
 import RadioGroup from 'react-native-radio-buttons-group'; //yarn add react-native-radio-buttons-group
+import { supabase } from "../../utils/hooks/supabase";
 
 export default function GiveScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
-  const { title, photoUrl, contributors, current, goals, stories } = route.params; 
+  const { title, photoUrl, contributors, current, goals, stories, setAmount } = route.params; 
 
   const [donation, setDonation] = useState("");
   
   const handleNumberChange = (text) => {
     setDonation(text);
+    setAmount(parseInt(text));
   };
 
   // Money Donation Buttons
@@ -80,24 +82,34 @@ export default function GiveScreen({ route, navigation }) {
     }
   ]), []);
 
-    //Display Public or Not
-    const [publicId, setPublicId] = useState();
-    const publicButtons = useMemo(() => ([
-      {
-        id: '1',
-        label: 'Display Me on Give Fund',
-        value: 'sure',
-        containerStyle: styles.radioButtonContainer,
-        labelStyle: styles.radioButtonLabel,
-      },
-      {
-        id: '2',
-        label: 'Don\'t Display Me Publicly on Give Fund',
-        value: 'dont',
-        containerStyle: styles.radioButtonContainer,
-        labelStyle: styles.radioButtonLabel,
-      },
-    ]), []);
+  //Display Public or Not
+  const [publicId, setPublicId] = useState();
+  const publicButtons = useMemo(() => ([
+    {
+      id: '1',
+      label: 'Display Me on Give Fund',
+      value: 'sure',
+      containerStyle: styles.radioButtonContainer,
+      labelStyle: styles.radioButtonLabel,
+    },
+    {
+      id: '2',
+      label: 'Don\'t Display Me Publicly on Give Fund',
+      value: 'dont',
+      containerStyle: styles.radioButtonContainer,
+      labelStyle: styles.radioButtonLabel,
+    },
+  ]), []);
+
+  //UPDATE CURRENT TOTAL DONATIONS ON SUPABASE
+  async function updateCurrent() {
+    const { data, error } = await supabase
+      .from('nonprofits')
+      .update({ currentAmount: current + (donation) })
+      .eq('name', title)
+      .select()
+  }
+          
 
   return (
     <SafeAreaView
@@ -182,12 +194,17 @@ export default function GiveScreen({ route, navigation }) {
                 ${donation}
               </Text>
             </View>
+            {/* DEBUGGUING */}
+            <Text style={[{fontSize:20}]}>
+              Updated Amounts: {current + parseInt(donation)} 
+            </Text>
             
             <Text style={[styles.sectionTitles]}>
               Confirmation
             </Text>
             <Pressable 
                 style={[styles.buttonStyle, styles.donateButton]}
+                onPress={updateCurrent}
             >
                 <View style={{display:"flex", flexDirection:"row"}}>
                     <Ionicons name="gift-outline" color="yellow" size={25}/>

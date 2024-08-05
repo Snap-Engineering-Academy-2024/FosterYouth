@@ -12,7 +12,7 @@ export default function GiveFundSection() {
     useEffect(() => {
         async function fetchNonprofits() {
         try {
-            const { data, error } = await supabase.from("nonprofits").select("*");
+            const { data, error } = await supabase.from("nonprofits").select("*"); //CHANGE TO CLUMN NAMES WE WANT 
             if (error) {
                 console.error("Error fetching nonprofits:", error.message);
                 return;

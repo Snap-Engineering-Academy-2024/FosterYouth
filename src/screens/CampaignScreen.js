@@ -26,6 +26,11 @@ export default function CampaignScreen({ route, navigation }) {
   const[followNum, setFollowNum] = useState(followers);
   const[isFollowing, setIsFollowing] = useState(false);
 
+  const [amount, setAmount] = useState(current);
+
+  ///SUPABASE CALL
+  //SELECT * where ID is ___
+
   return (
     <SafeAreaView
       style={[
@@ -73,7 +78,7 @@ export default function CampaignScreen({ route, navigation }) {
               style={[styles.buttonStyle, 
                 {flex: 1}]}
               onPress={() => {
-                navigation.navigate("GiveScreen", {title:title, photoUrl:photoUrl, contributors:contributors, current:current, goals:goals, stories:stories});
+                navigation.navigate("GiveScreen", {title:title, photoUrl:photoUrl, contributors:contributors, current:amount, goals:goals, stories:stories, setAmount:setAmount});
               }}
             >
               <View style={{display:"flex", flexDirection:"row"}}>
@@ -86,13 +91,13 @@ export default function CampaignScreen({ route, navigation }) {
           {/* can make this section a component to work on Bitmoji head */}
           <View style={styles.progressSection}>
             <Progress.Bar 
-              progress={current/goals[0]} 
+              progress={amount/goals[0]} 
               width={350}
               height={15}
               borderRadius={50}
             />
             <Text style={[{color: colors.primary,fontSize: fontHeader.fontSize, fontFamily: fontHeader.fontFamily,textAlign:"center", paddingVertical:10, fontSize:15}]}>
-              ${current} raised out of ${goals[0]} goal
+              ${amount} raised out of ${goals[0]} goal
             </Text>
           </View>
 

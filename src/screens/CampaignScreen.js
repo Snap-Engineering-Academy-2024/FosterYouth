@@ -61,30 +61,33 @@ export default function CampaignScreen({ route, navigation }) {
             </View>
           </View>
           
-          <FollowButton 
-              followNum={followNum}
-              setFollowNum={setFollowNum}
-              isFollowing={isFollowing}
-              setIsFollowing={setIsFollowing}
-            />
+          <View style={{display:"flex", flexDirection:"row"}}>
+            <FollowButton 
+                followNum={followNum}
+                setFollowNum={setFollowNum}
+                isFollowing={isFollowing}
+                setIsFollowing={setIsFollowing}
+              />
 
-          <Pressable 
-            style={styles.buttonStyle}
-            onPress={() => {
-              navigation.navigate("DonateScreen", {title:title, photoUrl:photoUrl, contributors:contributors, current:current, goals:goals, stories:stories});
-            }}
-          >
-            <View style={{display:"flex", flexDirection:"row"}}>
-              <Ionicons name="gift-outline" color="black" size={20} />
-              <Text style={styles.buttonText}>  Donate</Text>
-            </View>
-          </Pressable>
+            <Pressable 
+              style={[styles.buttonStyle, 
+                {flex: 1}]}
+              onPress={() => {
+                navigation.navigate("GiveScreen", {title:title, photoUrl:photoUrl, contributors:contributors, current:current, goals:goals, stories:stories});
+              }}
+            >
+              <View style={{display:"flex", flexDirection:"row"}}>
+                <Ionicons name="gift-outline" color="black" size={20} />
+                <Text style={styles.buttonText}>  Give</Text>
+              </View>
+            </Pressable>
+          </View>
 
           {/* can make this section a component to work on Bitmoji head */}
           <View style={styles.progressSection}>
             <Progress.Bar 
               progress={current/goals[0]} 
-              width={200} 
+              width={350}
               height={15}
               borderRadius={50}
             />

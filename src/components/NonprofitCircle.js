@@ -21,8 +21,7 @@ export default function NonprofitCircle({id}) {
   useEffect(() => {
     async function fetchNonprofits() {
     try {
-        const { data, error } = await supabase.from("nonprofits").select("name, imageUrl, followers")
-        .eq("registrationNumber", id); 
+        const { data, error } = await supabase.from("nonprofits").select("name, imageUrl, followers").eq("registrationNumber", id); 
         if (error) {
             console.error("Error fetching nonprofits:", error.message);
             return;
@@ -39,12 +38,17 @@ export default function NonprofitCircle({id}) {
     fetchNonprofits();
   }, []);
 
+  //Helps with rendering of page?! 
+  if (nonprofits.length === 0) {
+    return null; // or render a loading spinner
+  }
+
   return (
     <View style={styles.nonprofitContainer}>
       <Pressable //added a presable to give the story interaction
         style={[styles.profile, styles.buttons]}
         onPress={() => {
-          navigation.navigate("CampaignScreen", {title:name, photoUrl:photoUrl, id:id, bio:bio, website:website, contributors:contributors, followers:followers, current:current, goals:goals, stories:stories});
+          navigation.navigate("CampaignScreen", {id:id});
         }}
       >
         <Image

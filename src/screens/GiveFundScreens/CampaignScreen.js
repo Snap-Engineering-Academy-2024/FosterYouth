@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -19,17 +19,44 @@ import { useNavigation } from "@react-navigation/native";
 import CampaignTestimonials from "../../components/GiveFundComponents/CampaignTestimonials";
 import FollowButton from "../../components/GiveFundComponents/FollowButton";
 import * as Progress from 'react-native-progress'; //yarn add react-native-progress --save
+import { supabase } from "../../utils/hooks/supabase";
 
 export default function CampaignScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
-  const { title, photoUrl, id, bio, website, contributors, followers, current, goals, stories } = route.params; //Destructure any props that were passed in
-  const[followNum, setFollowNum] = useState(followers);
+  const { id } = route.params; //Destructure any props that were passed in
+  const[followNum, setFollowNum] = useState(0);
   const[isFollowing, setIsFollowing] = useState(false);
+  const [nonprofits, setNonprofits] = useState([]);
 
-  const [amount, setAmount] = useState(current);
+  const [amount, setAmount] = useState(0);
 
   ///SUPABASE CALL
   //SELECT * where ID is ___
+  useEffect(() => {
+    async function fetchNonprofits() {
+    try {
+        const { data, error } = await supabase.from("nonprofits").select("*").eq("registrationNumber", id); 
+        if (error) {
+            console.error("Error fetching nonprofits:", error.message);
+            return;
+        }
+        if (data) {
+            setNonprofits(data);
+            setFollowNum(data[0].followers);
+            setAmount(data[0].currentAmount);
+            // console.log(data);
+        }
+    } catch (error) {
+        console.error("Error fetching Nonprofits:", error.message);
+    }
+    }
+
+    fetchNonprofits();
+  }, []);
+
+  if (nonprofits.length === 0) {
+    return null; // or render a loading spinner
+  }
 
   return (
     <SafeAreaView
@@ -58,10 +85,10 @@ export default function CampaignScreen({ route, navigation }) {
           <View style={styles.titleContainer}>
             <Image 
               style={styles.logo}
-              source={{uri: photoUrl,}}
+              source={{uri: nonprofits[0].imageUrl,}}
             />
             <View>
-              <Text style={styles.mainTitle}>{title}</Text>
+              <Text style={styles.mainTitle}>{nonprofits[0].name}</Text>
               <Text style={styles.followers}>{followNum} followers</Text>
             </View>
           </View>
@@ -77,7 +104,7 @@ export default function CampaignScreen({ route, navigation }) {
               style={[styles.buttonStyle, 
                 {flex: 1}]}
               onPress={() => {
-                navigation.navigate("GiveScreen", {title:title, photoUrl:photoUrl, contributors:contributors, current:amount, goals:goals, stories:stories, setAmount:setAmount});
+                navigation.navigate("GiveScreen", {id:id});
               }}
             >
               <View style={{display:"flex", flexDirection:"row"}}>
@@ -90,13 +117,13 @@ export default function CampaignScreen({ route, navigation }) {
           {/* can make this section a component to work on Bitmoji head */}
           <View style={styles.progressSection}>
             <Progress.Bar 
-              progress={current/goals[0]} 
+              progress={amount/nonprofits[0].goals[0]} 
               width={200} 
               height={15}
               borderRadius={50}
             />
             <Text style={[{color: colors.primary,fontSize: fontHeader.fontSize, fontFamily: fontHeader.fontFamily,textAlign:"center", paddingVertical:10, fontSize:15}]}>
-              ${amount} raised out of ${goals[0]} goal
+              ${amount} raised out of ${nonprofits[0].goals[0]} goal
             </Text>
           </View>
 
@@ -104,17 +131,17 @@ export default function CampaignScreen({ route, navigation }) {
 
         <View style={styles.storiesSection}>
           <Text style={styles.sectionHeader}>Testimonials</Text>
-          <Text style={[styles.sectionHeader, {fontSize:14, fontWeight:"400"}]}>Watch a story to support {title}!</Text>
+          <Text style={[styles.sectionHeader, {fontSize:14, fontWeight:"400"}]}>Watch a story to support {nonprofits[0].name}!</Text>
           <ScrollView
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             style={styles.sectionContent}
           >
-            {stories.length > 0 ? (
+            {nonprofits[0].stories.length > 0 ? (
                 <FlatList
-                  data={stories}
+                  data={nonprofits[0].stories}
                   horizontal={false}
-                  numColumns={stories.length}
+                  numColumns={nonprofits[0].stories.length}
                   ItemSeparatorComponent={() => <View style={{ height: "1%" }} />}
                   // columnWrapperStyle={{ justifyContent: "space-between" }}
                   renderItem={({ item }) => <CampaignTestimonials url={item} />}
@@ -128,9 +155,9 @@ export default function CampaignScreen({ route, navigation }) {
 
         <View style={styles.storiesSection}>
           <Text style={styles.sectionHeader}>About</Text>
-          <Pressable onPress={() => Linking.openURL(website)}>
+          <Pressable onPress={() => Linking.openURL(nonprofits[0].websiteUrl)}>
             <View style={[styles.sectionContent, {justifyContent:"space-between"}]}>
-              <Text style={{padding:10}}>{title} Website</Text>
+              <Text style={{padding:10}}>{nonprofits[0].name} Website</Text>
               <Ionicons name="chevron-forward-outline" size={20} color="black" style={{padding:10}}/>
             </View>
           </Pressable>

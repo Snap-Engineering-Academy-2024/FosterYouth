@@ -224,10 +224,10 @@ export default function GiveScreen({ route, navigation }) {
                 ${donation}
               </Text>
             </View>
-            {/* DEBUGGUING */}
+            {/* DEBUGGUING
             <Text style={[{fontSize:20}]}>
               Updated Amounts: {nonprofits[0].currentAmount + parseInt(donation)} 
-            </Text>
+            </Text> */}
             
             <Text style={[styles.sectionTitles]}>
               Confirmation

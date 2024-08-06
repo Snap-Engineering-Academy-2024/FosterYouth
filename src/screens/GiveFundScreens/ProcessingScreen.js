@@ -5,11 +5,11 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function ProcessingScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
-  const { title, photoUrl, contributors, current, goals, stories } = route.params;
+  const { id } = route.params;
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigation.navigate("ConfirmationScreen", {title:title, photoUrl:photoUrl, contributors:contributors, current:current, goals:goals, stories:stories});
+      navigation.navigate("ConfirmationScreen", {id:id});
     }, 3000);
 
     return () => clearTimeout(timer);

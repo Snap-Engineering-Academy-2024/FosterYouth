@@ -1,17 +1,36 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View, Text, StyleSheet, Pressable, Image, ScrollView, SafeAreaView, Dimensions } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { supabase } from "../../utils/hooks/supabase";
 
 import ConfettiCannon from 'react-native-confetti-cannon'; // yarn add react-native-confetti-cannon
 
 export default function ConfirmationScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
-  const { title, photoUrl, contributors, current, goals, stories } = route.params; 
+  const { id } = route.params; 
+  const [title, setTitle] = useState("");
 
   const { width, height } = Dimensions.get('window');
   const confettiRef = useRef(null);
 
   useEffect(() => {
+    async function fetchNonprofits() {
+      try {
+          const { data, error } = await supabase.from("nonprofits").select("name").eq("registrationNumber", id); 
+          if (error) {
+              console.error("Error fetching nonprofits:", error.message);
+              return;
+          }
+          if (data) {
+              setTitle(data[0].name);
+              // console.log(data);
+          }
+      } catch (error) {
+          console.error("Error fetching Nonprofits:", error.message);
+      }
+      }
+  
+      fetchNonprofits();
     if (confettiRef.current) {
       confettiRef.current.start();
     }
@@ -48,12 +67,7 @@ export default function ConfirmationScreen({ route, navigation }) {
 
           <Pressable onPress={() =>{
               navigation.navigate('CampaignScreen', {
-                title: title,
-                photoUrl: photoUrl,
-                contributors: contributors,
-                current: current,
-                goals: goals,
-                stories: stories
+                id: id
               })}} style={styles.button}>
             <Text style={styles.buttonText}>Back to Campaign</Text>
           </Pressable>

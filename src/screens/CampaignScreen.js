@@ -66,13 +66,12 @@ export default function CampaignScreen({ route, navigation }) {
             </View>
           </View>
           
-          <View style={{display:"flex", flexDirection:"row"}}>
-            <FollowButton 
-                followNum={followNum}
-                setFollowNum={setFollowNum}
-                isFollowing={isFollowing}
-                setIsFollowing={setIsFollowing}
-              />
+          <FollowButton 
+              followNum={followNum}
+              setFollowNum={setFollowNum}
+              isFollowing={isFollowing}
+              setIsFollowing={setIsFollowing}
+            />
 
             <Pressable 
               style={[styles.buttonStyle, 
@@ -91,8 +90,8 @@ export default function CampaignScreen({ route, navigation }) {
           {/* can make this section a component to work on Bitmoji head */}
           <View style={styles.progressSection}>
             <Progress.Bar 
-              progress={amount/goals[0]} 
-              width={350}
+              progress={current/goals[0]} 
+              width={200} 
               height={15}
               borderRadius={50}
             />
@@ -152,16 +151,15 @@ export default function CampaignScreen({ route, navigation }) {
             <Ionicons name="camera-outline" size={20} color="black" style={{padding:10}}/>
           </View>
         </View>
-      </View>
       
     </ScrollView>
-      <View style={{backgroundColor:"white",
-        position: "absolute",
-        left: 0, 
-        top: 0,}}>
-        <HeaderFund />
-        {/* <Image source={{uri: "../../assets/buttons/campaignHeader.png"}} style={{width:50, height: 50}}/> */}
-      </View>
+    <View style={{backgroundColor:"white",
+      position: "absolute",
+      left: 0, 
+      top: 0,}}>
+      <HeaderFund />
+      {/* <Image source={{uri: "../../assets/buttons/campaignHeader.png"}} style={{width:50, height: 50}}/> */}
+    </View>
     </SafeAreaView>
   );
 }

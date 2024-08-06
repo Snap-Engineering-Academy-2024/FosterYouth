@@ -17,7 +17,7 @@ import ButtonMultiselect, {ButtonLayout} from 'react-native-button-multiselect';
 import RadioGroup from 'react-native-radio-buttons-group'; //yarn add react-native-radio-buttons-group
 import { supabase } from "../../utils/hooks/supabase";
 
-export default function GiveScreen({ route, navigation }) {
+export default function DonateScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
   const { title, photoUrl, contributors, current, goals, stories, setAmount } = route.params; 
 
@@ -126,6 +126,13 @@ export default function GiveScreen({ route, navigation }) {
     <ScrollView>
 
     <View style={styles.contentContainer}>
+        <View style={styles.bitmojiContainer}>
+          <Image 
+            source={{uri:"https://i.ibb.co/xjCH2yR/Screenshot-2024-08-01-at-11-21-07-PM.png"}}
+            style={styles.headerImage}
+          />
+        </View>
+
         <View style={styles.mainInfoContainer}>
             <Image 
                 style={styles.logo}
@@ -241,8 +248,20 @@ const styles = StyleSheet.create({
     flexDirection: "row",
 
   },
-  mainInfoContainer:{
+  bitmojiContainer:{
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    gap: 4,
+    backgroundColor: "transparent",
+  },
+  headerImage:{
+    resizeMode: "cover",
+    width:700,
+    height:100, 
     marginTop:50,
+  },
+  mainInfoContainer:{
     textAlign: "center",
     justifyContent: "center", 
     paddingHorizontal: 12,

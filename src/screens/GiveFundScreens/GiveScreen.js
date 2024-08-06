@@ -21,6 +21,9 @@ export default function GiveScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
   const { id } = route.params; 
   const [nonprofits, setNonprofits] = useState([]);
+  const [answered1, setAnswered1] = useState(false);
+  const [answered2, setAnswered2] = useState(false);
+  const [answered3, setAnswered3] = useState(false);
 
   useEffect(() => {
     async function fetchNonprofits() {
@@ -54,7 +57,7 @@ export default function GiveScreen({ route, navigation }) {
     { label: '$5', value: '5' },
     { label: '$10', value: '10' },
     { label: '$20', value: '20' },
-    { label: 'Other', value: ' ' },
+    { label: 'Custom', value: ' ' },
   ];
   const [selectedButtons, setSelectedButtons] = useState([]);
   const handleButtonSelected = (selectedValues) => {
@@ -149,13 +152,6 @@ export default function GiveScreen({ route, navigation }) {
     <ScrollView>
 
     <View style={styles.contentContainer}>
-        <View style={styles.bitmojiContainer}>
-          <Image 
-            source={{uri:"https://i.ibb.co/xjCH2yR/Screenshot-2024-08-01-at-11-21-07-PM.png"}}
-            style={styles.headerImage}
-          />
-        </View>
-
         <View style={styles.mainInfoContainer}>
             <Image 
                 style={styles.logo}
@@ -170,6 +166,16 @@ export default function GiveScreen({ route, navigation }) {
               buttons={buttons}
               selectedButtons={selectedButtons}
               onButtonSelected={handleButtonSelected}
+              buttonStyle={{width:"auto"}}
+              selectedColors={{
+                backgroundColor:"#FFFC01", 
+                borderColor:"transparent"
+              }}
+              unselectedColors={{
+                backgroundColor:"#E0E0E0", 
+                textColor:"#404040",
+                borderColor:"transparent"
+              }}
             />
             </View>
 
@@ -202,10 +208,15 @@ export default function GiveScreen({ route, navigation }) {
                 containerStyle={styles.radioGroup}
               />
             </View>
-
-            <Text style={[styles.sectionTitles]}>
-              Publicly Display  ⍰
-            </Text>
+            
+            <View style={{display:"flex", flexDirection:"row"}}>
+              <Text style={[styles.sectionTitles, {flex:1}]}>
+                Publicly Display 
+              </Text>
+              <View style={{marginTop:-10, paddingTop:28}}>
+                <Ionicons name="information-circle-outline" color="black" size={20}/>
+              </View>
+            </View>
 
             <View style={{borderRadius:10, flex: 1, justifyContent: 'center', backgroundColor:"white", marginBottom:30}}>
               <RadioGroup 
@@ -224,10 +235,6 @@ export default function GiveScreen({ route, navigation }) {
                 ${donation}
               </Text>
             </View>
-            {/* DEBUGGUING
-            <Text style={[{fontSize:20}]}>
-              Updated Amounts: {nonprofits[0].currentAmount + parseInt(donation)} 
-            </Text> */}
             
             <Text style={[styles.sectionTitles]}>
               Confirmation
@@ -290,6 +297,7 @@ const styles = StyleSheet.create({
   mainInfoContainer:{
     textAlign: "center",
     justifyContent: "center", 
+    marginTop: 50,
     paddingHorizontal: 12,
     display: "flex",
     flexDirection: "column",

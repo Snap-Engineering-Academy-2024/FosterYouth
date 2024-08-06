@@ -132,6 +132,16 @@ export default function CampaignScreen({ route, navigation }) {
         </View>
 
         <View style={styles.storiesSection}>
+          <Text style={styles.sectionHeader}>About</Text>
+          <Pressable onPress={() => Linking.openURL(nonprofits[0].websiteUrl)}>
+            <View style={[styles.sectionContent, {justifyContent:"space-between"}]}>
+              <Text style={{padding:10}}>{nonprofits[0].name} Website</Text>
+              <Ionicons name="chevron-forward-outline" size={20} color="black" style={{padding:10}}/>
+            </View>
+          </Pressable>
+        </View>
+
+        <View style={styles.storiesSection}>
           <Text style={styles.sectionHeader}>Stories</Text>
           <Text style={[styles.sectionHeader, {fontSize:14, fontWeight:"400"}]}>Watch a story to support {nonprofits[0].name}!</Text>
           <ScrollView
@@ -153,16 +163,6 @@ export default function CampaignScreen({ route, navigation }) {
               <Text>No "usersToAdd" table</Text>
             )}
         </ScrollView>
-        </View>
-
-        <View style={styles.storiesSection}>
-          <Text style={styles.sectionHeader}>About</Text>
-          <Pressable onPress={() => Linking.openURL(nonprofits[0].websiteUrl)}>
-            <View style={[styles.sectionContent, {justifyContent:"space-between"}]}>
-              <Text style={{padding:10}}>{nonprofits[0].name} Website</Text>
-              <Ionicons name="chevron-forward-outline" size={20} color="black" style={{padding:10}}/>
-            </View>
-          </Pressable>
         </View>
 
         <View style={styles.storiesSection}>

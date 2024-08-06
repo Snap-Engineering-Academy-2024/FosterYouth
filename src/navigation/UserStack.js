@@ -13,7 +13,7 @@ import MemoryScreen from "../screens/MemoryScreen";
 import CampaignScreen from '../screens/GiveFundScreens/CampaignScreen';
 import EventScreen from "../screens/EventScreen"; //New component by Sona and Christian
 import CampaignStoryIndiv from "../components/GiveFundComponents/CampaignStoryIndiv";
-import GiveScreen from '../screens/GiveFundScreens/CampaignScreen'
+import GiveScreen from '../screens/GiveFundScreens/GiveScreen'
 
 const Stack = createStackNavigator();
 

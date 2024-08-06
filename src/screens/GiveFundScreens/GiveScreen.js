@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -19,7 +19,28 @@ import { supabase } from "../../utils/hooks/supabase";
 
 export default function GiveScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
-  const { title, photoUrl, contributors, current, goals, stories, setAmount } = route.params; 
+  const { id } = route.params; 
+  const [nonprofits, setNonprofits] = useState([]);
+
+  useEffect(() => {
+    async function fetchNonprofits() {
+    try {
+        const { data, error } = await supabase.from("nonprofits").select("*").eq("registrationNumber", id); 
+        if (error) {
+            console.error("Error fetching nonprofits:", error.message);
+            return;
+        }
+        if (data) {
+            setNonprofits(data);
+            // console.log(data);
+        }
+    } catch (error) {
+        console.error("Error fetching Nonprofits:", error.message);
+    }
+    }
+
+    fetchNonprofits();
+  }, []);
 
   const [donation, setDonation] = useState("");
   
@@ -105,11 +126,14 @@ export default function GiveScreen({ route, navigation }) {
   async function updateCurrent() {
     const { data, error } = await supabase
       .from('nonprofits')
-      .update({ currentAmount: current + (donation) })
+      .update({ currentAmount: nonprofits[0].currentAmount + (donation) })
       .eq('name', title)
       .select()
   }
           
+  if (nonprofits.length === 0) {
+    return null; // or render a loading spinner
+  }
 
   return (
     <SafeAreaView
@@ -136,10 +160,10 @@ export default function GiveScreen({ route, navigation }) {
         <View style={styles.mainInfoContainer}>
             <Image 
                 style={styles.logo}
-                source={{uri: photoUrl}}
+                source={{uri: nonprofits[0].imageUrl}}
             />
             <Text style={styles.mainTitle}>You're Supporting</Text>
-            <Text style={[styles.mainTitle, styles.nonprofitName]}>{title}!</Text>
+            <Text style={[styles.mainTitle, styles.nonprofitName]}>{nonprofits[0].name}!</Text>
 
             <View style={styles.moneyContainer}>
             <ButtonMultiselect
@@ -203,7 +227,7 @@ export default function GiveScreen({ route, navigation }) {
             </View>
             {/* DEBUGGUING */}
             <Text style={[{fontSize:20}]}>
-              Updated Amounts: {current + parseInt(donation)} 
+              Updated Amounts: {nonprofits[0].currentAmount + parseInt(donation)} 
             </Text>
             
             <Text style={[styles.sectionTitles]}>

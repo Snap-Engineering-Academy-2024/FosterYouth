@@ -21,9 +21,6 @@ export default function GiveScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
   const { id } = route.params; 
   const [nonprofits, setNonprofits] = useState([]);
-  const [answered1, setAnswered1] = useState(false);
-  const [answered2, setAnswered2] = useState(false);
-  const [answered3, setAnswered3] = useState(false);
 
   useEffect(() => {
     async function fetchNonprofits() {
@@ -126,11 +123,18 @@ export default function GiveScreen({ route, navigation }) {
 
   //UPDATE CURRENT TOTAL DONATIONS ON SUPABASE
   async function updateCurrent() {
+    if(selectedId && publicId && selectedButtons){
       const { data, error } = await supabase
         .from('nonprofits')
         .update({ "currentAmount": nonprofits[0].currentAmount + parseInt(donation) })
         .eq('registrationNumber', id)
         .select();
+      
+      navigation.navigate("ProcessingScreen", {id:id, donation:donation});
+    } else{
+      console.log("Error! One or more fields missing:");
+    }
+      
   }
           
   if (nonprofits.length === 0) {
@@ -197,7 +201,7 @@ export default function GiveScreen({ route, navigation }) {
             }
 
             <Text style={[styles.sectionTitles]}>
-              Give Method
+              Give Method *
             </Text>
 
             <View style={{borderRadius:10, flex: 1, justifyContent: 'center', backgroundColor:"white"}}>
@@ -211,7 +215,7 @@ export default function GiveScreen({ route, navigation }) {
             
             <View style={{display:"flex", flexDirection:"row"}}>
               <Text style={[styles.sectionTitles, {flex:1}]}>
-                Publicly Display 
+                Publicly Display *
               </Text>
               <View style={{marginTop:-10, paddingTop:28}}>
                 <Ionicons name="information-circle-outline" color="black" size={20}/>
@@ -243,7 +247,6 @@ export default function GiveScreen({ route, navigation }) {
                 style={[styles.buttonStyle, styles.donateButton]}
                 onPress={()=>{
                   updateCurrent();
-                  navigation.navigate("ProcessingScreen", {id:id, donation:donation});
                 }}
             >
                 <View style={{display:"flex", flexDirection:"row"}}>

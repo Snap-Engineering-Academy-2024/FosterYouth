@@ -15,6 +15,7 @@ import EventScreen from "../screens/EventScreen"; //New component by Sona and Ch
 import CampaignStoryIndiv from "../components/GiveFundComponents/CampaignStoryIndiv";
 import DonateScreen from '../screens/GiveFundScreens/DonateScreen'
 import ProcessingScreen from '../screens/GiveFundScreens/ProcessingScreen'
+import ConfirmationScreen from "../screens/GiveFundScreens/ConfirmationScreen";
 
 const Stack = createStackNavigator();
 
@@ -76,7 +77,12 @@ export default function App() {
         <Stack.Screen
           name="ProcessingScreen"
           component={ProcessingScreen}
-          options={{ headerShown: true }}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ConfirmationScreen"
+          component={ConfirmationScreen}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Astrology"

@@ -1,24 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Pressable, Image, SafeAreaView, ActivityIndicator } from "react-native";
+import React, { useState, useEffect} from "react";
+import { View, Text, StyleSheet, Pressable, Image, SafeAreaView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useNavigation } from '@react-navigation/native';
 
 export default function ProcessingScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
   const { title, photoUrl, contributors, current, goals, stories } = route.params;
-  
-  const [loading, setLoading] = useState(true);
 
-  // Simulate loading process
   useEffect(() => {
-    // Simulate a loading process with a timeout
     const timer = setTimeout(() => {
-      setLoading(false);
-    }, 3000); // Adjust the timeout as needed
+      navigation.navigate("ConfirmationScreen", {title:title, photoUrl:photoUrl, contributors:contributors, current:current, goals:goals, stories:stories});
+    }, 3000);
 
-    // Clean up the timer on unmount
     return () => clearTimeout(timer);
-  }, []);
-
+  }, [navigation]);
+  
   return (
     <SafeAreaView
       style={[
@@ -31,16 +27,9 @@ export default function ProcessingScreen({ route, navigation }) {
         },
       ]}
     >
+      <Image source={require('../../../assets/snapchat/mariahProcessing.png')} style={styles.bitmoji} />
 
-    <View style={styles.imageContainer}>
-        <Image source={require('../../../assets/snapchat/mariahProcessing.png')} style={styles.image} />
-        {loading && (
-          <View style={styles.overlay}>
-            <ActivityIndicator size="large" color="#0000ff" />
-          </View>
-        )}
-      </View>
-      <Text style={styles.text}>Processing</Text>
+      <Image source={require('../../../assets/snapchat/loading.gif')} style={styles.spinner} />
     </SafeAreaView>
   );
 }
@@ -48,5 +37,19 @@ export default function ProcessingScreen({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+
+  bitmoji: {
+    marginTop: 70,
+    width: 300,
+    height: 300
+  },
+
+  spinner: {
+    marginTop: 50,
+    width: 75,
+    height: 75,
   },
 });

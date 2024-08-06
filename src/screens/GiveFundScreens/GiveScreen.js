@@ -46,7 +46,6 @@ export default function GiveScreen({ route, navigation }) {
   
   const handleNumberChange = (text) => {
     setDonation(text);
-    setAmount(parseInt(text));
   };
 
   // Money Donation Buttons
@@ -124,11 +123,11 @@ export default function GiveScreen({ route, navigation }) {
 
   //UPDATE CURRENT TOTAL DONATIONS ON SUPABASE
   async function updateCurrent() {
-    const { data, error } = await supabase
-      .from('nonprofits')
-      .update({ currentAmount: nonprofits[0].currentAmount + (donation) })
-      .eq('name', title)
-      .select()
+      const { data, error } = await supabase
+        .from('nonprofits')
+        .update({ "currentAmount": nonprofits[0].currentAmount + parseInt(donation) })
+        .eq('registrationNumber', id)
+        .select();
   }
           
   if (nonprofits.length === 0) {
@@ -235,7 +234,10 @@ export default function GiveScreen({ route, navigation }) {
             </Text>
             <Pressable 
                 style={[styles.buttonStyle, styles.donateButton]}
-                onPress={updateCurrent}
+                onPress={()=>{
+                  updateCurrent();
+                  // navigation.navigate("CampaignScreen", {id:id});
+                }}
             >
                 <View style={{display:"flex", flexDirection:"row"}}>
                     <Ionicons name="gift-outline" color="yellow" size={25}/>

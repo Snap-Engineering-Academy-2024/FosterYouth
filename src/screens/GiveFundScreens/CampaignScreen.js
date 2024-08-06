@@ -50,7 +50,6 @@ export default function CampaignScreen({ route, navigation }) {
         setNonprofits(data);
         setFollowNum(data[0].followers);
         setAmount(data[0].currentAmount);
-        console.log("I was called");
       }
     } catch (error) {
       console.error("Error fetching Nonprofits:", error.message);

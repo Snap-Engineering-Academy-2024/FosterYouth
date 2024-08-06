@@ -195,6 +195,9 @@ export default function DonateScreen({ route, navigation }) {
             </Text>
             <Pressable 
                 style={[styles.buttonStyle, styles.donateButton]}
+                onPress={() => {
+                  navigation.navigate("ProcessingScreen", {title:title, photoUrl:photoUrl, contributors:contributors, current:current, goals:goals, stories:stories});
+                }}
             >
                 <View style={{display:"flex", flexDirection:"row"}}>
                     <Ionicons name="gift-outline" color="yellow" size={25}/>

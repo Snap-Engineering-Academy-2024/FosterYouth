@@ -56,8 +56,8 @@ const styles = StyleSheet.create({
     marginRight: 10
   },
   FeedImage: {
-    width: 100,
-    height: 150,
+    width: 130,
+    height: 200,
     display: "flex",
     justifyContent: "center",
     elevation: 5, 

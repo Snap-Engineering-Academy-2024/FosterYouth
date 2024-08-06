@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -11,20 +11,52 @@ import {
   Linking
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { fontHeader } from "../../assets/themes/font";
-import { colors } from "../../assets/themes/colors";
+import { fontHeader } from "../../../assets/themes/font";
+import { colors } from "../../../assets/themes/colors";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import HeaderFund from "../components/GiveFundComponents/HeaderFund";
+import HeaderFund from "../../components/GiveFundComponents/HeaderFund";
 import { useNavigation } from "@react-navigation/native";
-import CampaignTestimonials from "../components/GiveFundComponents/CampaignTestimonials";
-import FollowButton from "../components/GiveFundComponents/FollowButton";
+import CampaignTestimonials from "../../components/GiveFundComponents/CampaignTestimonials";
+import FollowButton from "../../components/GiveFundComponents/FollowButton";
 import * as Progress from 'react-native-progress'; //yarn add react-native-progress --save
+import { supabase } from "../../utils/hooks/supabase";
 
 export default function CampaignScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
-  const { title, photoUrl, id, bio, website, contributors, followers, current, goals, stories } = route.params; //Destructure any props that were passed in
-  const[followNum, setFollowNum] = useState(followers);
+  const { id } = route.params; //Destructure any props that were passed in
+  const[followNum, setFollowNum] = useState(0);
   const[isFollowing, setIsFollowing] = useState(false);
+  const [nonprofits, setNonprofits] = useState([]);
+
+  const [amount, setAmount] = useState(0);
+
+  ///SUPABASE CALL
+  //SELECT * where ID is ___
+  useEffect(() => {
+    async function fetchNonprofits() {
+    try {
+        const { data, error } = await supabase.from("nonprofits").select("*").eq("registrationNumber", id); 
+        if (error) {
+            console.error("Error fetching nonprofits:", error.message);
+            return;
+        }
+        if (data) {
+            setNonprofits(data);
+            setFollowNum(data[0].followers);
+            setAmount(data[0].currentAmount);
+            // console.log(data);
+        }
+    } catch (error) {
+        console.error("Error fetching Nonprofits:", error.message);
+    }
+    }
+
+    fetchNonprofits();
+  }, []);
+
+  if (nonprofits.length === 0) {
+    return null; // or render a loading spinner
+  }
 
   return (
     <SafeAreaView
@@ -53,61 +85,65 @@ export default function CampaignScreen({ route, navigation }) {
           <View style={styles.titleContainer}>
             <Image 
               style={styles.logo}
-              source={{uri: photoUrl,}}
+              source={{uri: nonprofits[0].imageUrl,}}
             />
             <View>
-              <Text style={styles.mainTitle}>{title}</Text>
+              <Text style={styles.mainTitle}>{nonprofits[0].name}</Text>
               <Text style={styles.followers}>{followNum} followers</Text>
             </View>
           </View>
           
-          <FollowButton 
-              followNum={followNum}
-              setFollowNum={setFollowNum}
-              isFollowing={isFollowing}
-              setIsFollowing={setIsFollowing}
-            />
+          <View style={{display:"flex", flexDirection:"row"}}>
+            <FollowButton 
+                followNum={followNum}
+                setFollowNum={setFollowNum}
+                isFollowing={isFollowing}
+                setIsFollowing={setIsFollowing}
+              />
 
-          <Pressable 
-            style={styles.buttonStyle}
-            onPress={() => {
-              navigation.navigate("DonateScreen", {title:title, photoUrl:photoUrl, contributors:contributors, current:current, goals:goals, stories:stories});
-            }}
-          >
-            <View style={{display:"flex", flexDirection:"row"}}>
-              <Ionicons name="gift-outline" color="black" size={20} />
-              <Text style={styles.buttonText}>  Donate</Text>
+              <Pressable 
+                style={[styles.buttonStyle, 
+                  {flex: .85}]}
+                onPress={() => {
+                  navigation.navigate("GiveScreen", {id:id});
+                }}
+              >
+                <View style={{display:"flex", flexDirection:"row"}}>
+                  <Ionicons name="gift-outline" color="black" size={20} />
+                  <Text style={styles.buttonText}>  Give</Text>
+                </View>
+              </Pressable>
             </View>
-          </Pressable>
+          </View>
 
           {/* can make this section a component to work on Bitmoji head */}
           <View style={styles.progressSection}>
             <Progress.Bar 
-              progress={current/goals[0]} 
-              width={200} 
+              progress={amount/nonprofits[0].goals[0]} 
+              width={350} 
               height={15}
               borderRadius={50}
             />
-            <Text style={[{color: colors.primary,fontSize: fontHeader.fontSize, fontFamily: fontHeader.fontFamily,textAlign:"center", paddingVertical:10, fontSize:15}]}>
-              ${current} raised out of ${goals[0]} goal
+            <Text style={[{color: colors.primary,fontSize: fontHeader.fontSize, fontFamily: fontHeader.fontFamily,textAlign:"center", paddingVertical:10, fontSize:20}]}>
+              ${amount} raised out of ${nonprofits[0].goals[0]} goal
             </Text>
           </View>
 
         </View>
 
         <View style={styles.storiesSection}>
-          <Text style={styles.sectionHeader}>Testimonials</Text>
-          <Text style={[styles.sectionHeader, {fontSize:14, fontWeight:"400"}]}>Watch a story to support {title}!</Text>
+          <Text style={styles.sectionHeader}>Stories</Text>
+          <Text style={[styles.sectionHeader, {fontSize:14, fontWeight:"400"}]}>Watch a story to support {nonprofits[0].name}!</Text>
           <ScrollView
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             style={styles.sectionContent}
           >
-            {stories.length > 0 ? (
+            {nonprofits[0].stories.length > 0 ? (
                 <FlatList
-                  data={stories}
+                  data={nonprofits[0].stories}
                   horizontal={false}
-                  numColumns={stories.length}
+                  numColumns={nonprofits[0].stories.length}
                   ItemSeparatorComponent={() => <View style={{ height: "1%" }} />}
                   // columnWrapperStyle={{ justifyContent: "space-between" }}
                   renderItem={({ item }) => <CampaignTestimonials url={item} />}
@@ -121,9 +157,9 @@ export default function CampaignScreen({ route, navigation }) {
 
         <View style={styles.storiesSection}>
           <Text style={styles.sectionHeader}>About</Text>
-          <Pressable onPress={() => Linking.openURL(website)}>
+          <Pressable onPress={() => Linking.openURL(nonprofits[0].websiteUrl)}>
             <View style={[styles.sectionContent, {justifyContent:"space-between"}]}>
-              <Text style={{padding:10}}>{title} Website</Text>
+              <Text style={{padding:10}}>{nonprofits[0].name} Website</Text>
               <Ionicons name="chevron-forward-outline" size={20} color="black" style={{padding:10}}/>
             </View>
           </Pressable>
@@ -144,16 +180,15 @@ export default function CampaignScreen({ route, navigation }) {
             <Ionicons name="camera-outline" size={20} color="black" style={{padding:10}}/>
           </View>
         </View>
-      </View>
       
     </ScrollView>
-      <View style={{backgroundColor:"white",
-        position: "absolute",
-        left: 0, 
-        top: 0,}}>
-        <HeaderFund />
-        {/* <Image source={{uri: "../../assets/buttons/campaignHeader.png"}} style={{width:50, height: 50}}/> */}
-      </View>
+    <View style={{backgroundColor:"white",
+      position: "absolute",
+      left: 0, 
+      top: 0,}}>
+      <HeaderFund />
+      {/* <Image source={{uri: "../../assets/buttons/campaignHeader.png"}} style={{width:50, height: 50}}/> */}
+    </View>
     </SafeAreaView>
   );
 }
@@ -256,7 +291,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 20,
     elevation: 3,
-    backgroundColor: '#FFFC01',
+    backgroundColor: 'gold',
     // width:"80%"
   },
   buttonText: {

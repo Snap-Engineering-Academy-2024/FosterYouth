@@ -12,7 +12,7 @@ export default function GiveFundSection() {
     useEffect(() => {
         async function fetchNonprofits() {
         try {
-            const { data, error } = await supabase.from("nonprofits").select("*");
+            const { data, error } = await supabase.from("nonprofits").select("registrationNumber"); 
             if (error) {
                 console.error("Error fetching nonprofits:", error.message);
                 return;
@@ -31,16 +31,7 @@ export default function GiveFundSection() {
 
     const renderItem = ({ item }) => ( //Renders individual items for Flatlist for our nonprofit list
         <NonprofitCircle 
-            name={item.name}
-            photoUrl={item.imageUrl}
             id={item.registrationNumber}
-            bio={item.bio}
-            website={item.websiteUrl}
-            contributors={item.contributors} //array
-            followers={item.followers}
-            current={item.currentAmount}
-            goals={item.goals}//arrray
-            stories={item.stories}
         />
       );
 

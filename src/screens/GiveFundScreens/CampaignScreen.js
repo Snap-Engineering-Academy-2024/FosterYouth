@@ -132,11 +132,13 @@ export default function CampaignScreen({ route, navigation }) {
         </View>
 
         <View style={styles.storiesSection}>
-          <Text style={styles.sectionHeader}>About</Text>
           <Pressable onPress={() => Linking.openURL(nonprofits[0].websiteUrl)}>
-            <View style={[styles.sectionContent, {justifyContent:"space-between"}]}>
-              <Text style={{padding:10}}>{nonprofits[0].name} Website</Text>
-              <Ionicons name="chevron-forward-outline" size={20} color="black" style={{padding:10}}/>
+            <View style={[styles.aboutSection]}>
+              <Text style={[styles.sectionHeader, {fontSize:18, color:"white"}]}>About</Text>
+              <View style={[styles.aboutContent]}>
+                {/* <Text style={{padding:10}}>{nonprofits[0].name} Website</Text> */}
+                <Text style={[styles.aboutContent, {padding:10}]}>{nonprofits[0].bio}</Text>
+              </View>
             </View>
           </Pressable>
         </View>
@@ -303,4 +305,18 @@ const styles = StyleSheet.create({
     alignSelf:"center",
     padding: 15,
   },
+  aboutSection: {
+    alignItems:"center",
+    backgroundColor:"#0FADFF", 
+    padding: 10,
+    borderRadius: 12, 
+    shadowColor: "#E8E8E8", 
+    shadowOffset: {width: -5, height: 4},
+    shadowRadius: 25,
+  }, 
+  aboutContent:{
+    color:"white",
+    fontSize:14,
+    textAlign:"center"
+  }
 });

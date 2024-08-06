@@ -93,32 +93,34 @@ export default function CampaignScreen({ route, navigation }) {
             </View>
           </View>
           
-          <FollowButton 
-              followNum={followNum}
-              setFollowNum={setFollowNum}
-              isFollowing={isFollowing}
-              setIsFollowing={setIsFollowing}
-            />
+          <View style={{display:"flex", flexDirection:"row"}}>
+            <FollowButton 
+                followNum={followNum}
+                setFollowNum={setFollowNum}
+                isFollowing={isFollowing}
+                setIsFollowing={setIsFollowing}
+              />
 
-            <Pressable 
-              style={[styles.buttonStyle, 
-                {flex: 1}]}
-              onPress={() => {
-                navigation.navigate("GiveScreen", {id:id});
-              }}
-            >
-              <View style={{display:"flex", flexDirection:"row"}}>
-                <Ionicons name="gift-outline" color="black" size={20} />
-                <Text style={styles.buttonText}>  Give</Text>
-              </View>
-            </Pressable>
+              <Pressable 
+                style={[styles.buttonStyle, 
+                  {flex: .85}]}
+                onPress={() => {
+                  navigation.navigate("GiveScreen", {id:id});
+                }}
+              >
+                <View style={{display:"flex", flexDirection:"row"}}>
+                  <Ionicons name="gift-outline" color="black" size={20} />
+                  <Text style={styles.buttonText}>  Give</Text>
+                </View>
+              </Pressable>
+            </View>
           </View>
 
           {/* can make this section a component to work on Bitmoji head */}
           <View style={styles.progressSection}>
             <Progress.Bar 
               progress={amount/nonprofits[0].goals[0]} 
-              width={200} 
+              width={350} 
               height={15}
               borderRadius={50}
             />
@@ -289,7 +291,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 20,
     elevation: 3,
-    backgroundColor: '#FFFC01',
+    backgroundColor: 'gold',
     // width:"80%"
   },
   buttonText: {

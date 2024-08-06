@@ -124,7 +124,7 @@ export default function CampaignScreen({ route, navigation }) {
               height={15}
               borderRadius={50}
             />
-            <Text style={[{color: colors.primary,fontSize: fontHeader.fontSize, fontFamily: fontHeader.fontFamily,textAlign:"center", paddingVertical:10, fontSize:15}]}>
+            <Text style={[{color: colors.primary,fontSize: fontHeader.fontSize, fontFamily: fontHeader.fontFamily,textAlign:"center", paddingVertical:10, fontSize:20}]}>
               ${amount} raised out of ${nonprofits[0].goals[0]} goal
             </Text>
           </View>
@@ -132,7 +132,7 @@ export default function CampaignScreen({ route, navigation }) {
         </View>
 
         <View style={styles.storiesSection}>
-          <Text style={styles.sectionHeader}>Testimonials</Text>
+          <Text style={styles.sectionHeader}>Stories</Text>
           <Text style={[styles.sectionHeader, {fontSize:14, fontWeight:"400"}]}>Watch a story to support {nonprofits[0].name}!</Text>
           <ScrollView
             horizontal={true}

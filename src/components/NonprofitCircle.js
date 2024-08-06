@@ -48,7 +48,7 @@ export default function NonprofitCircle({id}) {
       <Pressable //added a presable to give the story interaction
         style={[styles.profile, styles.buttons]}
         onPress={() => {
-          navigation.navigate("CampaignScreen", {id:id});
+          navigation.navigate("CampaignScreen", {id:id, originScreen:"NonprofitCircle"});
         }}
       >
         <Image

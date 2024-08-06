@@ -7,7 +7,7 @@ import ConfettiCannon from 'react-native-confetti-cannon'; // yarn add react-nat
 
 export default function ConfirmationScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
-  const { id } = route.params; 
+  const { id, donation } = route.params; 
   const [title, setTitle] = useState("");
 
   const { width, height } = Dimensions.get('window');
@@ -65,9 +65,12 @@ export default function ConfirmationScreen({ route, navigation }) {
 
           <Text style={styles.subHeading}>You've Earned The Philanthropist Badge</Text>
 
+          <Text>{donation}</Text>
+
           <Pressable onPress={() =>{
               navigation.navigate('CampaignScreen', {
-                id: id
+                id: id,
+                originScreen: "ConfirmationScreen"
               })}} style={styles.button}>
             <Text style={styles.buttonText}>Back to Campaign</Text>
           </Pressable>

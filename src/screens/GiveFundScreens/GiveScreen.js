@@ -17,7 +17,7 @@ import ButtonMultiselect, {ButtonLayout} from 'react-native-button-multiselect';
 import RadioGroup from 'react-native-radio-buttons-group'; //yarn add react-native-radio-buttons-group
 import { supabase } from "../../utils/hooks/supabase";
 
-export default function DonateScreen({ route, navigation }) {
+export default function GiveScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
   const { title, photoUrl, contributors, current, goals, stories, setAmount } = route.params; 
 

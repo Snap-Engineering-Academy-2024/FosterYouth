@@ -11,13 +11,13 @@ import {
   Linking
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { fontHeader } from "../../assets/themes/font";
-import { colors } from "../../assets/themes/colors";
+import { fontHeader } from "../../../assets/themes/font";
+import { colors } from "../../../assets/themes/colors";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import HeaderFund from "../components/GiveFundComponents/HeaderFund";
+import HeaderFund from "../../components/GiveFundComponents/HeaderFund";
 import { useNavigation } from "@react-navigation/native";
-import CampaignTestimonials from "../components/GiveFundComponents/CampaignTestimonials";
-import FollowButton from "../components/GiveFundComponents/FollowButton";
+import CampaignTestimonials from "../../components/GiveFundComponents/CampaignTestimonials";
+import FollowButton from "../../components/GiveFundComponents/FollowButton";
 import * as Progress from 'react-native-progress'; //yarn add react-native-progress --save
 
 export default function CampaignScreen({ route, navigation }) {

@@ -89,7 +89,7 @@ export default function CampaignScreen({ route, navigation }) {
             />
             <View>
               <Text style={styles.mainTitle}>{nonprofits[0].name}</Text>
-              <Text style={styles.followers}>{followNum} followers</Text>
+              <Text style={styles.followers}>{followNum} Community Members</Text>
             </View>
           </View>
           
@@ -109,7 +109,7 @@ export default function CampaignScreen({ route, navigation }) {
                 }}
               >
                 <View style={{display:"flex", flexDirection:"row"}}>
-                  <Ionicons name="gift-outline" color="black" size={20} />
+                  <Ionicons name="gift-outline" color="white" size={20} />
                   <Text style={styles.buttonText}>  Give</Text>
                 </View>
               </Pressable>
@@ -293,13 +293,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 20,
     elevation: 3,
-    backgroundColor: 'gold',
+    backgroundColor: '#038588',
     // width:"80%"
   },
   buttonText: {
     fontSize: 16,
     fontWeight: "600",
-    color: "black",
+    color: "white",
   },
   progressSection:{
     alignSelf:"center",
@@ -318,5 +318,8 @@ const styles = StyleSheet.create({
     color:"white",
     fontSize:14,
     textAlign:"center"
+  }, 
+  followers:{
+    fontWeight:"600"
   }
 });

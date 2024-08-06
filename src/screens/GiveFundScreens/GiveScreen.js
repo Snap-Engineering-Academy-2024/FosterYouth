@@ -236,7 +236,7 @@ export default function GiveScreen({ route, navigation }) {
                 style={[styles.buttonStyle, styles.donateButton]}
                 onPress={()=>{
                   updateCurrent();
-                  // navigation.navigate("CampaignScreen", {id:id});
+                  navigation.navigate("ProcessingScreen", {id:id});
                 }}
             >
                 <View style={{display:"flex", flexDirection:"row"}}>

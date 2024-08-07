@@ -66,6 +66,7 @@ export default function NonProfitScreen({ route, navigation }){
           index={3}
           snapPoints={["35", "48", "58", "68", "78", "85"]}
         >
+          <ScrollView>
           <View style={styles.mainInfoContainer}>
             <View style={styles.titleContainer}>
               <Image
@@ -187,7 +188,7 @@ export default function NonProfitScreen({ route, navigation }){
           </View>
         </View>
 
-        <View style={styles.storiesSection}>
+        <View style={[styles.storiesSection, {marginBottom:175}]}>
           <Text style={styles.sectionHeader}>My Stories</Text>
           <View
             style={[styles.sectionContent, { justifyContent: "space-between" }]}
@@ -201,6 +202,7 @@ export default function NonProfitScreen({ route, navigation }){
             />
           </View>
         </View>
+        </ScrollView>
         </BottomSheet>
         <View style={{ position: "absolute", top: 50 }}>
           <ProfileHeader 

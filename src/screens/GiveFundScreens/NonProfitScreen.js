@@ -81,7 +81,11 @@ export default function NonProfitScreen({ route, navigation }){
     </View>
   );
   const SecondRoute = () => (
-    <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
+    <View style={{ flex: 1, backgroundColor: 'transparent' }} >
+      <Text style={styles.sectionContent}>
+        Videos from Community that support Organization
+      </Text>
+    </View>
   );
   const renderScene = SceneMap({
     stories: FirstRoute,
@@ -168,6 +172,18 @@ export default function NonProfitScreen({ route, navigation }){
                 </View>
               </Pressable>
             </View>
+            <Pressable
+              style={[styles.buttonStyle, { backgroundColor:"#007AFF", flex: 0.85 }]}
+              onPress={() => {
+                navigation.navigate("GiveScreen", { id: id });
+              }}
+            >
+              <View style={styles.row}>
+                <Ionicons name="star-outline" color="white" size={20} />
+                <Text style={styles.buttonText}> Give Coins</Text>
+              </View>
+            </Pressable>
+            <Text style={{textAlign:"center"}}>You have 100 Give Coins!</Text>
           </View>
 
           <View style={styles.progressSection}>
@@ -193,12 +209,12 @@ export default function NonProfitScreen({ route, navigation }){
             </Text>
           </View>
 
-        <View style={{height:1000}}>
+        <View style={{height:800}}>
           <TabView
             navigationState={{ index, routes }}
             onIndexChange={setIndex}
             renderScene={renderScene}
-            style={{height:900}}
+            style={{height:800}}
             renderTabBar={renderTabBar}
             indicatorStyle={{ backgroundColor: 'red' }}
           />
@@ -276,9 +292,7 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   mainTitle: {
-    // alignItems: 'center',
     justifyContent: "center",
-    textAlign: "center",
     paddingVertical: 4,
     color: "black",
     fontSize: 25,

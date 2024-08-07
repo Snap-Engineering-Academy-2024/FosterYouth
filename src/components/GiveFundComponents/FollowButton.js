@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 20,
     elevation: 3,
-    backgroundColor: '#0FADFF',
+    backgroundColor: '#007AFF',
   },
   unfollow:{
     backgroundColor: "#D0D0D0",

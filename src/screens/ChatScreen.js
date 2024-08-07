@@ -165,7 +165,7 @@ export default function ChatScreen({ navigation }) {
             <Text style={styles.modalText}>Explore the campaign by {nonprofits[0]?.name} and see how you can get involved!</Text>
 
             <Pressable onPress={() =>{
-              navigation.navigate('CampaignScreen', {
+              navigation.navigate('NonprofitScreen', {
                 title: nonprofits[0].name,
                 photoUrl: nonprofits[0].imageUrl,
                 id: nonprofits[0].registrationNumber,

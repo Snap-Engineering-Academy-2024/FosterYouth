@@ -19,7 +19,7 @@ export default function ProfileHeader() {
         <Pressable
           style={styles.buttons}
           onPress={() => {
-            navigation.navigate("Camera");
+            navigation.navigate("Chat");
           }}
         >
           <Icon name="arrow-back" size={22} />

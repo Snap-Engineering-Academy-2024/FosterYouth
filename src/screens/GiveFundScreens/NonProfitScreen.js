@@ -1,4 +1,4 @@
-import { Image, Text, View, Button, StyleSheet, Pressable, Dimensions, ImageBackground, ScrollView, FlatList, Linking } from "react-native";
+import { Image, Text, View, Button, StyleSheet, Pressable, Dimensions, ImageBackground, ScrollView, FlatList, Linking, useWindowDimensions } from "react-native";
 import { supabase } from "../../utils/hooks/supabase";
 import { useEffect, useState, useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -12,6 +12,7 @@ import ProfileHeader from "../../components/ProfileHeader";
 import CampaignTestimonials from "../../components/GiveFundComponents/CampaignTestimonials";
 import FollowButton from "../../components/GiveFundComponents/FollowButton";
 import * as Progress from "react-native-progress"; //yarn add react-native-progress --save
+import { TabBar, TabView, SceneMap } from 'react-native-tab-view'; //yarn add react-native-tab-view //AND yarn add react-native-pager-view //npx expo install react-native-pager-view
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
@@ -53,6 +54,54 @@ export default function NonProfitScreen({ route, navigation }){
   useEffect(() => {
     fetchNonprofits();
   }, [originScreen]);
+
+  //~~~~~~~~~~~~~~STORIES COMMUNITIES TABS
+  const FirstRoute = () => (
+    <View style={styles.storiesSection}>
+      <Text
+        style={[styles.sectionHeader, { fontSize: 14, fontWeight: "400" }]}
+      >
+        Watch a story to support {nonprofits[0].name}!
+      </Text>
+        {nonprofits[0].stories.length > 0 ? (
+          <FlatList
+            data={nonprofits[0].stories}
+            horizontal={false}
+            numColumns={3}
+            ItemSeparatorComponent={() => <View style={{ height: "1%" }} />}
+            // columnWrapperStyle={{ justifyContent: "space-between" }}
+            renderItem={({ item }) => <CampaignTestimonials url={item} />}
+            keyExtractor={(item) => item}
+            scrollEnabled={false}
+            height={1000}
+          />
+        ) : (
+          <Text>No "usersToAdd" table</Text>
+        )}
+    </View>
+  );
+  const SecondRoute = () => (
+    <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
+  );
+  const renderScene = SceneMap({
+    stories: FirstRoute,
+    community: SecondRoute,
+  });
+  const layout = useWindowDimensions();
+  const [index, setIndex] = useState(0);
+  const [routes] = useState([
+    { key: 'stories', title: 'Stories' },
+    { key: 'community', title: 'Community' },
+  ]);
+
+  const renderTabBar = (props) => (
+    <TabBar
+      {...props}
+      style={{ backgroundColor: '#F0F0F0' }} // Background color of the tab bar
+      indicatorStyle={{ backgroundColor: 'blue' }} // Color of the indicator
+      labelStyle={{ color: 'black' }} // Color of the tab labels
+    />
+  );
 
   if (nonprofits.length === 0) {
     return null; // or render a loading spinner
@@ -144,28 +193,15 @@ export default function NonProfitScreen({ route, navigation }){
             </Text>
           </View>
 
-        <View style={styles.storiesSection}>
-          <Text style={styles.sectionHeader}>Stories</Text>
-          <Text
-            style={[styles.sectionHeader, { fontSize: 14, fontWeight: "400" }]}
-          >
-            Watch a story to support {nonprofits[0].name}!
-          </Text>
-            {nonprofits[0].stories.length > 0 ? (
-              <FlatList
-                data={nonprofits[0].stories}
-                horizontal={false}
-                numColumns={3}
-                ItemSeparatorComponent={() => <View style={{ height: "1%" }} />}
-                // columnWrapperStyle={{ justifyContent: "space-between" }}
-                renderItem={({ item }) => <CampaignTestimonials url={item} />}
-                keyExtractor={(item) => item}
-                scrollEnabled={false}
-                height={1000}
-              />
-            ) : (
-              <Text>No "usersToAdd" table</Text>
-            )}
+        <View style={{height:1000}}>
+          <TabView
+            navigationState={{ index, routes }}
+            onIndexChange={setIndex}
+            renderScene={renderScene}
+            style={{height:900}}
+            renderTabBar={renderTabBar}
+            indicatorStyle={{ backgroundColor: 'red' }}
+          />
         </View>
 
         </ScrollView>

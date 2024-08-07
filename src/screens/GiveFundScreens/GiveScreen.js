@@ -7,7 +7,8 @@ import {
   Image,
   ScrollView,
   SafeAreaView, 
-  TextInput
+  TextInput,
+  TouchableOpacity
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { fontHeader } from "../../../assets/themes/font";
@@ -64,6 +65,9 @@ export default function GiveScreen({ route, navigation }) {
 
   //Card Payment Options
   const [selectedId, setSelectedId] = useState();
+  function changeMoneyId(value){
+    setPublicId(value);
+  }
   const radioButtons = useMemo(() => ([
     {
       id: '0', // acts as primary key, should be unique and non-empty string
@@ -103,23 +107,10 @@ export default function GiveScreen({ route, navigation }) {
   ]), []);
 
   //Display Public or Not
-  const [publicId, setPublicId] = useState();
-  const publicButtons = useMemo(() => ([
-    {
-      id: '1',
-      label: 'Display Me on Give Fund',
-      value: 'sure',
-      containerStyle: styles.radioButtonContainer,
-      labelStyle: styles.radioButtonLabel,
-    },
-    {
-      id: '2',
-      label: 'Don\'t Display Me Publicly on Give Fund',
-      value: 'dont',
-      containerStyle: styles.radioButtonContainer,
-      labelStyle: styles.radioButtonLabel,
-    },
-  ]), []);
+  const [publicId, setPublicId] = useState(false);
+  function changePublicId(){
+    setPublicId(!publicId);
+  }
 
   //UPDATE CURRENT TOTAL DONATIONS ON SUPABASE
   async function updateCurrent() {
@@ -222,14 +213,18 @@ export default function GiveScreen({ route, navigation }) {
               </View>
             </View>
 
-            <View style={{borderRadius:10, flex: 1, justifyContent: 'center', backgroundColor:"white", marginBottom:30}}>
-              <RadioGroup 
-                radioButtons={publicButtons} 
-                onPress={setPublicId}
-                selectedId={publicId}
-                containerStyle={styles.radioGroup}
+            <TouchableOpacity onPress={changePublicId} style={styles.clickableContainer}>
+              <View style={styles.clickableTextContainer}>
+                <Image source={require('../../../assets/snapchat/bitcrowd.png')} style={styles.clickableImageBitmoji}/>
+                <Text style={styles.clickableText}>Display Me Publicly on Give Fund</Text>
+              </View>  
+              <Ionicons
+                style={styles.circleIcon}
+                name={publicId ? "checkmark-circle" : "ellipse-outline"}
+                size={28}
+                color={publicId ? "#3CB2E2" : "lightgrey"}
               />
-            </View>
+            </TouchableOpacity>
 
             <View style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
               <Text style={[{fontSize:20}]}>
@@ -390,5 +385,43 @@ const styles = StyleSheet.create({
   },
   donateButton: {
     width: "100%",
-  }
+  },
+//CLICKABLE BUTTONS,
+
+  clickableContainer: {
+    backgroundColor: "white",
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    width: "100%",
+    paddingVertical: 7,
+    paddingHorizontal: 10,
+    borderRadius: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 20,
+  },
+  clickableImage: {
+    width: 20,
+    height: 20
+  },
+
+  clickableImageBitmoji: {
+    width: 25,
+    height: 25,
+    marginHorizontal: -3
+  },
+
+  clickableTextContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10
+  },
+
+  clickableText: {
+    fontSize: 14,
+    fontFamily: fontHeader.fontFamily,
+  },
 });

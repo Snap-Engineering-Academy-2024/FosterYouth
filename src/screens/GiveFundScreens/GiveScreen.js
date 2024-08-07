@@ -64,47 +64,7 @@ export default function GiveScreen({ route, navigation }) {
   };
 
   //Card Payment Options
-  const [selectedId, setSelectedId] = useState();
-  function changeMoneyId(value){
-    setPublicId(value);
-  }
-  const radioButtons = useMemo(() => ([
-    {
-      id: '0', // acts as primary key, should be unique and non-empty string
-      label: 'Credit or Debit Card  💳',
-      value: 'card',
-      containerStyle: styles.radioButtonContainer,
-      labelStyle: styles.radioButtonLabel,
-    },
-    {
-      id: '1',
-      label: 'Apple Pay   🍏',
-      value: 'apple',
-      containerStyle: styles.radioButtonContainer,
-      labelStyle: styles.radioButtonLabel,
-    },
-    {
-      id: '2',
-      label: 'Venmo     V',
-      value: 'venmo',
-      containerStyle: styles.radioButtonContainer,
-      labelStyle: styles.radioButtonLabel,
-    },
-    {
-      id: '3',
-      label: 'Paypal    P',
-      value: 'paypal',
-      containerStyle: styles.radioButtonContainer,
-      labelStyle: styles.radioButtonLabel,
-    },
-    {
-      id: '4',
-      label: 'Snap View Coin    🪙',
-      value: 'snap',
-      containerStyle: styles.radioButtonContainer,
-      labelStyle: styles.radioButtonLabel,
-    }
-  ]), []);
+  const [paymentId, setPaymentId] = useState();
 
   //Display Public or Not
   const [publicId, setPublicId] = useState(false);
@@ -114,7 +74,7 @@ export default function GiveScreen({ route, navigation }) {
 
   //UPDATE CURRENT TOTAL DONATIONS ON SUPABASE
   async function updateCurrent() {
-    if(selectedId && publicId && selectedButtons){
+    if(paymentId && publicId && selectedButtons){
       const { data, error } = await supabase
         .from('nonprofits')
         .update({ "currentAmount": nonprofits[0].currentAmount + parseInt(donation) })
@@ -195,14 +155,10 @@ export default function GiveScreen({ route, navigation }) {
               Give Method *
             </Text>
 
-            <View style={{borderRadius:10, flex: 1, justifyContent: 'center', backgroundColor:"white"}}>
-              <RadioGroup 
-                radioButtons={radioButtons} 
-                onPress={setSelectedId}
-                selectedId={selectedId}
-                containerStyle={styles.radioGroup}
-              />
-            </View>
+            <GiveMethod
+              paymentId={paymentId} 
+              setPaymentId={setPaymentId}
+            />
             
             <View style={{display:"flex", flexDirection:"row"}}>
               <Text style={[styles.sectionTitles, {flex:1}]}>
@@ -263,6 +219,110 @@ export default function GiveScreen({ route, navigation }) {
         </View>
     </SafeAreaView>
   );
+}
+
+function GiveMethod({paymentId, setPaymentId}) {
+
+  let iconSize = 20;
+
+  function changePaymentId(value){
+    setPaymentId(value);
+  }
+
+  return (
+    <>
+    <TouchableOpacity onPress={() => {
+      changePaymentId("card");
+    }} style={styles.clickableContainerMethod}>
+      <View style={styles.clickableTextContainer}>
+        <Ionicons
+          style={styles.circleIcon}
+          name={"card-outline"}
+          size={iconSize}
+        />
+        <Text style={styles.clickableText}>Credit or Debit Card</Text>
+      </View>  
+      <Ionicons
+        style={styles.circleIcon}
+        name={paymentId==="card" ? "checkmark-circle" : "ellipse-outline"}
+        size={28}
+        color={paymentId==="card" ? "#3CB2E2" : "lightgrey"}
+      />
+    </TouchableOpacity>
+    <TouchableOpacity onPress={() => {
+      changePaymentId("apple");
+    }} style={styles.clickableContainerMethod}>
+      <View style={styles.clickableTextContainer}>
+        <Ionicons
+          style={styles.circleIcon}
+          name={"logo-apple"}
+          size={iconSize}
+        />
+        <Text style={styles.clickableText}>Apple Pay</Text>
+      </View>  
+      <Ionicons
+        style={styles.circleIcon}
+        name={paymentId==="apple" ? "checkmark-circle" : "ellipse-outline"}
+        size={28}
+        color={paymentId==="apple" ? "#3CB2E2" : "lightgrey"}
+      />
+    </TouchableOpacity>
+    <TouchableOpacity onPress={() => {
+      changePaymentId("venmo");
+    }} style={styles.clickableContainerMethod}>
+      <View style={styles.clickableTextContainer}>
+        <Ionicons
+          style={styles.circleIcon}
+          name={"logo-venmo"}
+          size={iconSize}
+        />
+        <Text style={styles.clickableText}>Venmo</Text>
+      </View>  
+      <Ionicons
+        style={styles.circleIcon}
+        name={paymentId==="venmo" ? "checkmark-circle" : "ellipse-outline"}
+        size={28}
+        color={paymentId==="venmo" ? "#3CB2E2" : "lightgrey"}
+      />
+    </TouchableOpacity>
+    <TouchableOpacity onPress={() => {
+      changePaymentId("paypal");
+    }} style={styles.clickableContainerMethod}>
+      <View style={styles.clickableTextContainer}>
+        <Ionicons
+          style={styles.circleIcon}
+          name={"logo-paypal"}
+          size={iconSize}
+        />
+        <Text style={styles.clickableText}>Paypal</Text>
+      </View>  
+      <Ionicons
+        style={styles.circleIcon}
+        name={paymentId==="paypal" ? "checkmark-circle" : "ellipse-outline"}
+        size={28}
+        color={paymentId==="paypal" ? "#3CB2E2" : "lightgrey"}
+      />
+    </TouchableOpacity>
+    <TouchableOpacity onPress={() => {
+      changePaymentId("snap");
+    }} style={styles.clickableContainerMethod}>
+      <View style={styles.clickableTextContainer}>
+        <Ionicons
+          style={styles.circleIcon}
+          name={"logo-snapchat"}
+          size={iconSize}
+        />
+        <Text style={styles.clickableText}>Snap Give Coin</Text>
+      </View>  
+      <Ionicons
+        style={styles.circleIcon}
+        name={paymentId==="snap" ? "checkmark-circle" : "ellipse-outline"}
+        size={28}
+        color={paymentId==="snap" ? "#3CB2E2" : "lightgrey"}
+      />
+    </TouchableOpacity>
+    </>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -387,6 +447,21 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 //CLICKABLE BUTTONS,
+  clickableContainerMethod:{
+    backgroundColor: "white",
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    width: "100%",
+    paddingVertical: 7,
+    paddingHorizontal: 10,
+    borderRadius: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    margin: -1,
+  },
 
   clickableContainer: {
     backgroundColor: "white",

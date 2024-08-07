@@ -103,13 +103,13 @@ export default function CampaignScreen({ route, navigation }) {
               />
               <View>
                 <Text style={styles.mainTitle}>{nonprofits[0].name}</Text>
-                <Text style={styles.followers}>
-                  {followNum} Community Members
-                </Text>
+                  <Text style={styles.followers}>
+                    NonProfit • {followNum} Community Members
+                  </Text>
               </View>
             </View>
 
-            <View style={{ display: "flex", flexDirection: "row" }}>
+            <View style={styles.row}>
               <FollowButton
                 followNum={followNum}
                 setFollowNum={setFollowNum}
@@ -123,7 +123,7 @@ export default function CampaignScreen({ route, navigation }) {
                   navigation.navigate("GiveScreen", { id: id });
                 }}
               >
-                <View style={{ display: "flex", flexDirection: "row" }}>
+                <View style={styles.row}>
                   <Ionicons name="gift-outline" color="white" size={20} />
                   <Text style={styles.buttonText}> Give</Text>
                 </View>
@@ -372,5 +372,10 @@ const styles = StyleSheet.create({
   },
   followers: {
     fontWeight: "600",
+    fontSize: 14
   },
+  row: {
+    display: "flex", 
+    flexDirection: "row"
+  }
 });

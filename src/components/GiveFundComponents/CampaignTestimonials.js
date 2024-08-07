@@ -20,7 +20,6 @@ export default function CampaignTestimonials({url}) {
         >
           <ImageBackground
             style={styles.FeedImage}
-            imageStyle={{ borderRadius: 20 }}
             source={{
               uri: url,
             }}
@@ -51,13 +50,11 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     alignItems: "center",
-    borderRadius: 20,
     flexWrap: "wrap",
-    marginRight: 10
   },
   FeedImage: {
-    width: 130,
-    height: 200,
+    width: 120,
+    height: 215,
     display: "flex",
     justifyContent: "center",
     elevation: 5, 
@@ -68,7 +65,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "white",
     position: "absolute",
-    right: 15,
+    // right: 15,
     bottom: 15,
     textShadowColor: "#292929",
 

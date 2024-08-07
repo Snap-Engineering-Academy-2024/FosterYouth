@@ -151,56 +151,23 @@ export default function NonProfitScreen({ route, navigation }){
           >
             Watch a story to support {nonprofits[0].name}!
           </Text>
-          <ScrollView
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            style={styles.sectionContent}
-          >
             {nonprofits[0].stories.length > 0 ? (
               <FlatList
                 data={nonprofits[0].stories}
                 horizontal={false}
-                numColumns={nonprofits[0].stories.length}
+                numColumns={3}
                 ItemSeparatorComponent={() => <View style={{ height: "1%" }} />}
                 // columnWrapperStyle={{ justifyContent: "space-between" }}
                 renderItem={({ item }) => <CampaignTestimonials url={item} />}
                 keyExtractor={(item) => item}
+                scrollEnabled={false}
+                height={1000}
               />
             ) : (
               <Text>No "usersToAdd" table</Text>
             )}
-          </ScrollView>
         </View>
 
-        <View style={styles.storiesSection}>
-          <Text style={styles.sectionHeader}>Friends</Text>
-          <View
-            style={[styles.sectionContent, { justifyContent: "space-between" }]}
-          >
-            <Text style={{ padding: 10 }}>Invite Friends</Text>
-            <Ionicons
-              name="people-outline"
-              size={20}
-              color="black"
-              style={{ padding: 10 }}
-            />
-          </View>
-        </View>
-
-        <View style={[styles.storiesSection, {marginBottom:175}]}>
-          <Text style={styles.sectionHeader}>My Stories</Text>
-          <View
-            style={[styles.sectionContent, { justifyContent: "space-between" }]}
-          >
-            <Text style={{ padding: 10 }}>Add to my story</Text>
-            <Ionicons
-              name="camera-outline"
-              size={20}
-              color="black"
-              style={{ padding: 10 }}
-            />
-          </View>
-        </View>
         </ScrollView>
         </BottomSheet>
         <View style={{ position: "absolute", top: 50 }}>

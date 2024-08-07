@@ -20,7 +20,7 @@ export default function Header({ title }) {
   const navigation = useNavigation();
 
   const [profilePicUrl, setProfilePicUrl] = useState(
-    "https://sdk.bitmoji.com/render/panel/a41da708-81e9-4ec3-9364-9d8748f7063d-f5895c2e-da2d-4413-b1f6-d806dd48e7f5-v1.png?transparent=1&palette=1",
+    "../../assets/mariah/mariahProfile.png"
   );
 
   const { user } = useAuthentication();
@@ -64,7 +64,13 @@ export default function Header({ title }) {
             navigation.navigate("Profile");
           }}
         >
-          <Image style={styles.profileImage} source={{ uri: profilePicUrl }} />
+          <Image 
+            style={styles.profileImage} 
+            source={profilePicUrl.startsWith("../../")
+              ? require("../../assets/mariah/mariahProfile.png")
+              : { uri: profilePicUrl }
+            }
+          />
         </Pressable>
         <Pressable
           style={[styles.search, styles.buttons]}

@@ -27,7 +27,7 @@ export default function ProcessingScreen({ route, navigation }) {
         },
       ]}
     >
-      <Image source={require('../../../assets/snapchat/mariahProcessing.png')} style={styles.bitmoji} />
+      <Image source={require('../../../assets/mariah/waitForIt.png')} style={styles.bitmoji} />
 
       <Image source={require('../../../assets/snapchat/loading.gif')} style={styles.spinner} />
     </SafeAreaView>

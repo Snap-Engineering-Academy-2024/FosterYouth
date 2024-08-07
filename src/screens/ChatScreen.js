@@ -160,7 +160,7 @@ export default function ChatScreen({ navigation }) {
         <View style={styles.modalBackground}>
           <Animated.View style={[styles.modalContent, { transform: [{ translateY: slideAnim }] }]}>
             <Text style={styles.modalHeading}>Introducing Give Fund.</Text>
-            <Image source={require('../../assets/snapchat/chatModalImage.png')} style={styles.modalImage}/>
+            <Image source={require('../../assets/mariah/yus.png')} style={styles.modalImage}/>
             <Text style={styles.modalText}>Watch videos to generate ad revenue, share links, or personally support campaigns here on Snap’s Give Fund page to benefit Kids In The Spotlight, today!</Text>
             <Text style={styles.modalText}>Explore the campaign by {nonprofits[0]?.name} and see how you can get involved!</Text>
 

@@ -78,7 +78,7 @@ export default function ConfirmationScreen({ route, navigation }) {
         <View style={styles.confirmationContainer}>
           <Text style={styles.mainHeading}>Your Donation to {title} is Complete!</Text>
 
-          <Image source={require('../../../assets/snapchat/mariahYus.png')} style={styles.image}/>
+          <Image source={require('../../../assets/mariah/yus.png')} style={styles.image}/>
 
           <Text style={styles.subHeading}>You've Earned The Philanthropist Badge</Text>
 
@@ -98,7 +98,7 @@ export default function ConfirmationScreen({ route, navigation }) {
 
           <TouchableOpacity onPress={changeSelectionBitmoji} style={styles.clickableContainer}>
             <View style={styles.clickableTextContainer}>
-              <Image source={require('../../../assets/snapchat/bitcrowd.png')} style={styles.clickableImageBitmoji}/>
+              <Image source={require('../../../assets/mariah/smileCircle.png')} style={styles.clickableImageBitmoji}/>
               <Text style={styles.clickableText}>Add My Bitmoji to Philanthropist Crowd</Text>
             </View>
             
@@ -112,7 +112,7 @@ export default function ConfirmationScreen({ route, navigation }) {
 
           <TouchableOpacity onPress={changeSelectionBadge} style={styles.clickableContainer}>
             <View style={styles.clickableTextContainer}>
-              <Image source={require('../../../assets/snapchat/mariahDisplayBadge.png')} style={styles.clickableImageBitmoji}/>
+              <Image source={require('../../../assets/mariah/thumbUp.png')} style={styles.clickableImageBitmoji}/>
               <Text style={styles.clickableText}>Display Philanthropist Badge On Profile</Text>
             </View>
             
@@ -134,7 +134,7 @@ export default function ConfirmationScreen({ route, navigation }) {
           </Pressable>
 
           <Pressable onPress={() =>{
-              navigation.navigate('CampaignScreen', {
+              navigation.navigate('NonprofitScreen', {
                 id: id,
                 originScreen: "ConfirmationScreen"
               })}} style={styles.button}>

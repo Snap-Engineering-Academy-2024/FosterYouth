@@ -7,7 +7,7 @@ export default function ChatScreenBanner({setShowBanner, handleOpenModal}) {
     <View style={styles.container}>
       <TouchableOpacity onPress={handleOpenModal}>
         <View style={styles.content}>
-          <Image source={require('../../assets/snapchat/chatBannerBitmoji.png')} style={styles.image} />
+          <Image source={require('../../assets/mariah/heartChat.png')} style={styles.image} />
 
           <View>
             <Text style={styles.mainHeading}>Show your support for Foster Youth</Text>

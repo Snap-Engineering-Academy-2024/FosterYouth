@@ -8,7 +8,7 @@ import { supabase } from "../utils/hooks/supabase";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { BottomSheet, Button } from "@rneui/themed";
 
-export default function ProfileHeader() {
+export default function ProfileHeader({page}) {
   const navigation = useNavigation();
 
   const { user } = useAuthentication();
@@ -19,7 +19,7 @@ export default function ProfileHeader() {
         <Pressable
           style={styles.buttons}
           onPress={() => {
-            navigation.navigate("Camera");
+            navigation.navigate(page);
           }}
         >
           <Icon name="arrow-back" size={22} />

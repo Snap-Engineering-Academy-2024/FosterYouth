@@ -203,7 +203,9 @@ export default function NonProfitScreen({ route, navigation }){
         </View>
         </BottomSheet>
         <View style={{ position: "absolute", top: 50 }}>
-          <ProfileHeader />
+          <ProfileHeader 
+            page="Stories"
+          />
         </View>
       </ImageBackground>
     </View>

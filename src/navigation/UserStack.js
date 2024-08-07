@@ -10,7 +10,6 @@ import SettingsScreen from "../screens/SettingsScreen";
 import FriendStory from "../screens/FriendStory";
 import AstrologyScreen from "../screens/AstrologyScreen";
 import MemoryScreen from "../screens/MemoryScreen";
-import CampaignScreen from '../screens/GiveFundScreens/CampaignScreen';
 import EventScreen from "../screens/EventScreen"; //New component by Sona and Christian
 import CampaignStoryIndiv from "../components/GiveFundComponents/CampaignStoryIndiv";
 import GiveScreen from '../screens/GiveFundScreens/GiveScreen'
@@ -64,11 +63,6 @@ export default function App() {
           name="NonprofitScreen"
           component={NonprofitScreen}
           options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="CampaignScreen"
-          component={CampaignScreen}
-          options={{ headerShown: true }}
         />
         <Stack.Screen
           name="CampaignStoryIndiv"

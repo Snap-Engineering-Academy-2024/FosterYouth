@@ -1,4 +1,4 @@
-import { Image, Text, View, Button, StyleSheet, Pressable, Dimensions, ImageBackground, ScrollView, FlatList } from "react-native";
+import { Image, Text, View, Button, StyleSheet, Pressable, Dimensions, ImageBackground, ScrollView, FlatList, Linking } from "react-native";
 import { supabase } from "../../utils/hooks/supabase";
 import { useEffect, useState, useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -81,6 +81,24 @@ export default function NonProfitScreen({ route, navigation }){
               </View>
             </View>
 
+            <View style={[styles.storiesSection, {paddingHorizontal:3}]}>
+              <View style={[styles.aboutContent]}>
+                <Text style={[styles.aboutContent, { paddingHorizontal: 10 }]}>
+                  {nonprofits[0].bio}
+                </Text>
+                <Text 
+                  style={[styles.aboutContent, {paddingLeft: 10, color: "blue"}]}
+                  onPress={() => 
+                    {
+                      let web = nonprofits[0].websiteUrl
+                      Linking.openURL(web);
+                    }}
+                >
+                  {nonprofits[0].websiteUrl}
+                </Text>
+              </View>
+            </View>
+
             <View style={styles.row}>
               <FollowButton
                 followNum={followNum}
@@ -103,7 +121,6 @@ export default function NonProfitScreen({ route, navigation }){
             </View>
           </View>
 
-          {/* can make this section a component to work on Bitmoji head */}
           <View style={styles.progressSection}>
             <Progress.Bar
               progress={amount / nonprofits[0].goals[0]}
@@ -126,24 +143,6 @@ export default function NonProfitScreen({ route, navigation }){
               ${amount} raised out of ${nonprofits[0].goals[0]} goal
             </Text>
           </View>
-
-        <View style={styles.storiesSection}>
-          <Pressable onPress={() => Linking.openURL(nonprofits[0].websiteUrl)}>
-            <View style={[styles.aboutSection]}>
-              <Text
-                style={[styles.sectionHeader, { fontSize: 18, color: "white" }]}
-              >
-                About
-              </Text>
-              <View style={[styles.aboutContent]}>
-                {/* <Text style={{padding:10}}>{nonprofits[0].name} Website</Text> */}
-                <Text style={[styles.aboutContent, { padding: 10 }]}>
-                  {nonprofits[0].bio}
-                </Text>
-              </View>
-            </View>
-          </Pressable>
-        </View>
 
         <View style={styles.storiesSection}>
           <Text style={styles.sectionHeader}>Stories</Text>
@@ -354,9 +353,9 @@ const styles = StyleSheet.create({
     shadowRadius: 25,
   },
   aboutContent: {
-    color: "white",
+    color: "black",
     fontSize: 14,
-    textAlign: "center",
+    textAlign: "left",
   },
   followers: {
     fontWeight: "600",

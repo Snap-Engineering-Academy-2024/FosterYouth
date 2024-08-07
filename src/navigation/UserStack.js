@@ -16,6 +16,7 @@ import CampaignStoryIndiv from "../components/GiveFundComponents/CampaignStoryIn
 import GiveScreen from '../screens/GiveFundScreens/GiveScreen'
 import ProcessingScreen from '../screens/GiveFundScreens/ProcessingScreen'
 import ConfirmationScreen from "../screens/GiveFundScreens/ConfirmationScreen";
+import NonprofitScreen from '../screens/GiveFundScreens/NonProfitScreen'
 
 const Stack = createStackNavigator();
 
@@ -58,6 +59,11 @@ export default function App() {
           name="MemoryScreen"
           component={MemoryScreen}
           options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="NonprofitScreen"
+          component={NonprofitScreen}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="CampaignScreen"

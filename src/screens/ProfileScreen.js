@@ -122,7 +122,9 @@ export default function ProfileScreen(){
           </ScrollView>
         </BottomSheet>
         <View style={{ position: "absolute", top: 50 }}>
-          <ProfileHeader />
+          <ProfileHeader 
+            page="Chat"
+          />
         </View>
       </ImageBackground>
     </View>

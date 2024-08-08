@@ -1,9 +1,6 @@
 import { Image, Text, View, Button, StyleSheet, Pressable, Dimensions, ImageBackground, ScrollView, FlatList, Linking, useWindowDimensions } from "react-native";
 import { supabase } from "../../utils/hooks/supabase";
 import { useEffect, useState, useRef } from "react";
-import { useNavigation } from "@react-navigation/native";
-import { useAuthentication } from "../../utils/hooks/useAuthentication";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet"; // yarn add @gorhom/bottom-sheet
 import { fontHeader } from "../../../assets/themes/font";
 import { colors } from "../../../assets/themes/colors";
@@ -183,7 +180,7 @@ export default function NonProfitScreen({ route, navigation }){
               }}
             >
               <View style={styles.row}>
-                <Ionicons name="star-outline" color="white" size={20} />
+                <Image source={require('../../../assets/buttons/givecoin2.png')} style={styles.token}/>
                 <Text style={styles.buttonText}> Give Coins</Text>
               </View>
             </Pressable>
@@ -213,7 +210,7 @@ export default function NonProfitScreen({ route, navigation }){
             </Text>
           </View>
 
-        <View style={{height:800}}>
+        <View style={{height:600}}>
           <TabView
             navigationState={{ index, routes }}
             onIndexChange={setIndex}
@@ -258,9 +255,6 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     alignItems: "center",
     top: SCREEN_HEIGHT / 3.5,
-  },container: {
-    flex: 1,
-    // backgroundColor: "black"
   },
   contentContainer: {
     display: "flex",
@@ -299,7 +293,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingVertical: 4,
     color: "black",
-    fontSize: 25,
+    fontSize: 24,
     fontFamily: fontHeader.fontFamily,
     fontWeight: fontHeader.fontWeight,
   },
@@ -356,6 +350,7 @@ const styles = StyleSheet.create({
     // width:"80%"
   },
   buttonText: {
+    alignSelf:"center",
     fontSize: 16,
     fontWeight: "600",
     color: "white",
@@ -384,8 +379,8 @@ const styles = StyleSheet.create({
     fontSize: 12
   },
   token:{
-    width: 35,
-    height: 35,
+    width: 30,
+    height: 30,
     resizeMode: "contain"
   },
   row: {

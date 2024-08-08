@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { GiftedChat } from "react-native-gifted-chat";
-import { StyleSheet, SafeAreaView, Platform, Pressable, Text } from "react-native";
+import { StyleSheet, SafeAreaView, Platform, Pressable, Text, Image } from "react-native";
 import defaultProfileImage from "../../assets/snapchat/Snap Icon.png";
 import { useNavigation } from "@react-navigation/native";
 import { supabase } from "../utils/hooks/supabase";
@@ -79,7 +79,16 @@ export default function SnapchatChat() {
 
   return (
     <>
-    <Pressable
+    <Image 
+      source={require("../../assets/TeamSnapImage.png")}
+      style={{
+        resizeMode:"contain", 
+        width:400, 
+        height:800,
+        marginTop:-45
+      }}
+    />
+    {/* <Pressable
         onPress={() =>{
           navigation.navigate('CampaignScreen', {
             title: nonprofits[0].name,
@@ -98,7 +107,7 @@ export default function SnapchatChat() {
         style={styles.buttonStyle}
       >
         <Text>Join Friends to Give Fund</Text>
-      </Pressable>
+      </Pressable> */}
       <GiftedChat
       messages={messages}
       onSend={(messages) => {

@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-export default function CampaignTestimonials({url}) {
+export default function CampaignTestimonials({url, type}) {
   const navigation = useNavigation();
   return (
     <View style={styles.FeedContainer}>
@@ -24,7 +24,14 @@ export default function CampaignTestimonials({url}) {
               uri: url,
             }}
           >
+          
+          {type ? (
+              <Text style={styles.FeedText}>Why I Support</Text>
+          ) : (
             <Text style={styles.FeedText}>Hear Our Story</Text>
+          )
+          }
+            
           </ImageBackground>
         </Pressable>
       </View>
@@ -59,7 +66,7 @@ const styles = StyleSheet.create({
   FeedText: {
     padding: 8,
     fontWeight: "900",
-    fontSize: 14,
+    fontSize: 12,
     color: "white",
     position: "absolute",
     bottom: 15,

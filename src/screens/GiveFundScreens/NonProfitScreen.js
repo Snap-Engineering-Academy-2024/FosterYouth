@@ -10,6 +10,7 @@ import CampaignTestimonials from "../../components/GiveFundComponents/CampaignTe
 import FollowButton from "../../components/GiveFundComponents/FollowButton";
 import * as Progress from "react-native-progress"; //yarn add react-native-progress --save
 import { TabBar, TabView, SceneMap } from 'react-native-tab-view'; //yarn add react-native-tab-view //AND yarn add react-native-pager-view //npx expo install react-native-pager-view
+import communityList from '../../../assets/communityList'
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
@@ -74,15 +75,33 @@ export default function NonProfitScreen({ route, navigation }){
             contentContainerStyle={{ paddingBottom: 10 }}
           />
         ) : (
-          <Text>No "usersToAdd" table</Text>
+          <Text>No stories data found</Text>
         )}
     </View>
   );
   const SecondRoute = () => (
-    <View style={{ flex: 1, backgroundColor: 'transparent' }} >
-      <Text style={styles.sectionContent}>
-        Videos from Community that support Organization
+    <View style={styles.storiesSection}>
+      <Text
+        style={[styles.sectionHeader, { fontSize: 14, fontWeight: "400" }]}
+      >
+        See how people are getting involved with {nonprofits[0].name}!
       </Text>
+        {nonprofits[0].stories.length > 0 ? (
+          <FlatList
+            nestedScrollEnabled
+            data={communityList}
+            horizontal={false}
+            numColumns={3}
+            columnWrapperStyle={{ justifyContent: "space-between" }}
+            ItemSeparatorComponent={() => <View style={{ height: 5 }} />}
+            renderItem={({ item }) => <CampaignTestimonials url={item.link} type={item.type} />}
+            keyExtractor={(item) => item}
+            scrollEnabled={false}
+            contentContainerStyle={{ paddingBottom: 10 }}
+          />
+        ) : (
+          <Text>No stories data found</Text>
+        )}
     </View>
   );
   const renderScene = SceneMap({

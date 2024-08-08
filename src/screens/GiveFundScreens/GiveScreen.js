@@ -74,7 +74,7 @@ export default function GiveScreen({ route, navigation }) {
 
   //UPDATE CURRENT TOTAL DONATIONS ON SUPABASE
   async function updateCurrent() {
-    if(paymentId && publicId && selectedButtons){
+    if(paymentId && (publicId !== null) && selectedButtons){
       const { data, error } = await supabase
         .from('nonprofits')
         .update({ "currentAmount": nonprofits[0].currentAmount + parseInt(donation) })

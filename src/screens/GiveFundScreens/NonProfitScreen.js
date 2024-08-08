@@ -128,7 +128,10 @@ export default function NonProfitScreen({ route, navigation }){
                 source={{ uri: nonprofits[0].imageUrl }}
               />
               <View>
-                <Text style={styles.mainTitle}>{nonprofits[0].name}</Text>
+                <View style={styles.row}>
+                  <Text style={styles.mainTitle}>{nonprofits[0].name} </Text>
+                  <Image source={require('../../../assets/buttons/starfordiscover.png')} style={styles.token}/>
+                </View>
                   <Text style={styles.followers}>
                     NonProfit • {followNum} Community Members
                   </Text>
@@ -379,6 +382,11 @@ const styles = StyleSheet.create({
   followers: {
     fontWeight: "600",
     fontSize: 12
+  },
+  token:{
+    width: 35,
+    height: 35,
+    resizeMode: "contain"
   },
   row: {
     display: "flex", 

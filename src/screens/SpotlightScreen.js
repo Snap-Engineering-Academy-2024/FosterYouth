@@ -1,5 +1,6 @@
 import React from "react";
 import { FlatList, Image, StyleSheet } from "react-native";
+import discoverList from "../../assets/discoverList";
 
 const DATA = [
   {
@@ -21,7 +22,7 @@ const DATA = [
 ];
 
 const renderItem = ({ item }) => {
-  return <Image style={styles.image} source={{ uri: item.id }} />;
+  return <Image style={styles.image} source={{ uri: item.link }} />;
 };
 
 export default function SpotlightScreen() {
@@ -29,8 +30,8 @@ export default function SpotlightScreen() {
     <FlatList
       contentContainerStyle={styles.container}
       pagingEnabled={true}
-      data={DATA}
-      keyExtractor={(item) => item.id}
+      data={discoverList}
+      keyExtractor={(item) => item.link}
       renderItem={renderItem}
     />
   );

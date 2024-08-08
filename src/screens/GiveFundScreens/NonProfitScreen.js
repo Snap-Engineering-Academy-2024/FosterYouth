@@ -65,15 +65,16 @@ export default function NonProfitScreen({ route, navigation }){
       </Text>
         {nonprofits[0].stories.length > 0 ? (
           <FlatList
+            nestedScrollEnabled
             data={nonprofits[0].stories}
             horizontal={false}
             numColumns={3}
-            ItemSeparatorComponent={() => <View style={{ height: "1%" }} />}
-            // columnWrapperStyle={{ justifyContent: "space-between" }}
+            columnWrapperStyle={{ justifyContent: "space-between" }}
+            ItemSeparatorComponent={() => <View style={{ height: 5 }} />}
             renderItem={({ item }) => <CampaignTestimonials url={item} />}
             keyExtractor={(item) => item}
             scrollEnabled={false}
-            height={1000}
+            contentContainerStyle={{ paddingBottom: 10 }}
           />
         ) : (
           <Text>No "usersToAdd" table</Text>
@@ -173,7 +174,7 @@ export default function NonProfitScreen({ route, navigation }){
               </Pressable>
             </View>
             <Pressable
-              style={[styles.buttonStyle, { backgroundColor:"#007AFF", flex: 0.85 }]}
+              style={[styles.buttonStyle, { backgroundColor:"#007AFF", flex: 0.85, marginTop: 15 }]}
               onPress={() => {
                 navigation.navigate("GiveScreen", { id: id });
               }}
@@ -183,7 +184,7 @@ export default function NonProfitScreen({ route, navigation }){
                 <Text style={styles.buttonText}> Give Coins</Text>
               </View>
             </Pressable>
-            <Text style={{textAlign:"center"}}>You have 100 Give Coins!</Text>
+            <Text style={{textAlign:"center", fontSize:12}}>You have 100 Give Coins!</Text>
           </View>
 
           <View style={styles.progressSection}>
@@ -359,6 +360,7 @@ const styles = StyleSheet.create({
   progressSection: {
     alignSelf: "center",
     padding: 15,
+    marginTop: 10
   },
   aboutSection: {
     alignItems: "center",
@@ -371,12 +373,12 @@ const styles = StyleSheet.create({
   },
   aboutContent: {
     color: "black",
-    fontSize: 14,
+    fontSize: 12,
     textAlign: "left",
   },
   followers: {
     fontWeight: "600",
-    fontSize: 14
+    fontSize: 12
   },
   row: {
     display: "flex", 

@@ -16,26 +16,20 @@ import { useNavigation } from "@react-navigation/native";
 
 // import StoriesBitmoji from "../components/StoriesBitmoji";
 
-import Header from "../components/Header";
-
-export default function StoriesBitmoji() {
+export default function StoriesBitmoji({image, name, username}) {
   const navigation = useNavigation();
   return (
     <View style={styles.myBitmoji}>
-      <Pressable //added a presable to give the story interaction
-        style={[styles.profile, styles.buttons]}
-        onPress={() => {
-          navigation.navigate("FriendStory");
-        }}
-      >
+      <Pressable style={styles.storyHighlight}>
         <Image
           style={styles.bitmojiImage}
-          source={require("../../assets/snapchat/personalBitmoji.png")}
+          source={image}
         />
       </Pressable>
+
       <View style={styles.bitmojiTextContainer}>
-        <Text style={styles.bitmojiText}>Name</Text>
-        <Text style={styles.usernameText}>Username</Text>
+        <Text style={styles.bitmojiText}>{name}</Text>
+        <Text style={styles.usernameText}>{username}</Text>
       </View>
     </View>
   );
@@ -47,25 +41,39 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingRight: 10,
   },
-  bitmojiImage: {
-    width: 60,
-    height: 60,
-  },
-  bitmojiTextContainer: {
+
+  storyHighlight: {
+    padding: 1,
     backgroundColor: "white",
-    borderRadius: 20,
+    borderWidth: 2,
+    borderRadius: 50,
+    borderColor: "#a05dcd"
+  },
+
+  bitmojiImage: {
+    width: 55,
+    height: 55,
+    
+  },
+
+  bitmojiTextContainer: {
+    // backgroundColor: "white",
+    // borderRadius: 20,
     padding: 4,
   },
+
   bitmojiText: {
     alignSelf: "center",
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: "700",
   },
+
   usernameText: {
     fontSize: 8,
     fontWeight: "700",
-    opacity: 0.5,
+    opacity: 0.3,
   },
+
   Friends: {
     textAlign: "left",
     paddingLeft: 20,

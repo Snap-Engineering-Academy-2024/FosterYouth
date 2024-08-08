@@ -68,13 +68,13 @@ export default function StoriesScreen({ route, navigation }) {
 
             //contentContainerStyle={styles.stories} commented this out because it prevented story scrolling felt unintuitive
           >
-            <StoriesBitmoji />
-            <StoriesBitmoji />
-            <StoriesBitmoji />
-            <StoriesBitmoji />
-            <StoriesBitmoji />
-            <StoriesBitmoji />
-            <StoriesBitmoji />
+            <StoriesBitmoji image={require("../../assets/snapchat/jimmyBitmoji.png")} name="Jimmy" username="yimmyauto"/>
+            <StoriesBitmoji image={require("../../assets/snapchat/marcosBitmoji.png")} name="Marcos" username="directedby"/>
+            <StoriesBitmoji image={require("../../assets/snapchat/evaloveBitmoji.png")} name="Eva Love" username="aye_itseva"/>
+            <StoriesBitmoji image={require("../../assets/snapchat/abbeyBitmoji.png")} name="Abigail" username="abbeeyyyy"/>
+            <StoriesBitmoji image={require("../../assets/snapchat/marcusBitmoji.png")} name="Marcus" username="luminalmarc"/>
+            <StoriesBitmoji image={require("../../assets/snapchat/kyleBitmoji.png")} name="Kyle" username="kylejussab"/>
+            <StoriesBitmoji image={require("../../assets/snapchat/cindyBitmoji.png")} name="Cindy" username="cindya_who"/>
           </ScrollView>
         </View>
         <GiveFundSection />

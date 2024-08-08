@@ -77,7 +77,7 @@ export default function StoriesScreen({ route, navigation }) {
             <StoriesBitmoji />
           </ScrollView>
         </View>
-        <GiveFundSection />
+        {/* <GiveFundSection /> */}
         <Text style={styles.sectionHeader}>Discover</Text>
         <FlatList
           contentContainerStyle={{ paddingBottom: 250 }}

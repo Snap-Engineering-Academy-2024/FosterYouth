@@ -15,7 +15,8 @@ import { colors } from "../../assets/themes/colors";
 import StoriesBitmoji from "../components/StoriesBitmoji";
 import DiscoverFeed from "../components/DiscoverFeed";
 import { useNavigation } from "@react-navigation/native";
-import GiveFundSection from '../components/GiveFundSection'
+import GiveFundSection from '../components/GiveFundSection';
+import discoverList from '../../assets/discoverList';
 
 import Header from "../components/Header";
 
@@ -80,11 +81,11 @@ export default function StoriesScreen({ route, navigation }) {
         <Text style={styles.sectionHeader}>Discover</Text>
         <FlatList
           contentContainerStyle={{ paddingBottom: 250 }}
-          data={DATA}
+          data={discoverList}
           horizontal={false}
           numColumns={2}
           ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
-          renderItem={({ item }) => <DiscoverFeed title={item.title} />}
+          renderItem={({ item }) => <DiscoverFeed photoLink={item.link} title={item.title} />}
           keyExtractor={(item) => item.id}
         />
       </View>

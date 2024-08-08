@@ -15,7 +15,7 @@ import { fontHeader } from "../../assets/themes/font";
 import { colors } from "../../assets/themes/colors";
 import { useNavigation } from "@react-navigation/native";
 
-export default function DiscoverFeed() {
+export default function DiscoverFeed({title, photoLink}) {
   const navigation = useNavigation();
   //  const [discoverCard, setDiscoverCard] = useState(false);
   //  const handlePress = () => {
@@ -35,12 +35,12 @@ export default function DiscoverFeed() {
         >
           <ImageBackground
             style={styles.FeedImage}
-            imageStyle={{ borderRadius: 20 }}
+            imageStyle={{ borderRadius: 5 }}
             source={{
-              uri: "https://eccles.utah.edu/wp-content/uploads/2017/02/snapchat.jpg",
+              uri: photoLink,
             }}
           >
-            <Text style={styles.FeedText}>Hello My Name Is Chillahs</Text>
+            <Text style={styles.FeedText}>{title}</Text>
           </ImageBackground>
         </Pressable>
       </View>

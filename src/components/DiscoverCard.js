@@ -22,10 +22,10 @@ export default function DiscoverCard() {
         style={styles.FeedImage}
         imageStyle={{ borderRadius: 20 }}
         source={{
-          uri: "https://eccles.utah.edu/wp-content/uploads/2017/02/snapchat.jpg",
+          uri: "https://chronicle.brightspotcdn.com/dims4/default/a126f2a/2147483647/strip/true/crop/5400x3600+0+0/resize/840x560!/quality/90/?url=http%3A%2F%2Fchronicle-brightspot.s3.us-east-1.amazonaws.com%2F61%2Fd0%2Fe4b75dfc4b77b40490c5ed24bfaa%2Fdementoscottbbbg-0524-gabriela-alayna-14.jpg",
         }}
       >
-        <Text style={styles.FeedText}>Hello My Name Is Chillahs</Text>
+        <Text style={styles.FeedText}>Thank you for watching our story.</Text>
       </ImageBackground>
       {/* </Pressable> */}
     </View>
@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "white",
     position: "absolute",
-    right: 15,
-    bottom: 15,
+    right: 40,
+    bottom: -40,
     textShadowColor: "#000",
     textShadowOffset: {
       width: -1,

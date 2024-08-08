@@ -85,7 +85,13 @@ export default function StoriesScreen({ route, navigation }) {
           horizontal={false}
           numColumns={2}
           ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
-          renderItem={({ item }) => <DiscoverFeed photoLink={item.link} title={item.title} />}
+          renderItem={({ item }) => 
+            <DiscoverFeed 
+              photoLink={item.link} 
+              title={item.title} 
+              type={item.type}
+              />
+          }
           keyExtractor={(item) => item.id}
         />
       </View>

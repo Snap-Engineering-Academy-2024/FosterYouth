@@ -15,7 +15,7 @@ import { fontHeader } from "../../assets/themes/font";
 import { colors } from "../../assets/themes/colors";
 import { useNavigation } from "@react-navigation/native";
 
-export default function DiscoverFeed({title, photoLink}) {
+export default function DiscoverFeed({title, photoLink, type}) {
   const navigation = useNavigation();
   //  const [discoverCard, setDiscoverCard] = useState(false);
   //  const handlePress = () => {
@@ -40,7 +40,25 @@ export default function DiscoverFeed({title, photoLink}) {
               uri: photoLink,
             }}
           >
-            <Text style={styles.FeedText}>{title}</Text>
+            {type=="snapstar" ? (
+              <Text style={styles.FeedText}>{title} ⭐️</Text>
+            ) : (
+              <></>
+            )
+            }
+            {type=="nonprofit" ? (
+              <Text style={styles.FeedText}>{title} 💖</Text>
+            ) : (
+              <></>
+            )
+            }
+            {type=="regular" ? (
+              <Text style={styles.FeedText}>{title}</Text>
+            ) : (
+              <></>
+            )
+            }
+            
           </ImageBackground>
         </Pressable>
       </View>

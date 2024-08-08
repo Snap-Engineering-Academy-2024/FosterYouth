@@ -187,7 +187,7 @@ export default function NonProfitScreen({ route, navigation }){
               </Pressable>
             </View>
             <Pressable
-              style={[styles.buttonStyle, { backgroundColor:"black", flex: 0.85, marginTop: 15 }]}
+              style={[styles.buttonStyle, { backgroundColor:"#A65ED1", flex: 0.85, marginTop: 15 }]}
               onPress={() => {
                 navigation.navigate("GiveScreen", { id: id });
               }}
@@ -206,12 +206,13 @@ export default function NonProfitScreen({ route, navigation }){
               width={350}
               height={25}
               borderRadius={50}
+              color="#0FADFF"
             />
             <View
               style={{
                 display:"absolute", 
                 left:(350*amount / nonprofits[0].goals[0] - 45),
-                marginTop: -40
+                marginTop: -45
               }}
             >
             <Image 
@@ -312,6 +313,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     gap: 4,
+    marginBottom: 15
   },
   mainTitle: {
     justifyContent: "center",
@@ -408,10 +410,10 @@ const styles = StyleSheet.create({
     resizeMode: "contain"
   },
   progressIcon:{
-    width: 55,
-    height: 55,
+    width: 60,
+    height: 60,
     resizeMode: "contain",
-    backgroundColor:"#007AFF", 
+    backgroundColor:"#0FADFF", 
     borderRadius:50,
   },
   row: {

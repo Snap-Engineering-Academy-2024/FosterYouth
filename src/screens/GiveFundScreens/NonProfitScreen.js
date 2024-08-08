@@ -56,11 +56,6 @@ export default function NonProfitScreen({ route, navigation }){
   //~~~~~~~~~~~~~~STORIES COMMUNITIES TABS
   const FirstRoute = () => (
     <View style={styles.storiesSection}>
-      <Text
-        style={[styles.sectionHeader, { fontSize: 14, fontWeight: "400" }]}
-      >
-        Watch a story to support {nonprofits[0].name}!
-      </Text>
         {nonprofits[0].stories.length > 0 ? (
           <FlatList
             nestedScrollEnabled
@@ -81,11 +76,6 @@ export default function NonProfitScreen({ route, navigation }){
   );
   const SecondRoute = () => (
     <View style={styles.storiesSection}>
-      <Text
-        style={[styles.sectionHeader, { fontSize: 14, fontWeight: "400" }]}
-      >
-        See how people are getting involved with {nonprofits[0].name}!
-      </Text>
         {nonprofits[0].stories.length > 0 ? (
           <FlatList
             nestedScrollEnabled
@@ -130,7 +120,11 @@ export default function NonProfitScreen({ route, navigation }){
 
   return (
     <View style={styles.container}>
-      <ImageBackground source={{uri:"https://pbs.twimg.com/media/EZwpCsAUEAAg_zZ.jpg"}} style={styles.image}>
+      <ImageBackground 
+        source={require("../../../assets/crowdWithout.png")} 
+        style={styles.image}
+        resizeMode="cover" //contain makes it too small
+      >
         <BottomSheet
           ref={sheetRef}
           index={3}
@@ -193,14 +187,14 @@ export default function NonProfitScreen({ route, navigation }){
               </Pressable>
             </View>
             <Pressable
-              style={[styles.buttonStyle, { backgroundColor:"#007AFF", flex: 0.85, marginTop: 15 }]}
+              style={[styles.buttonStyle, { backgroundColor:"black", flex: 0.85, marginTop: 15 }]}
               onPress={() => {
                 navigation.navigate("GiveScreen", { id: id });
               }}
             >
               <View style={styles.row}>
                 <Image source={require('../../../assets/buttons/givecoin2.png')} style={styles.token}/>
-                <Text style={styles.buttonText}> Give Coins</Text>
+                <Text style={[styles.buttonText]}> Give Coins</Text>
               </View>
             </Pressable>
             <Text style={{textAlign:"center", fontSize:12}}>You have 100 Give Coins!</Text>
@@ -210,21 +204,19 @@ export default function NonProfitScreen({ route, navigation }){
             <Progress.Bar
               progress={amount / nonprofits[0].goals[0]}
               width={350}
-              height={15}
+              height={25}
               borderRadius={50}
             />
             <View
               style={{
                 display:"absolute", 
-                left:(350*amount / nonprofits[0].goals[0] - 15),
-                marginTop: -23
+                left:(350*amount / nonprofits[0].goals[0] - 45),
+                marginTop: -40
               }}
             >
             <Image 
               source={require("../../../assets/mariah/mariahProfile.png")}
-              style={[styles.token, {backgroundColor:"#007AFF", 
-                borderRadius:50,
-              }]}
+              style={[styles.progressIcon]}
             />
             </View>
             <Text
@@ -273,7 +265,6 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    resizeMode: "cover",
     height: "100%",
     width: "100%",
   },
@@ -415,6 +406,13 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     resizeMode: "contain"
+  },
+  progressIcon:{
+    width: 55,
+    height: 55,
+    resizeMode: "contain",
+    backgroundColor:"#007AFF", 
+    borderRadius:50,
   },
   row: {
     display: "flex", 

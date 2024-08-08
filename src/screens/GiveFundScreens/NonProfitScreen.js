@@ -206,13 +206,13 @@ export default function NonProfitScreen({ route, navigation }){
               width={350}
               height={25}
               borderRadius={50}
-              color="#0FADFF"
+              color="#14FF0F"
             />
             <View
               style={{
                 display:"absolute", 
-                left:(350*amount / nonprofits[0].goals[0] - 45),
-                marginTop: -45
+                left:(350*amount / nonprofits[0].goals[0] - 65),
+                marginTop: -65
               }}
             >
             <Image 
@@ -313,7 +313,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     gap: 4,
-    marginBottom: 15
+    marginBottom: 40
   },
   mainTitle: {
     justifyContent: "center",
@@ -410,11 +410,15 @@ const styles = StyleSheet.create({
     resizeMode: "contain"
   },
   progressIcon:{
-    width: 60,
-    height: 60,
+    width: 90,
+    height: 90,
     resizeMode: "contain",
-    backgroundColor:"#0FADFF", 
+    backgroundColor:"#14FF0F", 
     borderRadius:50,
+    // shadowColor: 'red',
+    // shadowOffset: { width: 0, height: 1 },
+    // shadowOpacity: 1,
+    // shadowRadius: 50
   },
   row: {
     display: "flex", 

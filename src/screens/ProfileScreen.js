@@ -37,14 +37,19 @@ export default function ProfileScreen(){
                 <Text style={styles.tagText}>Aug 7</Text>
               </View>
 
-              <View style={[styles.tag, {width: 85}]}>
+              <View style={[styles.tag, {width: 75}]}>
                 <Image source={require("../../assets/snapchat/snapscore.png")} style={styles.tagImage}/>
-                <Text style={styles.tagText}>36,869</Text>
+                <Text style={styles.tagText}>6,869</Text>
               </View>
 
               <View style={[styles.tag, {width: 60}]}>
                 <Image source={require("../../assets/snapchat/leo.png")} style={styles.tagImage}/>
                 <Text style={styles.tagText}>Leo</Text>
+              </View>
+
+              <View style={[styles.tag, {width: 125}]}>
+                <Image source={require("../../assets/buttons/philanthropistbage1.png")} style={styles.tagImage}/>
+                <Text style={styles.tagText}>Philanthropist</Text>
               </View>
             </View>
 
@@ -56,7 +61,7 @@ export default function ProfileScreen(){
             >
               <TouchableOpacity style={styles.sectionContainer}>
                 <View style={styles.sectionTitleContainer}>
-                  <Image source={require("../../assets/snapchat/giveCoin.png")} style={styles.sectionImageGiveCoin}/>
+                  <Image source={require("../../assets/buttons/givecoin2.png")} style={styles.sectionImageGiveCoin}/>
                   <View>
                     <Text style={styles.sectionTitle}>Give Coins</Text>
                     <Text style={styles.sectionDescription}>189</Text>

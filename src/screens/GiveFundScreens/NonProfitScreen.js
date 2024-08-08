@@ -194,6 +194,20 @@ export default function NonProfitScreen({ route, navigation }){
               height={15}
               borderRadius={50}
             />
+            <View
+              style={{
+                display:"absolute", 
+                left:(350*amount / nonprofits[0].goals[0] - 15),
+                marginTop: -23
+              }}
+            >
+            <Image 
+              source={require("../../../assets/mariah/mariahProfile.png")}
+              style={[styles.token, {backgroundColor:"#007AFF", 
+                borderRadius:50,
+              }]}
+            />
+            </View>
             <Text
               style={[
                 {

@@ -44,7 +44,7 @@ export default function FollowButton({ followNum,setFollowNum, isFollowing, setI
         >
           <View style={{display:"flex", flexDirection:"row", alignItems:"center"}}>
               <Ionicons name="remove-circle-outline" color="red" size={25}/>
-              <Text style={[styles.buttonText, styles.unfollow]}> Leave</Text> 
+              <Text style={[styles.buttonText, styles.unfollow]}> Unfollow</Text> 
           </View>
         </Pressable>
       </>
@@ -58,7 +58,7 @@ export default function FollowButton({ followNum,setFollowNum, isFollowing, setI
         >
           <View style={{display:"flex", flexDirection:"row", alignItems:"center"}}>
             <Ionicons name="add-circle-outline" color="white" size={25}/>
-            <Text style={[styles.buttonText]}> Join</Text> 
+            <Text style={[styles.buttonText]}> Follow</Text> 
           </View>
         </Pressable>
       </>

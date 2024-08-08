@@ -303,24 +303,6 @@ function GiveMethod({paymentId, setPaymentId}) {
         color={paymentId==="paypal" ? "#3CB2E2" : "lightgrey"}
       />
     </TouchableOpacity>
-    <TouchableOpacity onPress={() => {
-      changePaymentId("snap");
-    }} style={styles.clickableContainerMethod}>
-      <View style={styles.clickableTextContainer}>
-        <Ionicons
-          style={styles.circleIcon}
-          name={"logo-snapchat"}
-          size={iconSize}
-        />
-        <Text style={styles.clickableText}>Snap Give Coin</Text>
-      </View>  
-      <Ionicons
-        style={styles.circleIcon}
-        name={paymentId==="snap" ? "checkmark-circle" : "ellipse-outline"}
-        size={28}
-        color={paymentId==="snap" ? "#3CB2E2" : "lightgrey"}
-      />
-    </TouchableOpacity>
     </>
   )
 }

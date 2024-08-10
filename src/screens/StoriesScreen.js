@@ -3,9 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
-  Pressable,
   Image,
-  ScrollView,
   FlatList,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -14,42 +12,60 @@ import { fontHeader } from "../../assets/themes/font";
 import { colors } from "../../assets/themes/colors";
 import StoriesBitmoji from "../components/StoriesBitmoji";
 import DiscoverFeed from "../components/DiscoverFeed";
-import { useNavigation } from "@react-navigation/native";
-import GiveFundSection from '../components/GiveFundSection';
 import discoverList from '../../assets/discoverList';
-
 import Header from "../components/Header";
 
-/* Discover FlatList will render a component in the list
- * for each object in the array DATA. This is just an example I took
- * from the FlatList documentation, so feel free to change the contents.
- */
-
-const DATA = [
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "Second Item",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Third Item",
-  },
+const stories = [
+  { image: require("../../assets/snapchat/jimmyBitmoji.png"), name: "Jimmy", username: "yimmyauto" },
+  { image: require("../../assets/snapchat/marcosBitmoji.png"), name: "Marcos", username: "directedby" },
+  { image: require("../../assets/snapchat/evaloveBitmoji.png"), name: "Eva Love", username: "aye_itseva" },
+  { image: require("../../assets/snapchat/abbeyBitmoji.png"), name: "Abigail", username: "abbeeyyyy" },
+  { image: require("../../assets/snapchat/marcusBitmoji.png"), name: "Marcus", username: "luminalmarc" },
+  { image: require("../../assets/snapchat/kyleBitmoji.png"), name: "Kyle", username: "kylejussab" },
+  { image: require("../../assets/snapchat/cindyBitmoji.png"), name: "Cindy", username: "cindya_who" }
 ];
 
 export default function StoriesScreen({ route, navigation }) {
   const tabBarHeight = useBottomTabBarHeight();
   const insets = useSafeAreaInsets();
 
+  const renderStories = () => (
+    <View style={styles.storyBar}>
+      <Text style={[styles.sectionHeader, {marginTop: -10, marginBottom: -5}]}>Friends</Text>
+      <FlatList
+        data={stories}
+        renderItem={({ item }) => <StoriesBitmoji image={item.image} name={item.name} username={item.username}/>}
+        keyExtractor={(item, index) => index.toString()}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ paddingVertical: 0 }} // Adjust padding as needed
+      />
+    </View>
+  );
+
+  const renderDiscover = () => (
+    <FlatList
+      data={discoverList}
+      style={{marginLeft: 12}}
+      renderItem={({ item }) => (
+        <DiscoverFeed
+          photoLink={item.link}
+          title={item.title}
+          type={item.type}
+        />
+      )}
+      keyExtractor={(item) => item.link}
+      numColumns={2}
+      ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
+      contentContainerStyle={{ paddingBottom: 0 }}
+    />
+  );
+
   return (
     <View
       style={[
         styles.container,
         {
-          // Paddings to handle safe area
           paddingTop: insets.top,
           paddingBottom: insets.bottom,
           paddingLeft: insets.left,
@@ -59,42 +75,24 @@ export default function StoriesScreen({ route, navigation }) {
       ]}
     >
       <Header title="Stories" />
-      <View style={styles.contentContainer}>
-        <View style={styles.storyBar}>
-          <Text style={styles.sectionHeader}>Friends</Text>
-          <ScrollView
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
+      <FlatList
+        ListHeaderComponent={() => (
+          <>
+            {renderStories()}
+            <View style={styles.sectionHeaderContainer}>
+              <Text style={styles.sectionHeader}>Following</Text>
+              <Image source={require("../../assets/snapchat/arrowRight.png")} style={{ width: 15, height: 15 }} />
+            </View>
 
-            //contentContainerStyle={styles.stories} commented this out because it prevented story scrolling felt unintuitive
-          >
-            <StoriesBitmoji image={require("../../assets/snapchat/jimmyBitmoji.png")} name="Jimmy" username="yimmyauto"/>
-            <StoriesBitmoji image={require("../../assets/snapchat/marcosBitmoji.png")} name="Marcos" username="directedby"/>
-            <StoriesBitmoji image={require("../../assets/snapchat/evaloveBitmoji.png")} name="Eva Love" username="aye_itseva"/>
-            <StoriesBitmoji image={require("../../assets/snapchat/abbeyBitmoji.png")} name="Abigail" username="abbeeyyyy"/>
-            <StoriesBitmoji image={require("../../assets/snapchat/marcusBitmoji.png")} name="Marcus" username="luminalmarc"/>
-            <StoriesBitmoji image={require("../../assets/snapchat/kyleBitmoji.png")} name="Kyle" username="kylejussab"/>
-            <StoriesBitmoji image={require("../../assets/snapchat/cindyBitmoji.png")} name="Cindy" username="cindya_who"/>
-          </ScrollView>
-        </View>
-        {/* <GiveFundSection /> */}
-        <Text style={styles.sectionHeader}>Discover</Text>
-        <FlatList
-          contentContainerStyle={{ paddingBottom: 250 }}
-          data={discoverList}
-          horizontal={false}
-          numColumns={2}
-          ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
-          renderItem={({ item }) => 
-            <DiscoverFeed 
-              photoLink={item.link} 
-              title={item.title} 
-              type={item.type}
-              />
-          }
-          keyExtractor={(item) => item.id}
-        />
-      </View>
+            <Image style={styles.followingCard} source={require("../../assets/snapchat/mariahBitmojiStory.png")}/>
+
+            <Text style={[styles.sectionHeader, styles.sectionHeaderContainer]}>Discover</Text>
+          </>
+        )}
+        ListFooterComponent={renderDiscover}
+        contentContainerStyle={styles.contentContainer}
+        showsVerticalScrollIndicator={false}
+      />
     </View>
   );
 }
@@ -104,7 +102,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contentContainer: {
-    padding: 12,
+    paddingVertical: 12,
     display: "flex",
     flexDirection: "column",
     gap: 12,
@@ -115,18 +113,25 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     gap: 4,
   },
-  stories: {
-    display: "flex",
-    gap: 20,
-    width: "100%",
-    // justifyContent:"center",
-  },
   sectionHeader: {
     textAlign: "left",
-    paddingVertical: 4,
+    paddingVertical: 1,
     color: colors.primary,
-    fontSize: fontHeader.fontSize,
+    fontSize: 14,
+    marginLeft: 12,
     fontFamily: fontHeader.fontFamily,
     fontWeight: fontHeader.fontWeight,
+  },
+  sectionHeaderContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  followingCard: {
+    width: 90,
+    height: 140,
+    backgroundColor: "red",
+    marginLeft: 12,
+    borderRadius: 7,
+    marginVertical: 4
   },
 });

@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     display: "flex",
 
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     gap: 20,
     width: "100%",
     alignItems: "center",
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
   },
   FeedImage: {
-    width: 165,
+    width: 180,
     height: 320,
     display: "flex",
     justifyContent: "center",

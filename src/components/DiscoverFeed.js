@@ -30,7 +30,7 @@ export default function DiscoverFeed({title, photoLink, type}) {
       <View style={styles.Square}>
         <Pressable
           onPress={() => {
-            navigation.navigate("DiscoverCard");
+            navigation.navigate("VideoScreen");
           }}
         >
           <ImageBackground

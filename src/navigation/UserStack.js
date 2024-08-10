@@ -16,6 +16,7 @@ import GiveScreen from '../screens/GiveFundScreens/GiveScreen'
 import ProcessingScreen from '../screens/GiveFundScreens/ProcessingScreen'
 import ConfirmationScreen from "../screens/GiveFundScreens/ConfirmationScreen";
 import NonprofitScreen from '../screens/GiveFundScreens/NonProfitScreen'
+import VideoScreen from '../screens/GiveFundScreens/VideoScreen'
 
 const Stack = createStackNavigator();
 
@@ -67,6 +68,11 @@ export default function App() {
         <Stack.Screen
           name="CampaignStoryIndiv"
           component={CampaignStoryIndiv}
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="VideoScreen"
+          component={VideoScreen}
           options={{ headerShown: true }}
         />
         <Stack.Screen

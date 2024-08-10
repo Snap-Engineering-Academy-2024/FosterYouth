@@ -67,10 +67,10 @@ export default function StoriesScreen({ route, navigation }) {
         styles.container,
         {
           paddingTop: insets.top,
-          paddingBottom: insets.bottom,
+          // paddingBottom: insets.bottom,
           paddingLeft: insets.left,
           paddingRight: insets.right,
-          marginBottom: tabBarHeight,
+          marginBottom: 90,
         },
       ]}
     >
@@ -84,9 +84,13 @@ export default function StoriesScreen({ route, navigation }) {
               <Image source={require("../../assets/snapchat/arrowRight.png")} style={{ width: 15, height: 15 }} />
             </View>
 
-            <Image style={styles.followingCard} source={require("../../assets/snapchat/mariahBitmojiStory.png")}/>
+            <View style={styles.followingCard}>
+              <Image style={styles.followingImage} source={require("../../assets/snapchat/mariahBitmojiStory.png")}/>
+              <Text style={styles.followingHeading}>We Need To Talk🤨</Text>
+            </View>
+            
 
-            <Text style={[styles.sectionHeader, styles.sectionHeaderContainer]}>Discover</Text>
+            <Text style={[styles.sectionHeader, styles.sectionHeaderContainer, {marginBottom: -10}]}>Discover</Text>
           </>
         )}
         ListFooterComponent={renderDiscover}
@@ -127,11 +131,26 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   followingCard: {
+    marginLeft: 12,
+    marginVertical: 4
+  },
+
+  followingImage: {
     width: 90,
     height: 140,
-    backgroundColor: "red",
-    marginLeft: 12,
     borderRadius: 7,
-    marginVertical: 4
+  },
+
+  followingHeading: {
+    width: 80,
+    position: "absolute",
+    bottom: 5,
+    left: 5,
+    fontSize: 12,
+    color: "white",
+    fontWeight: "bold",
+    textShadowColor: "#000",
+    textShadowRadius: 3,
+    textShadowOpacity: 1,
   },
 });

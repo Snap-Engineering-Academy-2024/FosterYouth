@@ -1,10 +1,11 @@
-import { Image, Text, View, Button, StyleSheet, TouchableOpacity, Dimensions, ImageBackground, ScrollView } from "react-native";
+import { Image, Text, View, Modal, StyleSheet, TouchableOpacity, Dimensions, ImageBackground, ScrollView, Animated } from "react-native";
 import { supabase } from "../utils/hooks/supabase";
 import { useEffect, useState, useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useAuthentication } from "../utils/hooks/useAuthentication";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet"; // yarn add @gorhom/bottom-sheet
+import Ionicons from "react-native-vector-icons/Ionicons";
+import BottomSheet, { BottomSheetView, SCREEN_WIDTH } from "@gorhom/bottom-sheet"; // yarn add @gorhom/bottom-sheet
 import ProfileHeader from "../components/ProfileHeader";
 import { LinearGradient } from 'expo-linear-gradient'; // yarn add expo-linear-gradient
 
@@ -13,9 +14,67 @@ const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 export default function ProfileScreen(){
   const navigation = useNavigation();
   const sheetRef = useRef(null);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const slideAnim = useState(new Animated.Value(SCREEN_HEIGHT))[0];
+
+  const handleOpenModal = () => {
+    setModalVisible(true);
+    Animated.timing(slideAnim, {
+      toValue: 0,
+      duration: 200,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const handleCloseModal = () => {
+    Animated.timing(slideAnim, {
+      toValue: 500, 
+      duration: 200,
+      useNativeDriver: true,
+    }).start(() => {setModalVisible(false);});
+  };
 
   return (
     <View style={styles.container}>
+      <Modal
+        animationType="none"
+        transparent={true}
+        visible={modalVisible}
+        onShow={handleOpenModal}
+        onRequestClose={handleCloseModal}
+      >
+        <View style={styles.modalBackground}>
+          <Animated.View style={[styles.modalContent, { transform: [{ translateY: slideAnim }] }]}>
+            <Text style={styles.modalHeading}>Give Coins!</Text>
+
+            <Image source={require('../../assets/snapchat/Give Coin 2.gif')} style={styles.modalImage}/>
+            
+            <View style={styles.modalTextContainer}>
+              <Image source={require('../../assets/mariah/smileCircle.png')} style={styles.modalImageMariah}/>
+              <View>
+                <Text style={styles.modalText}>Earn Give Coins by watching sponsored videos from non-profits.</Text>
+                <Text style={{fontSize: 10, color: "grey", textAlign: "center", width: 260, marginTop: 5}}>Your views generate Give Coins through ad revenue!</Text>
+              </View>
+            </View>
+
+            <View style={styles.modalTextContainer}>
+              <Image source={require('../../assets/mariah/thumbUp.png')} style={styles.modalImageMariah}/>
+              <Text style={styles.modalText}>Donate to the causes you care most about!</Text>
+            </View>
+
+            <View style={styles.modalTextContainer}>
+              <Image source={require('../../assets/mariah/yayCircle.png')} style={styles.modalImageMariah}/>
+              <Text style={styles.modalText}>Support and give back while enjoying content!</Text>
+            </View>
+
+            <TouchableOpacity onPress={handleCloseModal} style={styles.modalCloseButton}>
+              <Ionicons name="close" size={25} color="gray" />
+            </TouchableOpacity>
+          </Animated.View>
+        </View>
+      </Modal>
+
       <ImageBackground source={require("../../assets/snapchat/mariahprofilebackground.png")} style={styles.image}>
         <BottomSheet
           ref={sheetRef}
@@ -59,7 +118,7 @@ export default function ProfileScreen(){
               end={{ x: 0.5, y: 1.5 }}
               style={styles.gradientBorder}
             >
-              <TouchableOpacity style={styles.sectionContainer}>
+              <TouchableOpacity style={styles.sectionContainer} onPress={handleOpenModal}>
                 <View style={styles.sectionTitleContainer}>
                   <Image source={require("../../assets/buttons/givecoin2.png")} style={styles.sectionImageGiveCoin}/>
                   <View>
@@ -124,6 +183,39 @@ export default function ProfileScreen(){
             </TouchableOpacity>
 
             <Text style={styles.heading}>Spotlight & Snap Map</Text>
+
+            <TouchableOpacity style={styles.sectionContainer}>
+              <View style={styles.sectionTitleContainer}>
+                <Image source={require("../../assets/snapchat/spotlightIcon.png")} style={styles.sectionImageFriend}/>
+                <View>
+                  <Text style={[styles.sectionTitle, {marginBottom: -3}]}>Add To Spotlight</Text>
+                </View>
+              </View>
+              
+              <View style={styles.sectionNewContainer}>
+                <Image source={require("../../assets/snapchat/more.png")} style={{width: 16, height: 16, marginRight: 6}}/>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.sectionMyFriends}>
+              <View>
+                <Image source={require("../../assets/snapchat/friendsImage.png")} style={{width: 360, height: 93}}/>
+              </View>
+              
+              <View style={styles.sectionLargeContainer}>
+                <View style={styles.sectionTitleContainer}>
+                  <Image source={require("../../assets/snapchat/addFriend.png")} style={styles.sectionImageFriend}/>
+                  <View>
+                    <Text style={[styles.sectionTitle, {marginBottom: -3}]}>My Friends</Text>
+                  </View>
+                </View>
+                
+                <View style={styles.sectionNewContainer}>
+                  <Image source={require("../../assets/snapchat/arrowRight.png")} style={styles.sectionArrow}/>
+                </View>
+              </View>
+              
+            </TouchableOpacity>
           </ScrollView>
         </BottomSheet>
         <View style={{ position: "absolute", top: 50 }}>
@@ -137,6 +229,58 @@ export default function ProfileScreen(){
 }
 
 const styles = StyleSheet.create({
+  modalBackground: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    width: '100%',
+    height: 500,
+    padding: 20,
+    position: "absolute",
+    bottom: 0,
+    backgroundColor: "white",
+    borderRadius: 10,
+    alignItems: "center",
+    gap: 25
+  },
+
+  modalHeading: {
+    marginTop: 10,
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+
+  modalImage: {
+    width: 90,
+    height: 90,
+    marginVertical: -10
+  },
+
+  modalImageMariah: {
+    width: 75,
+    height: 75,
+  },
+
+  modalTextContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 10
+  },
+
+  modalText: {
+    textAlign: "left",
+    width: 260,
+  },
+
+  modalCloseButton: {
+    position: "absolute",
+    top: 25,
+    right: 20
+  },
   container: {
     flex: 1,
     justifyContent: "center",
@@ -228,6 +372,27 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingHorizontal: 20,
     marginBottom: 15,
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4
+  },
+
+  sectionLargeContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "white",
+    height: 65,
+    borderRadius: 12,
+    paddingHorizontal: 20,
+    marginBottom: 0,
+  },
+
+  sectionMyFriends: {
+    backgroundColor: "white",
+    paddingTop: 10,
+    borderRadius: 12,
     shadowColor: 'black',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,

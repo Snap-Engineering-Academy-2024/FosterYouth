@@ -53,8 +53,22 @@ export default function VideoScreen({navigation}) {
         shouldPlay={true}
         controls={false}
       />
+      <View style={[styles.headerBar, styles.row]}>
+          <View style={[styles.row]}>
+            <Image 
+              source={{uri:"https://www.commercialappeal.com/gcdn/presto/2018/09/30/PMCA/01e00455-a937-4900-be8e-50a37c86679f-BBBS_B_Logo_The_Capital.jpg?width=660&height=528&fit=crop&format=pjpg&auto=webp"}}
+              style={styles.buttonsImage}
+            />
+            <View style={styles.headerTextContainer}>
+              <Text style={styles.headerText}>Big Brothers Big Sisters</Text>
+              <Text style={styles.headerText}>August 9</Text>
+            </View>
+          </View>
+          <Ionicons name="bookmark" size={35} color="white" />
+
+        </View>
       <View style={styles.overlayContainer}>
-        <View style={styles.mainLeftContainer}>
+        {/* <View style={styles.mainLeftContainer}>
           <View style={styles.row}>
             <Ionicons name="play" size={20} color="white" />
             <Text style={[styles.mainLeft, styles.mainLeftCount]}> 20K</Text>
@@ -66,7 +80,7 @@ export default function VideoScreen({navigation}) {
           <View style={styles.row}>
             <Text style={[styles.mainLeft, styles.mainLeftInfo]}>Just By Watching This Video, Your Supporting Big Brothers Big Sisters! This Video Generates 1 Give Coin Automaticly Sent to Your Give Wallet! </Text>
           </View>
-        </View>
+        </View> */}
       </View>
       <View style={styles.buttonContainer}>
         <Pressable
@@ -90,13 +104,13 @@ export default function VideoScreen({navigation}) {
         >
           <Ionicons name="arrow-redo" size={35} color="white" />
         </Pressable>
-        <Pressable
+        {/* <Pressable
           onPress={giveScreen} 
           style={[styles.buttons, {
             backgroundColor:"rgba(52, 52, 52, 0.5)"}]}
         >
           <Ionicons name="ellipsis-horizontal" size={35} color="white" />
-        </Pressable>
+        </Pressable> */}
       </View>
       <StatusBar style="auto" />
       <Image 
@@ -123,6 +137,18 @@ const styles = StyleSheet.create({
     bottom:90,
     width:"85%"
   },
+  headerBar:{
+    justifyContent:"space-between",
+    width:"100%",
+    position:"absolute",
+    top:0,
+    backgroundColor:"black"
+  },
+  headerTextContainer:{
+  },
+  headerText:{
+    color:"white"
+  },
   mainLeftContainer:{
     backgroundColor:"rgba(52, 52, 52, 0.3)",
   },
@@ -136,7 +162,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer:{
     position:"absolute",
-    height:400,
+    height:200,
     bottom:80,
     paddingBottom:70,
     justifyContent:"space-between",
@@ -171,7 +197,7 @@ const styles = StyleSheet.create({
     display:"flex",
     flexDirection:"row",
     alignItems:"center",
-    paddingHorizontal:12,
-    paddingTop:12
+    paddingTop:5,
+    paddingRight:10
   }
 });

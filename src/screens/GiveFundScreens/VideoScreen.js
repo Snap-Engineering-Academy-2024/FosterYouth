@@ -35,8 +35,12 @@ export default function VideoScreen({navigation}) {
     return unsubscribe;
   }, [navigation]);
 
-  function giveScreen() {
+  function campaignScreen() {
     navigation.navigate("NonprofitScreen", {id:451632968, originScreen:"VideoScreen"});
+  }
+
+  function giveScreen() {
+    navigation.navigate("GiveScreen", {id:451632968, originScreen:"VideoScreen"});
   }
 
   return (
@@ -113,10 +117,12 @@ export default function VideoScreen({navigation}) {
         </Pressable> */}
       </View>
       <StatusBar style="auto" />
-      <Image 
+      <Pressable onPress={campaignScreen}>
+        <Image 
           source={require("../../../assets/story/bottomBar.png")}
           style={styles.bar}
         />
+      </Pressable>
     </View>
   );
 }

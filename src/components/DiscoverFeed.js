@@ -9,13 +9,9 @@ import {
   Pressable,
   useState,
 } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
-import { fontHeader } from "../../assets/themes/font";
-import { colors } from "../../assets/themes/colors";
 import { useNavigation } from "@react-navigation/native";
 
-export default function DiscoverFeed({title, photoLink, type}) {
+export default function DiscoverFeed({title, subtitle, photoLink, type}) {
   const navigation = useNavigation();
   //  const [discoverCard, setDiscoverCard] = useState(false);
   //  const handlePress = () => {
@@ -41,31 +37,39 @@ export default function DiscoverFeed({title, photoLink, type}) {
             }}
           >
             {type=="snapstar" ? (
-              <View style={styles.row}>
-                <Text style={styles.FeedText}>{title}</Text>
-                <Image 
-                  source={require("../../assets/buttons/snapStarBadge.png")}
-                  style={styles.FeedBadge}
-                />
+              <View style={styles.textContainer}>
+                <Text style={[styles.FeedText, {marginBottom:-10}]}>{title}</Text>
+                <View style={styles.row}>
+                  <Image 
+                    source={require("../../assets/buttons/snapStarBadge.png")}
+                    style={styles.FeedBadge}
+                  />
+                  <Text style={styles.FeedTextSubtitle}>{subtitle}</Text>
+                </View>
+                
               </View>
             ) : (
               <></>
             )
             }
             {type=="nonprofit" ? (
+              <View style={styles.textContainer}>
+              <Text style={[styles.FeedText, {marginBottom:-10}]}>{title}</Text>
               <View style={styles.row}>
-                <Text style={styles.FeedText}>{title}</Text>
                 <Image 
                   source={require("../../assets/buttons/nonprofitBadge.png")}
                   style={styles.FeedBadge}
                 />
+                <Text style={styles.FeedTextSubtitle}>{subtitle}</Text>
               </View>
+              
+            </View>
             ) : (
               <></>
             )
             }
             {type=="regular" ? (
-              <View style={styles.row}>
+              <View style={styles.textContainer}>
                 <Text style={styles.FeedText}>{title}</Text>
               </View>
             ) : (
@@ -119,27 +123,38 @@ const styles = StyleSheet.create({
   },
   FeedText: {
     padding: 8,
-    width:"75%",
     fontWeight: "900",
     fontSize: 14,
     color: "white",
     textShadowColor: "#292929",
     textShadowRadius: 5,
     textShadowOpacity: 0,
-    marginLeft:5
   },
-  row:{
-    display: "flex",
-    flexDirection: "row", 
+  FeedTextSubtitle: {
+    padding: 8,
+    fontSize: 14,
+    fontWeight: "600",
+    color: "white",
+    textShadowColor: "#292929",
+    textShadowRadius: 5,
+    textShadowOpacity: 0,
+  },
+  textContainer:{
     alignItems: "center", 
     position: "absolute",
     left: 0,
     bottom: 0,
-    justifyContent: "flex-start",
+    justifyContent: "flex-start"
+  },
+  row:{
+    display: "flex",
+    flexDirection: "row",
+    alignItems:"center",
+    width:"100%"
   },
   FeedBadge: {
-    width:20,
-    height:20,
+    width:17,
+    height:17,
     resizeMode:"contain",
     marginLeft:5,
   }

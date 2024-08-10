@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
   },
   FeedText: {
     padding: 8,
+    width:"75%",
     fontWeight: "900",
     fontSize: 14,
     color: "white",

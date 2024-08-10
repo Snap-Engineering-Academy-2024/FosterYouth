@@ -43,7 +43,7 @@ discoverList = [
         "id":"7",
         "title":"Adrian Jopanda",
         "link":"https://i.ibb.co/qCXS43R/story1.png",
-        "type":"user"
+        "type":"snapstar"
     },
     {
         "id":"8",
@@ -59,9 +59,25 @@ discoverList = [
     },
     {
         "id":"10",
+        "title":"Kids in the Spotlight",
+        "link":"https://media.licdn.com/dms/image/D5622AQFOTtshYMolyQ/feedshare-shrink_800/0/1713105459517?e=2147483647&v=beta&t=T5AnxelIi6jtRweD9jKOg9-uOIDu-FVBo1CGnmcUnnw",
+        "type":"nonprofit",
+        "registrationNumber":352364726,
+        "video" : "../../../assets/story/bbbsStoryMovie.mp4"
+    },
+    {
+        "id":"11",
         "title":"Checkdown",
         "link":"https://i.ibb.co/N3zYjLm/Discover-Show-Tile-4.png",
         "type":"regular"
+    },
+    {
+        "id":"12",
+        "title":"Friends of the Children",
+        "link":"https://media.bizj.us/view/img/12432736/simone-biles-friends-6*320xx1110-1665-45-0.png",
+        "type":"nonprofit",
+        "registrationNumber":352364726,
+        "video" : "../../../assets/story/bbbsStoryMovie.mp4"
     },
     
 ]

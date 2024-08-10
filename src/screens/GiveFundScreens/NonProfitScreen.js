@@ -140,7 +140,7 @@ export default function NonProfitScreen({ route, navigation }){
               <View>
                 <View style={styles.row}>
                   <Text style={styles.mainTitle}>{nonprofits[0].name} </Text>
-                  <Image source={require('../../../assets/buttons/starfordiscover.png')} style={styles.token}/>
+                  <Image source={require('../../../assets/buttons/nonprofitBadge.png')} style={styles.token}/>
                 </View>
                   <Text style={styles.followers}>
                     NonProfit • {followNum} Community Members

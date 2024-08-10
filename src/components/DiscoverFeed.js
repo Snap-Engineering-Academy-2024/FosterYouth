@@ -41,19 +41,33 @@ export default function DiscoverFeed({title, photoLink, type}) {
             }}
           >
             {type=="snapstar" ? (
-              <Text style={styles.FeedText}>{title} ⭐️</Text>
+              <View style={styles.row}>
+                <Text style={styles.FeedText}>{title}</Text>
+                <Image 
+                  source={require("../../assets/buttons/snapStarBadge.png")}
+                  style={styles.FeedBadge}
+                />
+              </View>
             ) : (
               <></>
             )
             }
             {type=="nonprofit" ? (
-              <Text style={styles.FeedText}>{title} 💖</Text>
+              <View style={styles.row}>
+                <Text style={styles.FeedText}>{title}</Text>
+                <Image 
+                  source={require("../../assets/buttons/nonprofitBadge.png")}
+                  style={styles.FeedBadge}
+                />
+              </View>
             ) : (
               <></>
             )
             }
             {type=="regular" ? (
-              <Text style={styles.FeedText}>{title}</Text>
+              <View style={styles.row}>
+                <Text style={styles.FeedText}>{title}</Text>
+              </View>
             ) : (
               <></>
             )
@@ -77,13 +91,11 @@ const styles = StyleSheet.create({
   },
   Square: {
     display: "flex",
-
     flexDirection: "row",
     justifyContent: "space-between",
     gap: 20,
     width: "100%",
     alignItems: "center",
-    // backgroundColor: "pink",
     alignItems: "center",
     borderRadius: 20,
     flexWrap: "wrap",
@@ -110,13 +122,24 @@ const styles = StyleSheet.create({
     fontWeight: "900",
     fontSize: 14,
     color: "white",
-    position: "absolute",
-    right: 15,
-    bottom: 15,
     textShadowColor: "#292929",
-
     textShadowRadius: 5,
     textShadowOpacity: 0,
+    marginLeft:5
   },
-  smallFeedText: {},
+  row:{
+    display: "flex",
+    flexDirection: "row", 
+    alignItems: "center", 
+    position: "absolute",
+    left: 0,
+    bottom: 0,
+    justifyContent: "flex-start",
+  },
+  FeedBadge: {
+    width:20,
+    height:20,
+    resizeMode:"contain",
+    marginLeft:5,
+  }
 });

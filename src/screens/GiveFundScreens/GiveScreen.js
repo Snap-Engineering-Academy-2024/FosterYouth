@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -15,7 +15,6 @@ import { fontHeader } from "../../../assets/themes/font";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import HeaderFund from "../../components/GiveFundComponents/HeaderFund";
 import ButtonMultiselect, {ButtonLayout} from 'react-native-button-multiselect'; //yarn add react-native-button-multiselect
-import RadioGroup from 'react-native-radio-buttons-group'; //yarn add react-native-radio-buttons-group
 import { supabase } from "../../utils/hooks/supabase";
 
 export default function GiveScreen({ route, navigation }) {
@@ -77,7 +76,7 @@ export default function GiveScreen({ route, navigation }) {
     if(paymentId && (publicId !== null) && selectedButtons){
       const { data, error } = await supabase
         .from('nonprofits')
-        .update({ "currentAmount": nonprofits[0].currentAmount + parseInt(donation) })
+        .update({ "currentAmount": nonprofits[0].currentAmount + parseInt(donation), "hasDonated": true })
         .eq('registrationNumber', id)
         .select();
       

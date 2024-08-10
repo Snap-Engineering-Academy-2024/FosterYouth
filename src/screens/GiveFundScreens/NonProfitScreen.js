@@ -22,11 +22,8 @@ export default function NonProfitScreen({ route, navigation }){
   const [nonprofits, setNonprofits] = useState([]);
 
   const [amount, setAmount] = useState(0);
-
-  // if (amount != updatedDonationAmount) {
-  //   fetchNonprofits();
-  // }
-
+  const [crowdImage, setCrowdImage] = useState(require("../../../assets/crowdWithout.png"));
+  
   ///SUPABASE CALL
   //SELECT * where ID is ___
   async function fetchNonprofits() {
@@ -43,6 +40,9 @@ export default function NonProfitScreen({ route, navigation }){
         setNonprofits(data);
         setFollowNum(data[0].followers);
         setAmount(data[0].currentAmount);
+        if(data[0].hasDonated){
+          setCrowdImage(require("../../../assets/crowdWithMariah.png"))
+        }
       }
     } catch (error) {
       console.error("Error fetching Nonprofits:", error.message);
@@ -121,7 +121,7 @@ export default function NonProfitScreen({ route, navigation }){
   return (
     <View style={styles.container}>
       <ImageBackground 
-        source={require("../../../assets/crowdWithout.png")} 
+        source={crowdImage} 
         style={styles.image}
         resizeMode="cover" //contain makes it too small
       >
@@ -289,21 +289,6 @@ const styles = StyleSheet.create({
   titleContainer: {
     display: "flex",
     flexDirection: "row",
-  },
-  bitmojiContainer: {
-    // padding: 12,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    gap: 4,
-    backgroundColor: "transparent",
-  },
-  headerImage: {
-    // position:"absolute",
-    resizeMode: "cover",
-    width: 700,
-    height: 100,
-    marginTop: 50,
   },
   mainInfoContainer: {
     textAlign: "center",

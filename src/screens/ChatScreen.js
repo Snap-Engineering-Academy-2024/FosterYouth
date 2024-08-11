@@ -9,6 +9,7 @@ import { ChatScreenChatOutline, ChatScreenChatFill } from "../../assets/snapchat
 import ChatScreenBanner from "../components/ChatScreenBanner";
 import ChatScreenNavigation from "../components/ChatScreenNavigation";
 import { supabase } from "../utils/hooks/supabase";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function ChatScreen({ navigation }) {
   const [chats, setChats] = useState([]);
@@ -87,6 +88,7 @@ export default function ChatScreen({ navigation }) {
 
       <ChatScreenNavigation chats={chats}/>
 
+      <ScrollView>
       {showBanner && (
         <ChatScreenBanner setShowBanner={setShowBanner} handleOpenModal={handleOpenModal}/>
       )}
@@ -146,6 +148,7 @@ export default function ChatScreen({ navigation }) {
           );
         })}
       </View>
+      </ScrollView>
 
       <View style={styles.newMessageButton}>
         <Ionicons name="add" size={35} color="white"/>

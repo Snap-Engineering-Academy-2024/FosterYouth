@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-export default function DiscoverFeed({title, subtitle, photoLink, type, video, registrationNumber}) {
+export default function DiscoverFeed({title, subtitle, logo, photoLink, type, video, registrationNumber}) {
   const navigation = useNavigation();
   //  const [discoverCard, setDiscoverCard] = useState(false);
   //  const handlePress = () => {
@@ -26,7 +26,7 @@ export default function DiscoverFeed({title, subtitle, photoLink, type, video, r
       <View style={styles.Square}>
         <Pressable
           onPress={() => {
-            navigation.navigate("VideoScreen", {videoUrlLink:video, registrationNumber: registrationNumber});
+            navigation.navigate("VideoScreen", {logo:logo, subtitle:subtitle, videoUrlLink:video, registrationNumber: registrationNumber});
           }}
         >
           <ImageBackground
@@ -133,6 +133,7 @@ const styles = StyleSheet.create({
   FeedTextSubtitle: {
     padding: 8,
     fontSize: 14,
+    width:"90%",
     fontWeight: "600",
     color: "white",
     textShadowColor: "#292929",

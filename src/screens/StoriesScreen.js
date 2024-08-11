@@ -53,6 +53,7 @@ export default function StoriesScreen({ route, navigation }) {
           title={item.title}
           type={item.type}
           subtitle={item.subtitle}
+          logo={item.logo}
           video={item.video}
           registrationNumber = {item.registrationNumber}
         />

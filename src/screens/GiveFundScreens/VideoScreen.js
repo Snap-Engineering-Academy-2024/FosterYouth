@@ -8,7 +8,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 export default function VideoScreen({navigation, route}) {
   const video = useRef(null);
   const [statusVideo, setStatusVideo] = useState({});
-  const { videoUrlLink, registrationNumber } = route.params; //Destructure any props that were passed in
+  const { subtitle, logo, videoUrlLink, registrationNumber } = route.params; //Destructure any props that were passed in
   const[videoLink, setVideoLink] = useState(videoUrlLink);
 
   //Focus Event: to be fired when the HomeScreen is focused.
@@ -62,11 +62,11 @@ export default function VideoScreen({navigation, route}) {
       <View style={[styles.headerBar, styles.row]}>
           <View style={[styles.row]}>
             <Image 
-              source={{uri:"https://www.commercialappeal.com/gcdn/presto/2018/09/30/PMCA/01e00455-a937-4900-be8e-50a37c86679f-BBBS_B_Logo_The_Capital.jpg?width=660&height=528&fit=crop&format=pjpg&auto=webp"}}
-              style={styles.buttonsImage}
+              source={{uri:logo}}
+              style={[styles.buttonsImage, {marginRight:10,marginBottom:10}]}
             />
             <View style={styles.headerTextContainer}>
-              <Text style={styles.headerText}>Big Brothers Big Sisters</Text>
+              <Text style={styles.headerText}>{subtitle}</Text>
               <Text style={styles.headerText}>August 9</Text>
             </View>
           </View>
@@ -188,6 +188,7 @@ const styles = StyleSheet.create({
   buttonsImage:{
     width:50,
     height:50,
+    borderRadius:50,
     resizeMode:"contain"
   },
   buttonText:{

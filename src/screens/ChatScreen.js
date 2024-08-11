@@ -12,6 +12,7 @@ import { supabase } from "../utils/hooks/supabase";
 import { ScrollView } from "react-native-gesture-handler";
 
 export default function ChatScreen({ navigation }) {
+  const chosenNonprofitIndex = 4;
   const [chats, setChats] = useState([]);
   const [nonprofits, setNonprofits] = useState([]);
   const [showBanner, setShowBanner] = useState(true);
@@ -164,21 +165,21 @@ export default function ChatScreen({ navigation }) {
           <Animated.View style={[styles.modalContent, { transform: [{ translateY: slideAnim }] }]}>
             <Text style={styles.modalHeading}>Introducing Give Fund.</Text>
             <Image source={require('../../assets/mariah/heart.png')} style={styles.modalImage}/>
-            <Text style={styles.modalText}>Watch videos to generate ad revenue, share links, or personally support campaigns here on Snap’s Give Fund page to benefit Kids In The Spotlight, today!</Text>
-            <Text style={styles.modalText}>Explore the campaign by {nonprofits[0]?.name} and see how you can get involved!</Text>
+            <Text style={styles.modalText}>Watch videos to generate ad revenue, share links, or personally support campaigns here on Snap’s Give Fund page to benefit {nonprofits[chosenNonprofitIndex]?.name}, today!</Text>
+            <Text style={styles.modalText}>Explore the campaign by {nonprofits[chosenNonprofitIndex]?.name} and see how you can get involved!</Text>
 
             <Pressable onPress={() =>{
               navigation.navigate('NonprofitScreen', {
-                title: nonprofits[0].name,
-                photoUrl: nonprofits[0].imageUrl,
-                id: nonprofits[0].registrationNumber,
-                bio: nonprofits[0].bio,
-                website: nonprofits[0].websiteUrl,
-                contributors: nonprofits[0].contributors,
-                followers: nonprofits[0].followers,
-                current: nonprofits[0].currentAmount,
-                goals: nonprofits[0].goals,
-                stories: nonprofits[0].stories
+                title: nonprofits[chosenNonprofitIndex].name,
+                photoUrl: nonprofits[chosenNonprofitIndex].imageUrl,
+                id: nonprofits[chosenNonprofitIndex].registrationNumber,
+                bio: nonprofits[chosenNonprofitIndex].bio,
+                website: nonprofits[chosenNonprofitIndex].websiteUrl,
+                contributors: nonprofits[chosenNonprofitIndex].contributors,
+                followers: nonprofits[chosenNonprofitIndex].followers,
+                current: nonprofits[chosenNonprofitIndex].currentAmount,
+                goals: nonprofits[chosenNonprofitIndex].goals,
+                stories: nonprofits[chosenNonprofitIndex].stories
               })
 
               handleCloseModal();

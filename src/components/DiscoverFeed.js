@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-export default function DiscoverFeed({title, subtitle, photoLink, type}) {
+export default function DiscoverFeed({title, subtitle, photoLink, type, video}) {
   const navigation = useNavigation();
   //  const [discoverCard, setDiscoverCard] = useState(false);
   //  const handlePress = () => {
@@ -26,7 +26,7 @@ export default function DiscoverFeed({title, subtitle, photoLink, type}) {
       <View style={styles.Square}>
         <Pressable
           onPress={() => {
-            navigation.navigate("VideoScreen");
+            navigation.navigate("VideoScreen", {videoUrlLink:video});
           }}
         >
           <ImageBackground

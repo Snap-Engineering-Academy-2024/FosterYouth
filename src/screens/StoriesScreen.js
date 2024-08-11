@@ -53,6 +53,7 @@ export default function StoriesScreen({ route, navigation }) {
           title={item.title}
           type={item.type}
           subtitle={item.subtitle}
+          video={item.video}
         />
       )}
       keyExtractor={(item) => item.link}

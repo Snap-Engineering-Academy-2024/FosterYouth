@@ -5,9 +5,11 @@ import { Video } from 'expo-av'; //npx expo install expo-av
 import React, {useRef, useState, useEffect} from 'react';
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-export default function VideoScreen({navigation}) {
+export default function VideoScreen({navigation, route}) {
   const video = useRef(null);
   const [statusVideo, setStatusVideo] = useState({});
+  const { videoUrlLink } = route.params; //Destructure any props that were passed in
+  const[videoLink, setVideoLink] = useState(videoUrlLink);
 
   //Focus Event: to be fired when the HomeScreen is focused.
   useEffect(() => {
@@ -48,7 +50,7 @@ export default function VideoScreen({navigation}) {
       <Video
         ref={video}
         style={styles.video}
-        source={require("../../../assets/story/bbbsStoryMovie.mp4")}
+        source={videoLink}
         useNativeControls
         resizeMode="contain"
         isLooping={false}

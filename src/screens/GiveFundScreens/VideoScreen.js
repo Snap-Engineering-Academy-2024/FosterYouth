@@ -8,7 +8,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 export default function VideoScreen({navigation, route}) {
   const video = useRef(null);
   const [statusVideo, setStatusVideo] = useState({});
-  const { videoUrlLink } = route.params; //Destructure any props that were passed in
+  const { videoUrlLink, registrationNumber } = route.params; //Destructure any props that were passed in
   const[videoLink, setVideoLink] = useState(videoUrlLink);
 
   //Focus Event: to be fired when the HomeScreen is focused.
@@ -38,11 +38,11 @@ export default function VideoScreen({navigation, route}) {
   }, [navigation]);
 
   function campaignScreen() {
-    navigation.navigate("NonprofitScreen", {id:451632968, originScreen:"VideoScreen"});
+    navigation.navigate("NonprofitScreen", {id:registrationNumber, originScreen:"VideoScreen"});
   }
 
   function giveScreen() {
-    navigation.navigate("GiveScreen", {id:451632968, originScreen:"VideoScreen"});
+    navigation.navigate("GiveScreen", {id:registrationNumber, originScreen:"VideoScreen"});
   }
 
   return (

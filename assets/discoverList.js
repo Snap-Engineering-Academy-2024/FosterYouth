@@ -5,6 +5,7 @@ discoverList = [
         "subtitle":"So Satisfying",
         "link":"https://i.ibb.co/C8VnyKz/Discover-Show-Tile.png",
         "type":"regular",
+        "registrationNumber":0,
         "video" : require("../assets/story/fotcSimonBiles.mp4")
     },
     {
@@ -13,6 +14,7 @@ discoverList = [
         "subtitle":"Leilani J",
         "link":"https://i.ibb.co/Xt8xTqJ/Placeholder-Snap-1.png",
         "type":"snapstar",
+        "registrationNumber":0,
         "video" : require("../assets/story/fotcSimonBiles.mp4")
     },
     {
@@ -30,6 +32,7 @@ discoverList = [
         "subtitle":"Benito",
         "link":"https://i.ibb.co/FH8zn9y/Placeholder-Snap.png",
         "type":"snapstar",
+        "registrationNumber":0,
         "video" : require("../assets/story/fotcSimonBiles.mp4")
     },
     {
@@ -38,6 +41,7 @@ discoverList = [
         "subtitle":"Sarcasm Therapy",
         "link":"https://i.ibb.co/r3kKKnX/Discover-Show-Tile-1.png",
         "type":"regular",
+        "registrationNumber":0,
         "video" : require("../assets/story/fotcSimonBiles.mp4")
     },
     {
@@ -55,6 +59,7 @@ discoverList = [
         "subtitle":"Adrian Jopanda",
         "link":"https://i.ibb.co/qCXS43R/story1.png",
         "type":"snapstar",
+        "registrationNumber":0,
         "video" : require("../assets/story/fotcSimonBiles.mp4")
     },
     {
@@ -63,6 +68,7 @@ discoverList = [
         "subtitle":"Hooked",
         "link":"https://i.ibb.co/gzXvChQ/Discover-Show-Tile-2.png",
         "type":"regular",
+        "registrationNumber":0,
         "video" : require("../assets/story/fotcSimonBiles.mp4")
     },
     {
@@ -71,6 +77,7 @@ discoverList = [
         "subtitle":"Esquire",
         "link":"https://i.ibb.co/tD84njW/Discover-Show-Tile-3.png",
         "type":"regular",
+        "registrationNumber":0,
         "video" : require("../assets/story/fotcSimonBiles.mp4")
     },
     {
@@ -88,6 +95,7 @@ discoverList = [
         "subtitle":"Checkdown",
         "link":"https://i.ibb.co/N3zYjLm/Discover-Show-Tile-4.png",
         "type":"regular",
+        "registrationNumber":0,
         "video" : require("../assets/story/fotcSimonBiles.mp4")
     },
     {
@@ -96,7 +104,7 @@ discoverList = [
         "subtitle":"Friends of the Children",
         "link":"https://media.bizj.us/view/img/12432736/simone-biles-friends-6*320xx1110-1665-45-0.png",
         "type":"nonprofit",
-        "registrationNumber":352364726,
+        "registrationNumber":510175525,
         "video" : require("../assets/story/fotcSimonBiles.mp4")
     },
     

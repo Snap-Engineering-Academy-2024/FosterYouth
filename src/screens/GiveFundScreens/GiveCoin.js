@@ -124,13 +124,19 @@ export default function GiveCoin({ route, navigation }) {
               </View>  
             </TouchableOpacity>
 
-            <View style={styles.moneyContainer}>
+            <View style={[styles.moneyContainer, { overflow: 'visible' }]}>
             <ButtonMultiselect
               layout={ButtonLayout.CAROUSEL} // Choose from ButtonLayout enum: CAROUSEL, FULL_WIDTH, GRID
               buttons={buttons}
               selectedButtons={selectedButtons}
               onButtonSelected={handleButtonSelected}
-              buttonStyle={{width:"auto"}}
+              buttonStyle={{
+                shadowColor: "#000",
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.25,
+                shadowRadius: 1.5,
+                elevation: 5,
+              }}
               selectedColors={{
                 backgroundColor:"#FFFC01", 
                 borderColor:"transparent"
@@ -297,12 +303,6 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     color: "white",
-  },
-  chosenMoneyButton:{
-    backgroundColor: "black",
-  },
-  moneyButton:{
-    backgroundColor: "#707070",
   },
   moneyContainer:{
     display:"flex", 

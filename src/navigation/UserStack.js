@@ -13,6 +13,7 @@ import MemoryScreen from "../screens/MemoryScreen";
 import EventScreen from "../screens/EventScreen"; //New component by Sona and Christian
 import CampaignStoryIndiv from "../components/GiveFundComponents/CampaignStoryIndiv";
 import GiveScreen from '../screens/GiveFundScreens/GiveScreen'
+import GiveCoin from '../screens/GiveFundScreens/GiveCoin'
 import ProcessingScreen from '../screens/GiveFundScreens/ProcessingScreen'
 import ConfirmationScreen from "../screens/GiveFundScreens/ConfirmationScreen";
 import NonprofitScreen from '../screens/GiveFundScreens/NonProfitScreen'
@@ -78,6 +79,11 @@ export default function App() {
         <Stack.Screen
           name="GiveScreen"
           component={GiveScreen}
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="GiveCoin"
+          component={GiveCoin}
           options={{ headerShown: true }}
         />
         <Stack.Screen

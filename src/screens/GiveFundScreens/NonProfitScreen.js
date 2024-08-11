@@ -189,7 +189,7 @@ export default function NonProfitScreen({ route, navigation }){
             <Pressable
               style={[styles.buttonStyle, { backgroundColor:"#A65ED1", flex: 0.85, marginTop: 15 }]}
               onPress={() => {
-                navigation.navigate("GiveScreen", { id: id });
+                navigation.navigate("GiveCoin", { id: id });
               }}
             >
               <View style={styles.row}>

@@ -17,7 +17,7 @@ import HeaderFund from "../../components/GiveFundComponents/HeaderFund";
 import ButtonMultiselect, {ButtonLayout} from 'react-native-button-multiselect'; //yarn add react-native-button-multiselect
 import { supabase } from "../../utils/hooks/supabase";
 
-export default function GiveScreen({ route, navigation }) {
+export default function GiveCoin({ route, navigation }) {
   const insets = useSafeAreaInsets();
   const { id } = route.params; 
   const [nonprofits, setNonprofits] = useState([]);
@@ -50,10 +50,11 @@ export default function GiveScreen({ route, navigation }) {
 
   // Money Donation Buttons
   const buttons = [
-    { label: '$1', value: '1' },
-    { label: '$5', value: '5' },
-    { label: '$10', value: '10' },
-    { label: '$20', value: '20' },
+    { label: '1', value: '1' },
+    { label: '5', value: '5' },
+    { label: '20', value: '20' },
+    { label: '50', value: '50' },
+    { label: '100', value: '100' },
     { label: 'Custom', value: ' ' },
   ];
   const [selectedButtons, setSelectedButtons] = useState([]);
@@ -61,9 +62,6 @@ export default function GiveScreen({ route, navigation }) {
     setSelectedButtons(selectedValues);
     setDonation(selectedValues)
   };
-
-  //Card Payment Options
-  const [paymentId, setPaymentId] = useState();
 
   //Display Public or Not
   const [publicId, setPublicId] = useState(false);
@@ -73,7 +71,7 @@ export default function GiveScreen({ route, navigation }) {
 
   //UPDATE CURRENT TOTAL DONATIONS ON SUPABASE
   async function updateCurrent() {
-    if(paymentId && (publicId !== null) && selectedButtons){
+    if((publicId !== null) && selectedButtons){
       const { data, error } = await supabase
         .from('nonprofits')
         .update({ "currentAmount": nonprofits[0].currentAmount + parseInt(donation), "hasDonated": true })
@@ -114,6 +112,18 @@ export default function GiveScreen({ route, navigation }) {
             <Text style={styles.mainTitle}>You're Supporting</Text>
             <Text style={[styles.mainTitle, styles.nonprofitName]}>{nonprofits[0].name}!</Text>
 
+            <View style={{display:"flex", flexDirection:"row"}}>
+              <Text style={[styles.sectionTitles, {flex:1}]}>
+                My Give Coins
+              </Text>
+            </View>
+            <TouchableOpacity onPress={() => {console.log("info about give coin")}} style={styles.clickableContainer}>
+              <View style={styles.clickableTextContainer}>
+                <Image source={require('../../../assets/buttons/givecoin2.png')} style={styles.clickableImageBitmoji}/>
+                <Text style={styles.clickableText}>100 Give Coins</Text>
+              </View>  
+            </TouchableOpacity>
+
             <View style={styles.moneyContainer}>
             <ButtonMultiselect
               layout={ButtonLayout.CAROUSEL} // Choose from ButtonLayout enum: CAROUSEL, FULL_WIDTH, GRID
@@ -149,19 +159,10 @@ export default function GiveScreen({ route, navigation }) {
             :
             <></>
             }
-
-            <Text style={[styles.sectionTitles]}>
-              Give Method *
-            </Text>
-
-            <GiveMethod
-              paymentId={paymentId} 
-              setPaymentId={setPaymentId}
-            />
             
             <View style={{display:"flex", flexDirection:"row"}}>
               <Text style={[styles.sectionTitles, {flex:1}]}>
-                Publicly Display *
+                Publicly Display
               </Text>
               <View style={{marginTop:-10, paddingTop:28}}>
                 <Ionicons name="information-circle-outline" color="black" size={20}/>
@@ -183,16 +184,13 @@ export default function GiveScreen({ route, navigation }) {
 
             <View style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
               <Text style={[{fontSize:20}]}>
-                Your Donation
+                Your Contribution
               </Text>
               <Text style={[{fontSize:20}]}>
-                ${donation}
+                {donation} Give Coins
               </Text>
             </View>
             
-            <Text style={[styles.sectionTitles]}>
-              Confirmation
-            </Text>
             <Pressable 
                 style={[styles.buttonStyle, styles.donateButton]}
                 onPress={()=>{
@@ -218,74 +216,6 @@ export default function GiveScreen({ route, navigation }) {
         </View>
     </SafeAreaView>
   );
-}
-
-function GiveMethod({paymentId, setPaymentId}) {
-
-  let iconSize = 20;
-
-  function changePaymentId(value){
-    setPaymentId(value);
-  }
-
-  return (
-    <>
-    <TouchableOpacity onPress={() => {
-      changePaymentId("apple");
-    }} style={styles.clickableContainerMethod}>
-      <View style={styles.clickableTextContainer}>
-        <Ionicons
-          style={styles.circleIcon}
-          name={"logo-apple"}
-          size={iconSize}
-        />
-        <Text style={styles.clickableText}>Apple Pay</Text>
-      </View>  
-      <Ionicons
-        style={styles.circleIcon}
-        name={paymentId==="apple" ? "checkmark-circle" : "ellipse-outline"}
-        size={28}
-        color={paymentId==="apple" ? "#3CB2E2" : "lightgrey"}
-      />
-    </TouchableOpacity>
-    <TouchableOpacity onPress={() => {
-      changePaymentId("venmo");
-    }} style={styles.clickableContainerMethod}>
-      <View style={styles.clickableTextContainer}>
-        <Ionicons
-          style={styles.circleIcon}
-          name={"logo-venmo"}
-          size={iconSize}
-        />
-        <Text style={styles.clickableText}>Venmo</Text>
-      </View>  
-      <Ionicons
-        style={styles.circleIcon}
-        name={paymentId==="venmo" ? "checkmark-circle" : "ellipse-outline"}
-        size={28}
-        color={paymentId==="venmo" ? "#3CB2E2" : "lightgrey"}
-      />
-    </TouchableOpacity>
-    <TouchableOpacity onPress={() => {
-      changePaymentId("paypal");
-    }} style={styles.clickableContainerMethod}>
-      <View style={styles.clickableTextContainer}>
-        <Ionicons
-          style={styles.circleIcon}
-          name={"logo-paypal"}
-          size={iconSize}
-        />
-        <Text style={styles.clickableText}>Paypal</Text>
-      </View>  
-      <Ionicons
-        style={styles.circleIcon}
-        name={paymentId==="paypal" ? "checkmark-circle" : "ellipse-outline"}
-        size={28}
-        color={paymentId==="paypal" ? "#3CB2E2" : "lightgrey"}
-      />
-    </TouchableOpacity>
-    </>
-  )
 }
 
 const styles = StyleSheet.create({
@@ -355,6 +285,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     margin: 5,
+    marginVertical:25,
     paddingVertical: 10,
     paddingHorizontal: 10,
     borderRadius: 20,
@@ -447,8 +378,8 @@ const styles = StyleSheet.create({
   },
 
   clickableImageBitmoji: {
-    width: 25,
-    height: 25,
+    width: 35,
+    height: 35,
     marginHorizontal: -3
   },
 
@@ -461,5 +392,6 @@ const styles = StyleSheet.create({
   clickableText: {
     fontSize: 14,
     fontFamily: fontHeader.fontFamily,
+    paddingVertical:16
   },
 });

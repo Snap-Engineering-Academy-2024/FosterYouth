@@ -357,7 +357,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 20,
     elevation: 3,
-    backgroundColor: "#038588",
+    backgroundColor: "#00AC8E",
     // width:"80%"
   },
   buttonText: {

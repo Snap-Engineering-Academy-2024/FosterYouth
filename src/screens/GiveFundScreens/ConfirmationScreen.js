@@ -126,7 +126,7 @@ export default function ConfirmationScreen({ route, navigation }) {
           
           <View style={styles.donationTextContainer}>
             <Text style={styles.donationText}>Your Donation</Text>
-            <Text style={styles.donationText}>${donation}</Text>
+            <Text style={styles.donationText}>{donation} Give Coins</Text>
           </View>
           
           <Pressable style={styles.button}>
